@@ -2,8 +2,38 @@
 
 -   Admin panel for users:
     -   Apartement Properties
-        -   Title
-        -   website
-        -   location
+        -   id
+        -   name
+        -   total_floors
+        -   number_of_units
+        -   has_fitness_center
+        -   has_swimming_pool
+        -   has_laundry
+        -   has_wheelchair_accessibilty
+        -   has_intercom_facility
+        -   has_power_backup
+        -   has_main_door_security
+        -   number_of_elevators
+        -   street_name
+        -   city_name
+        -   state_name
+        -   county_name
+        -   zip_code
         -   phone number
-        -   number of units
+    -   units:
+        -   id
+        -   unit_heading
+        -   unit_type_id
+        -   number_of_bedroom
+        -   number_bathroom
+        -   number_of_balcony
+        -   leasing_info_id
+        -   date_of_posting
+        -   date_available_from
+        -   posted_by
+        -   is_active
+        -   unit_desription
+        -   carpet_area
+        -   unit_number
+        -   unit_floor_number
+        -   proberty_id
