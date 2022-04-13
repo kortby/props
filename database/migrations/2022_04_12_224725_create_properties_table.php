@@ -18,6 +18,21 @@ return new class extends Migration
             $table->string('name');
             $table->integer('total_floors');
             $table->integer('number_of_units');
+            $table->boolean('has_fitness_center');
+            $table->boolean('has_swimming_pool');
+            $table->boolean('has_laundry');
+            $table->boolean('has_wheelchair_accessibilty');
+            $table->boolean('has_intercom_facility');
+            $table->boolean('has_power_backup');
+            $table->boolean('has_main_door_security');
+            $table->integer('number_of_elevators');
+            $table->string('address_line_1');
+            $table->string('address_line_2');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
+            $table->integer('postal_code');
+            $table->string('phone');
             $table->timestamps();
         });
     }

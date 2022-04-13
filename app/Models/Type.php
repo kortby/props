@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Property extends Model
+class Type extends Model
 {
     use HasFactory;
 
     // public function units()
     // {
-    //     $this->hasMany(Unit::class);
+    //     return $this->belongsToMany(Unit::class);
     // }
 }

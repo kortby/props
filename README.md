@@ -19,15 +19,15 @@
         -   state_name
         -   county_name
         -   zip_code
-        -   phone number
+        -   phone
     -   units:
         -   id
         -   unit_heading
-        -   unit_type_id
+        -   unit_type_id (hasOne)
         -   number_of_bedroom
         -   number_bathroom
         -   number_of_balcony
-        -   leasing_info_id
+        -   leasing_info_id ( hasOne )
         -   date_of_posting
         -   date_available_from
         -   posted_by
@@ -36,4 +36,7 @@
         -   carpet_area
         -   unit_number
         -   unit_floor_number
-        -   proberty_id
+        -   proberty_id (hasOne)
+    -   unit_type
+        -   id
+        -   unit_type
