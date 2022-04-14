@@ -46,23 +46,18 @@ class Property extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make()->sortable()->hideFromIndex(),
             Text::make('Name')->rules('required', 'max:120'),
-            Number::make('Total Floors'),
-            Number::make('Number of Units'),
-            Boolean::make('Has fitness center')->hideFromIndex(),
-            Boolean::make('Has swimming pool')->hideFromIndex(),
-            Boolean::make('Has laundry')->hideFromIndex(),
-            Boolean::make('Has wheelchair accessibilty')->hideFromIndex(),
-            Boolean::make('Has intercom facility')->hideFromIndex(),
-            Boolean::make('Has power backup')->hideFromIndex(),
-            Boolean::make('Has main door security')->hideFromIndex(),
-            Number::make('number_of_elevators'),
+            Number::make('Total Floors')->rules('required', 'max:70'),
+            Number::make('Number of Units')->rules('required', 'max:20'),
+            Number::make('number_of_elevators')->rules('max:10')->hideFromIndex(),
             Text::make('phone')->rules('max:11'),
+
+            new Panel('Amenities', $this->amenitiesFields()),
 
             new Panel('Address Information', $this->addressFields()),
 
-            // HasMany::make('Unit'),
+            HasMany::make('Units'),
         ];
     }
 
@@ -118,12 +113,30 @@ class Property extends Resource
     protected function addressFields()
     {
         return [
-            Text::make('Address', 'address_line_1')->hideFromIndex(),
+            Text::make('Address', 'address_line_1'),
             Text::make('Address Line 2')->hideFromIndex(),
-            Text::make('City')->hideFromIndex(),
-            Text::make('State')->hideFromIndex(),
+            Text::make('City'),
+            Text::make('State'),
             Text::make('Postal Code')->hideFromIndex(),
             Country::make('Country')->hideFromIndex(),
+        ];
+    }
+
+    /**
+     * Get the address fields for the resource.
+     *
+     * @return array
+     */
+    protected function amenitiesFields()
+    {
+        return [
+            Boolean::make('Has fitness center')->hideFromIndex(),
+            Boolean::make('Has swimming pool')->hideFromIndex(),
+            Boolean::make('Has laundry')->hideFromIndex(),
+            Boolean::make('Has wheelchair accessibilty')->hideFromIndex(),
+            Boolean::make('Has intercom facility')->hideFromIndex(),
+            Boolean::make('Has power backup')->hideFromIndex(),
+            Boolean::make('Has main door security')->hideFromIndex(),
         ];
     }
 }

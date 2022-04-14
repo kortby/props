@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('carpet_area');
             $table->integer('unit_number');
             $table->integer('unit_floor_number');
+            $table->integer('size');
             $table->timestamps();
         });
     }

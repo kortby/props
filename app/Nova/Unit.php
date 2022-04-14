@@ -48,19 +48,19 @@ class Unit extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make()->sortable()->hideFromIndex(),
+            Number::make('Unit number'),
             Text::make('Unit heading'),
             BelongsTo::make('Property'),
             BelongsTo::make('Type'),
             Number::make('Number of bedroom'),
             Number::make('Number bathroom'),
-            Number::make('Number of balcony'),
+            Number::make('Number of balcony')->hideFromIndex(),
             Date::make(__('Date available from'), 'date_available_from')->nullable(),
             Boolean::make('Is active'),
-            Text::make('Desription'),
-            Boolean::make('Carpet area'),
-            Number::make('Unit number'),
-            Number::make('Unit floor number'),
+            Text::make('Desription')->hideFromIndex(),
+            Boolean::make('Carpet area')->hideFromIndex(),
+            Number::make('Unit floor number')->hideFromIndex(),
         ];
     }
 
