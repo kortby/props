@@ -5,8 +5,8 @@ namespace App\Nova;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasOne;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -50,12 +50,12 @@ class Unit extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Unit heading'),
-            // BelongsTo::make('Proberty', Property::class),
-            // HasOne::make('Type'),
+            BelongsTo::make('Property'),
+            BelongsTo::make('Type'),
             Number::make('Number of bedroom'),
             Number::make('Number bathroom'),
             Number::make('Number of balcony'),
-            DateTime::make('Date available from'),
+            Date::make(__('Date available from'), 'date_available_from')->nullable(),
             Boolean::make('Is active'),
             Text::make('Desription'),
             Boolean::make('Carpet area'),

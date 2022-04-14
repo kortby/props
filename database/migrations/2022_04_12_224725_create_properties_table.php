@@ -27,7 +27,7 @@ return new class extends Migration
             $table->boolean('has_main_door_security');
             $table->integer('number_of_elevators');
             $table->string('address_line_1');
-            $table->string('address_line_2');
+            $table->string('address_line_2')->nullable();
             $table->string('city');
             $table->string('state');
             $table->string('country');

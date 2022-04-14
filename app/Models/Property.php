@@ -9,8 +9,8 @@ class Property extends Model
 {
     use HasFactory;
 
-    // public function units()
-    // {
-    //     $this->hasMany(Unit::class);
-    // }
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

@@ -16,20 +16,18 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('unit_heading');
-            $table->unsignedBigInteger('proberty_id');
-            $table->foreignId('type_id');
+            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('type_id');
             $table->integer('number_of_bedroom');
             $table->integer('number_bathroom');
             $table->integer('number_of_balcony');
-            $table->dateTime('date_available_from')->nullable();
+            $table->date('date_available_from')->nullable();
             $table->boolean('is_active');
-            $table->string('unit_desription');
+            $table->string('desription');
             $table->boolean('carpet_area');
             $table->integer('unit_number');
             $table->integer('unit_floor_number');
             $table->timestamps();
-
-            $table->foreign('proberty_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 

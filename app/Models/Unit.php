@@ -9,6 +9,11 @@ class Unit extends Model
 {
     use HasFactory;
 
+    //Casts of the model dates
+    protected $casts = [
+        'date_available_from' => 'date'
+    ];
+
     public function property()
     {
         return $this->belongsTo(Property::class);
@@ -16,6 +21,6 @@ class Unit extends Model
 
     public function type()
     {
-        return $this->hasOne(Type::class);
+        return $this->belongsTo(Type::class);
     }
 }
