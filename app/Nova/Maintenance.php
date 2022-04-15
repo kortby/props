@@ -2,31 +2,30 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
-class Unit extends Resource
+class Maintenance extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Unit::class;
+    public static $model = \App\Models\Maintenance::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'unit_heading';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -34,7 +33,7 @@ class Unit extends Resource
      * @var array
      */
     public static $search = [
-        'unit_heading',
+        'title',
     ];
 
     /**
@@ -46,22 +45,12 @@ class Unit extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable()->hideFromIndex(),
-            Number::make('Unit number')->textAlign('left'),
-            Text::make('Unit heading'),
-            BelongsTo::make('Property'),
-            BelongsTo::make('Type'),
-            Number::make('Number of bedroom')->textAlign('center'),
-            Number::make('Number bathroom')->textAlign('center'),
-            Number::make('Size')->displayUsing(function ($name) {
-                return strtoupper($name . ' sqft');
-            }),
-            Number::make('Number of balcony')->hideFromIndex(),
-            Date::make(__('Date available from'), 'date_available_from')->nullable(),
-            Boolean::make('Is active'),
-            Textarea::make('Desription')->hideFromIndex(),
-            Boolean::make('Carpet area')->hideFromIndex(),
-            Number::make('Unit floor number')->hideFromIndex(),
+            ID::make()->sortable(),
+            Text::make('Title'),
+            Text::make('Status'),
+            Textarea::make('Description'),
+            Text::make('Proirity'),
+            new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }
 
@@ -107,5 +96,20 @@ class Unit extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    /**
+     * Get the maintenance time fields for the resource.
+     *
+     * @return array
+     */
+    protected function maintenanceTimeFields()
+    {
+        return [
+            Date::make('Due date'),
+            DateTime::make('Preferred maintenece time'),
+            Text::make('Frequency'),
+            Date::make('Finished'),
+        ];
     }
 }

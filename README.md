@@ -20,6 +20,7 @@
         -   county_name
         -   zip_code
         -   phone
+        -   photos
     -   units:
         -   id
         -   unit_heading
@@ -37,6 +38,25 @@
         -   unit_number
         -   unit_floor_number
         -   proberty_id (hasOne)
+        -   photos
     -   unit_type
         -   id
         -   unit_type
+    -   maintenance
+        -   title
+        -   property
+        -   maintenance_category_id
+        -   requested_by
+        -   status ( New, In-Progress, Resolved, Closed, Cancelled)
+        -   description
+        -   assigned_to
+        -   priority ( Low, Normal, High, Critical)
+        -   due_date
+        -   preferred_maintenece_time
+        -   start_due_date
+        -   frequency (Daily, Weekly, Bi-Weekly, Monthly, Quarterly, Yearly, Semi-Annual)
+        -   finished
+    -   maintenance_category
+        -   name
+        -   sub_type
+        -   notes

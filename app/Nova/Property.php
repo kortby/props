@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 
@@ -50,8 +51,9 @@ class Property extends Resource
             Text::make('Name')->rules('required', 'max:120'),
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),
-            Number::make('number_of_elevators')->rules('max:10')->hideFromIndex(),
-            Text::make('phone')->rules('max:11'),
+            Number::make('Number of Elevators')->rules('max:10')->hideFromIndex(),
+            Text::make('Phone')->rules('max:11'),
+            Textarea::make('Description')->rules('max:255'),
 
             new Panel('Amenities', $this->amenitiesFields()),
 

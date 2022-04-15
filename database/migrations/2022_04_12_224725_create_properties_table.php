@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('total_floors');
             $table->integer('number_of_units');
-            $table->string('desription');
+            $table->string('description')->nullable();
             $table->boolean('has_fitness_center');
             $table->boolean('has_swimming_pool');
             $table->boolean('has_laundry');
