@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('status');
             $table->string('description');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('proirity');
             $table->date('due_date');
             $table->dateTime('preferred_maintenece_time');

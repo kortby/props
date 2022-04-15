@@ -43,7 +43,7 @@ class Type extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
+            Text::make('Name')->rules('required', 'max:50'),
             HasMany::make('Units'),
         ];
     }

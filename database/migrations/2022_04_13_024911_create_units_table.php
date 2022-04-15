@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('property_id');
             $table->unsignedBigInteger('type_id');
             $table->integer('number_of_bedroom');
-            $table->integer('number_bathroom');
+            $table->integer('number_of_bathroom');
             $table->integer('number_of_balcony');
             $table->date('date_available_from')->nullable();
             $table->boolean('is_active');

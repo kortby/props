@@ -9,9 +9,13 @@ class Unit extends Model
 {
     use HasFactory;
 
-    //Casts of the model dates
-    protected $casts = [
-        'date_available_from' => 'date'
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'date_available_from',
     ];
 
     public function property()

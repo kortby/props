@@ -19,4 +19,9 @@ class Maintenance extends Model
         'due_date',
         'finished',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

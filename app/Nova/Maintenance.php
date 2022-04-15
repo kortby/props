@@ -3,9 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -45,11 +47,23 @@ class Maintenance extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
-            Text::make('Title'),
-            Text::make('Status'),
+            ID::make()->hideFromIndex(),
+            Text::make('Title')->sortable()->rules('required', 'max:100'),
+            Select::make('Status')->options([
+                'new' => 'New',
+                'in-progress' => 'In-progress',
+                'resolved' => 'Resolved',
+                'closed' => 'Closed',
+                'cancelled' => 'Cancelled',
+            ]),
             Textarea::make('Description'),
-            Text::make('Proirity'),
+            BelongsTo::make('Category'),
+            Select::make('Proirity')->options([
+                'low' => 'Low',
+                'normal' => 'Normal',
+                'high' => 'High',
+                'critical' => 'Critical',
+            ]),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }
@@ -108,7 +122,14 @@ class Maintenance extends Resource
         return [
             Date::make('Due date'),
             DateTime::make('Preferred maintenece time'),
-            Text::make('Frequency'),
+            Select::make('Frequency')->options([
+                'once' => 'One Time',
+                'daily' => 'Daily',
+                'weekly' => 'Weekly',
+                'bi-weekly' => 'Bi-Weekly',
+                'monthly' => 'Monthly',
+                'quarterly' => 'Quarterly'
+            ]),
             Date::make('Finished'),
         ];
     }
