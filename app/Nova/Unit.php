@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
 class Unit extends Resource
 {
@@ -26,7 +27,7 @@ class Unit extends Resource
      *
      * @var string
      */
-    public static $title = 'unit_heading';
+    public static $title = 'unit_number';
 
     /**
      * The columns that should be searched.
@@ -34,7 +35,7 @@ class Unit extends Resource
      * @var array
      */
     public static $search = [
-        'unit_heading',
+        'unit_number',
     ];
 
     /**
@@ -46,22 +47,20 @@ class Unit extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->hideFromIndex(),
-            Number::make('Unit number')->textAlign('left')->sortable()->rules('required', 'max:7000'),
+            ID::make()->hideFromIndex()->hideFromDetail(),
+            Number::make('Unit number')->textAlign('left')->sortable()->rules('required')->min(1)->max(1000)->help(
+                'What is the unit number ?'
+            ),
             Text::make('Title', 'unit_heading')->rules('required', 'max:70'),
             BelongsTo::make('Property')->sortable(),
             BelongsTo::make('Type')->sortable(),
-            Number::make('Bedrooms', 'number_of_bedroom')->textAlign('center')->sortable()->min(0)->max(15),
-            Number::make('Bathrooms', 'number_of_bathroom')->textAlign('center'),
-            Number::make('Size')->displayUsing(function ($name) {
-                return strtoupper($name . ' sqft');
-            })->sortable(),
-            Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
-            Date::make('What day is going to be available?', 'date_available_from'),
-            Boolean::make('Is active'),
-            Textarea::make('Desription')->hideFromIndex(),
-            Boolean::make('Carpet area')->hideFromIndex(),
-            Number::make('Unit floor number')->hideFromIndex(),
+            Date::make('Available date', 'date_available_from')->help(
+                'When this is going to be available?'
+            ),
+            Boolean::make('Active', 'is_active'),
+            Textarea::make('Desription')->hideFromIndex()->rules('required', 'max:650'),
+            Number::make('Unit floor number')->hideFromIndex()->min(0)->max(80),
+            new Panel('Unit details', $this->detailsFields()),
         ];
     }
 
@@ -107,5 +106,29 @@ class Unit extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    /**
+     * Get the maintenance time fields for the resource.
+     *
+     * @return array
+     */
+    protected function detailsFields()
+    {
+        return [
+            Number::make('Bedrooms', 'number_of_bedroom')->textAlign('center')->sortable()->min(0)->max(15)->help(
+                'How many bedrooms?'
+            ),
+            Number::make('Bathrooms', 'number_of_bathroom')->textAlign('center')->sortable()->min(0)->max(15)->help(
+                'How many bedrooms?'
+            ),
+            Number::make('Size')->displayUsing(function ($name) {
+                return strtoupper($name . ' sqft');
+            })->sortable()->sortable()->min(0)->max(10000)->help(
+                'How many square feet?'
+            ),
+            Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
+            Boolean::make('Carpet area')->hideFromIndex(),
+        ];
     }
 }

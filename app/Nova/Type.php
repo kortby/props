@@ -42,7 +42,7 @@ class Type extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Name')->rules('required', 'max:50'),
             HasMany::make('Units'),
         ];

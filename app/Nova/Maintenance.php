@@ -47,23 +47,24 @@ class Maintenance extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->hideFromIndex(),
+            ID::make()->hideFromIndex()->hideFromDetail(),
             Text::make('Title')->sortable()->rules('required', 'max:100'),
+            BelongsTo::make('Unit'),
             Select::make('Status')->options([
                 'new' => 'New',
                 'in-progress' => 'In-progress',
                 'resolved' => 'Resolved',
                 'closed' => 'Closed',
                 'cancelled' => 'Cancelled',
-            ]),
-            Textarea::make('Description'),
-            BelongsTo::make('Category'),
+            ])->rules('required', 'max:50'),
+            Textarea::make('Description')->rules('required', 'max:250'),
+            BelongsTo::make('Category')->rules('required'),
             Select::make('Proirity')->options([
                 'low' => 'Low',
                 'normal' => 'Normal',
                 'high' => 'High',
                 'critical' => 'Critical',
-            ]),
+            ])->rules('required', 'max:50'),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }

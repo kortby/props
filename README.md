@@ -1,6 +1,7 @@
 # Welcome to PropsManager
 
 -   Admin panel for users:
+
     -   Apartement Properties
         -   id
         -   name
@@ -57,6 +58,22 @@
         -   frequency (Daily, Weekly, Bi-Weekly, Monthly, Quarterly, Yearly, Semi-Annual)
         -   finished
     -   maintenance_category
+
         -   name
         -   sub_type
         -   notes
+
+    -   super admin
+        -   app manager
+        -   contact ( plumers cleaner electris.....)
+    -   property owner
+        -   property managers
+            -   sales
+            -   tenant ( pay bill, sign lease)
+            -   contact ( plumers cleaner electris.....)
+
+    advantage:
+
+    -   contact service pro
+    -   accounting
+    -   managing units and websites

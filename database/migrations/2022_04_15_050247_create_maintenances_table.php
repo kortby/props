@@ -17,13 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('status');
+            $table->unsignedBigInteger('unit_id')->nullable();
             $table->string('description');
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('category_id');
             $table->string('proirity');
-            $table->date('due_date');
-            $table->dateTime('preferred_maintenece_time');
+            $table->date('due_date')->nullable();
+            $table->dateTime('preferred_maintenece_time')->nullable();
             $table->string('frequency');
-            $table->date('finished');
+            $table->date('finished')->nullable();
             $table->timestamps();
         });
     }
