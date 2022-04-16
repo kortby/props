@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use App\Policies\RolePolicy;
+use App\Policies\PermissionPolicy;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Menu\Menu;
+use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -16,6 +21,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+        /*Nova::userMenu(function (Request $request, Menu $menu) {
+            if ($request->user()->hasRole(2)) {
+                $menu->append(
+                    MenuItem::make('Subscriber Dashboard')
+                        ->path('/subscribers/dashboard')
+                );
+            }
+
+            $menu->prepend(
+                MenuItem::make(
+                    'My Profile',
+                    "/resources/user/{$request->user()->getKey()}"
+                )
+            );
+
+            return $menu;
+        });*/
     }
 
     /**
@@ -26,9 +49,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -44,6 +67,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return in_array($user->email, [
                 //
             ]);
+        });
+
+        Gate::define('viewRole', function ($user) {
+            return $user->can('view-roles');
         });
     }
 
@@ -66,7 +93,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            \Vyuldashev\NovaPermission\NovaPermissionTool::make(),
+            // ->rolePolicy(RolePolicy::class)
+            // ->permissionPolicy(PermissionPolicy::class),
+        ];
     }
 
     /**
