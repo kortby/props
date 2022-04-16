@@ -10,8 +10,6 @@ use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
-use Vyuldashev\NovaPermission\NovaPermissionTool;
-
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -41,7 +39,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             return $menu;
         });*/
-
     }
 
     /**
@@ -52,9 +49,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -97,9 +94,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            NovaPermissionTool::make()
-            ->rolePolicy(RolePolicy::class)
-            ->permissionPolicy(PermissionPolicy::class),
+            \Vyuldashev\NovaPermission\NovaPermissionTool::make(),
+            // ->rolePolicy(RolePolicy::class)
+            // ->permissionPolicy(PermissionPolicy::class),
         ];
     }
 
