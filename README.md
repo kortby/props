@@ -63,6 +63,8 @@
         -   sub_type
         -   notes
 
+    ## Roles and permissions
+
     -   super admin
         -   app manager
         -   contact ( plumers cleaner electris.....)
@@ -72,8 +74,12 @@
             -   tenant ( pay bill, sign lease)
             -   contact ( plumers cleaner electris.....)
 
-    advantage:
+    ### our advantage to be better than others:
 
     -   contact service pro
     -   accounting
     -   managing units and websites
+
+    # setup line commands just to remember for later:
+
+    `php artisan maake:policy PropertyPolicy -m Property`

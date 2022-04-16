@@ -38,6 +38,11 @@ class Property extends Resource
         'name',
     ];
 
+    public function title()
+    {
+        return $this->name . ' - ' . $this->city;
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
