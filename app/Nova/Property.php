@@ -48,7 +48,7 @@ class Property extends Resource
     {
         return [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
-            Text::make('Name')->rules('required', 'max:120'),
+            Text::make('Company name', 'name')->rules('required', 'max:120'),
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),
             Number::make('Number of Elevators')->rules('max:10')->hideFromIndex(),
