@@ -23,4 +23,19 @@ class PermissionPolicy
     {
         return $user->can('view-permissions');
     }
+
+    public function create(User $user)
+    {
+        return $user->can('create-permissions');
+    }
+
+    public function update(User $user)
+    {
+        return $user->can('update-permissions');
+    }
+
+    public function delete(User $user)
+    {
+        return $user->can('delete-permissions');
+    }
 }
