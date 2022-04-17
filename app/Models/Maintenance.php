@@ -8,8 +8,7 @@ use Laravel\Nova\Fields\Searchable;
 
 class Maintenance extends Model
 {
-    use HasFactory;
-    use Searchable;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that should be mutated to dates.

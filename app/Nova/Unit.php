@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\UnitActive;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -83,7 +84,9 @@ class Unit extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new UnitActive,
+        ];
     }
 
     /**

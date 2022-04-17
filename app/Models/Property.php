@@ -8,9 +8,7 @@ use Laravel\Nova\Fields\Searchable;
 
 class Property extends Model
 {
-    use HasFactory;
-
-    use Searchable;
+    use HasFactory, Searchable;
 
     public function units()
     {

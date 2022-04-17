@@ -8,8 +8,7 @@ use Laravel\Nova\Fields\Searchable;
 
 class Category extends Model
 {
-    use HasFactory;
-    use Searchable;
+    use HasFactory, Searchable;
 
     public function maintenance()
     {
