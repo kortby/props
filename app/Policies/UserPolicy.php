@@ -17,7 +17,8 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view-users');
+        // return $user->can('view-users');
+        return true;
     }
 
     /**
@@ -29,7 +30,8 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->can('view-users');
+        // return $user->can('view-users');
+        return true;
     }
 
     /**
@@ -40,7 +42,8 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-users');
+        // return $user->can('create-users');
+        return true;
     }
 
     /**

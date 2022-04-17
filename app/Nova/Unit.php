@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\AvailableUnit;
+use App\Nova\Actions\NotAvailableUnit;
 use App\Nova\Filters\UnitActive;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
@@ -108,7 +110,18 @@ class Unit extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new AvailableUnit)->canSee(function ($request) {
+                return true;
+            })->canRun(function ($request, $post) {
+                return true;
+            }),
+            (new NotAvailableUnit)->canSee(function ($request) {
+                return true;
+            })->canRun(function ($request, $post) {
+                return true;
+            }),
+        ];
     }
 
     /**
