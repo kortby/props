@@ -82,4 +82,5 @@
 
     # setup line commands just to remember for later:
 
-    `php artisan maake:policy PropertyPolicy -m Property`
+    `php artisan make:policy UnitPolicy -m Unit`
+    `php artisan db:seed --class=PermissionsSeeder`

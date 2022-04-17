@@ -94,8 +94,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             NovaPermissionTool::make()
-            // ->rolePolicy(RolePolicy::class)
-            // ->permissionPolicy(PermissionPolicy::class),
+                ->rolePolicy(RolePolicy::class)
+                ->permissionPolicy(PermissionPolicy::class),
         ];
     }
 
