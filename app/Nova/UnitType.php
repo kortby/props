@@ -8,14 +8,14 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Type extends Resource
+class UnitType extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Type::class;
+    public static $model = \App\Models\UnitType::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

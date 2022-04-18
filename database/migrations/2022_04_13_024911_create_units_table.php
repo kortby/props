@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('unit_heading');
             $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('unit_type_id');
             $table->integer('number_of_bedroom');
             $table->integer('number_of_bathroom');
             $table->integer('number_of_balcony');
