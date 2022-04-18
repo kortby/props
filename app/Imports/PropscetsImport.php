@@ -14,9 +14,8 @@ class PropscetsImport implements ToModel
     */
     public function model(array $row)
     {
-        return $row;
-       /* return new Prospect([
+        return new Prospect([
             //
-        ]);*/
+        ]);
     }
 }

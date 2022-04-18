@@ -30,8 +30,7 @@ class ImportProspect extends Command
      */
     public function handle()
     {
-        $array = Excel::toArray(new PropscetsImport, storage_path() . "/app/public/prospects/apartments-prospects.csv");
+         Excel::import(new PropscetsImport, Storage::disk('public')->get('/prospects/apartments-prospects.csv'));
 
-        dd($array);
     }
 }
