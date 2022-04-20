@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Nova\Fields\Searchable;
 
-class Type extends Model
+class UnitType extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     public function units()
     {

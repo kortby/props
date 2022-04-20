@@ -56,7 +56,7 @@ class Unit extends Resource
             ),
             Text::make('Title', 'unit_heading')->rules('required', 'max:70'),
             BelongsTo::make('Property')->sortable(),
-            BelongsTo::make('Type')->sortable(),
+            BelongsTo::make('Unit Type', 'UnitType'),
             Date::make('Available date', 'date_available_from')->help(
                 'When this is going to be available?'
             ),

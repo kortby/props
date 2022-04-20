@@ -2,12 +2,21 @@
 
 namespace App\Providers;
 
+use App\Nova\Category;
+use App\Nova\Maintenance;
+use App\Nova\Property;
+use App\Nova\PropertyType;
+use App\Nova\Prospect;
+use App\Nova\Unit;
+use App\Nova\UnitType;
+use App\Nova\Dashboards\Main;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Menu\Menu;
 use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use \Vyuldashev\NovaPermission\NovaPermissionTool;
@@ -23,8 +32,38 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        Nova::mainMenu(function (Request $request) {
+            return [
+                MenuSection::dashboard(Main::class)->icon('home'),
+
+                MenuSection::make('Properties', [
+                    MenuItem::resource(Property::class),
+                    MenuItem::resource(PropertyType::class),
+                ])->icon('office-building')->collapsable(),
+
+                MenuSection::make('Units', [
+                    MenuItem::resource(Unit::class),
+                    MenuItem::resource(UnitType::class),
+                ])->icon('document-duplicate')->collapsable(),
+
+                MenuSection::make('Maintenance', [
+                    MenuItem::resource(Maintenance::class),
+                    MenuItem::resource(Category::class),
+                ])->icon('cog')->collapsable(),
+
+                MenuSection::make('Contacts', [
+                    MenuItem::resource(Prospect::class),
+                ])->icon('annotation')->collapsable(),
+
+
+                MenuSection::make('Users')->path('/resources/users')->icon('users'),
+                MenuSection::make('Permisssions')->path('/resources/permissions')->icon('shield-check'),
+                MenuSection::make('Roles')->path('/resources/roles')->icon('briefcase'),
+            ];
+        });
+
         /*Nova::userMenu(function (Request $request, Menu $menu) {
-            if ($request->user()->hasRole(2)) {
+            if ($request->user()->hasRole('Super-Admin')) {
                 $menu->append(
                     MenuItem::make('Subscriber Dashboard')
                         ->path('/subscribers/dashboard')
@@ -94,8 +133,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             NovaPermissionTool::make()
-                ->rolePolicy(RolePolicy::class)
-                ->permissionPolicy(PermissionPolicy::class),
         ];
     }
 

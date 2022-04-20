@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Type;
+use App\Models\UnitType;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TypePolicy
+class UnitTypePolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class TypePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view-any-type');
+        return $user->can('view-any-unit-type');
     }
 
     /**
@@ -28,9 +28,9 @@ class TypePolicy
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Type $type)
+    public function view(User $user, UnitType $type)
     {
-        return $user->can('view-type');
+        return $user->can('view-unit-type');
     }
 
     /**
@@ -41,7 +41,7 @@ class TypePolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-type');
+        return $user->can('create-unit-type');
     }
 
     /**
@@ -51,9 +51,9 @@ class TypePolicy
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Type $type)
+    public function update(User $user, UnitType $type)
     {
-        return $user->can('update-type');
+        return $user->can('update-unit-type');
     }
 
     /**
@@ -63,9 +63,9 @@ class TypePolicy
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Type $type)
+    public function delete(User $user, UnitType $type)
     {
-        return $user->can('delete-type');
+        return $user->can('delete-unit-type');
     }
 
     /**
@@ -75,9 +75,9 @@ class TypePolicy
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Type $type)
+    public function restore(User $user, UnitType $type)
     {
-        return $user->can('restore-type');
+        return $user->can('restore-unit-type');
     }
 
     /**
@@ -87,8 +87,8 @@ class TypePolicy
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Type $type)
+    public function forceDelete(User $user, UnitType $type)
     {
-        return $user->can('force-delete-type');
+        return $user->can('force-delete-unit-type');
     }
 }

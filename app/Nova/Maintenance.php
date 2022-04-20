@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
@@ -49,14 +50,21 @@ class Maintenance extends Resource
         return [
             ID::make()->hideFromIndex()->hideFromDetail(),
             Text::make('Title')->sortable()->rules('required', 'max:100'),
-            BelongsTo::make('Unit'),
+            BelongsTo::make('Unit Number', 'unit', 'App\Nova\Unit')->searchable(),
             Select::make('Status')->options([
                 'new' => 'New',
                 'in-progress' => 'In-progress',
                 'resolved' => 'Resolved',
                 'closed' => 'Closed',
                 'cancelled' => 'Cancelled',
-            ])->rules('required', 'max:50'),
+            ])->hideFromIndex()->hideFromDetail(),
+            Badge::make('Status')->map([
+                'new' => 'info',
+                'in-progress' => 'warning',
+                'resolved' => 'success',
+                'closed' => 'info',
+                'cancelled' => 'danger',
+            ])->sortable(),
             Textarea::make('Description')->rules('required', 'max:250'),
             BelongsTo::make('Category')->rules('required'),
             Select::make('Proirity')->options([
@@ -64,7 +72,13 @@ class Maintenance extends Resource
                 'normal' => 'Normal',
                 'high' => 'High',
                 'critical' => 'Critical',
-            ])->rules('required', 'max:50'),
+            ])->hideFromIndex()->hideFromDetail(),
+            Badge::make('Proirity')->map([
+                'low' => 'info',
+                'normal' => 'info',
+                'high' => 'warning',
+                'critical' => 'danger',
+            ])->sortable(),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }

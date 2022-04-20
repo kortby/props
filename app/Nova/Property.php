@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\HasMany;
@@ -54,6 +55,7 @@ class Property extends Resource
         return [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Company name', 'name')->rules('required', 'max:120'),
+            BelongsTo::make('Property Type', 'propertyType'),
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),
             Number::make('Number of Elevators')->rules('max:10')->hideFromIndex(),

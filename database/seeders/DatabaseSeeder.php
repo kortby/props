@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PermissionsSeeder::class,
+            UnitTypeSeeder::class,
+            PropertyTypeSeeder::class,
+            PropertySeeder::class,
+            UnitSeeder::class,
+            CategorySeeder::class,
+            MaintenanceSeeder::class,
         ]);
     }
 }

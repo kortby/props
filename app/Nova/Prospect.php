@@ -2,27 +2,27 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ProspectState;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Type extends Resource
+class Prospect extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Type::class;
+    public static $model = \App\Models\Prospect::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'company_name';
 
     /**
      * The columns that should be searched.
@@ -30,7 +30,7 @@ class Type extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'company_name',
     ];
 
     /**
@@ -42,9 +42,24 @@ class Type extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
-            Text::make('Name')->rules('required', 'max:50'),
-            HasMany::make('Units'),
+            ID::make()->sortable()->hideFromIndex(),
+            Text::make('company_name'),
+            Text::make('address')->hideFromIndex(),
+            Text::make('city')->sortable(),
+            Text::make('state')->sortable(),
+            Text::make('county')->hideFromIndex(),
+            Text::make('zip')->hideFromIndex(),
+            Text::make('phone'),
+            Text::make('contact_firstname')->hideFromIndex(),
+            Text::make('contact_lastname')->hideFromIndex(),
+            Text::make('title')->hideFromIndex(),
+            Text::make('direct_phone')->hideFromIndex(),
+            Text::make('email'),
+            Text::make('website')->hideFromIndex(),
+            Text::make('employee_count')->hideFromIndex(),
+            Text::make('annual_sales')->sortable(),
+            Text::make('sic_code'),
+            Text::make('industry')->sortable(),
         ];
     }
 
@@ -67,7 +82,9 @@ class Type extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new ProspectState,
+        ];
     }
 
     /**

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('unit_heading');
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('property_id')->nullable();
+            $table->unsignedBigInteger('unit_type_id')->nullable();
             $table->integer('number_of_bedroom');
             $table->integer('number_of_bathroom');
             $table->integer('number_of_balcony');
