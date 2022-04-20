@@ -6,7 +6,6 @@ use Laravel\Nova\Http\Middleware\Authorize;
 use Laravel\Nova\Http\Middleware\BootTools;
 use Laravel\Nova\Http\Middleware\DispatchServingNovaEvent;
 use Laravel\Nova\Http\Middleware\HandleInertiaRequests;
-use Vyuldashev\NovaPermission\ForgetCachedPermissions;
 
 return [
 
@@ -21,7 +20,7 @@ return [
     |
     */
 
-    'license_key' => env('NOVA_LICENSE_KEY', ''),
+    'license_key' => env('NOVA_LICENSE_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -104,7 +103,6 @@ return [
         HandleInertiaRequests::class,
         DispatchServingNovaEvent::class,
         BootTools::class,
-        ForgetCachedPermissions::class
     ],
 
     'api_middleware' => [
@@ -164,15 +162,15 @@ return [
     |
     */
 
-    'brand' => [
-        'logo' => realpath(__DIR__ . '/../public/img/logo.svg'),
+    // 'brand' => [
+    //     'logo' => realpath(__DIR__.'/../public/img/example-logo.svg'),
 
-        'colors' => [
-            "400" => "24, 182, 155, 0.5",
-            "500" => "24, 182, 155",
-            "600" => "24, 182, 155, 0.75",
-        ]
-    ],
+    //     'colors' => [
+    //         "400" => "24, 182, 155, 0.5",
+    //         "500" => "24, 182, 155",
+    //         "600" => "24, 182, 155, 0.75",
+    //     ]
+    // ],
 
     /*
     |--------------------------------------------------------------------------
