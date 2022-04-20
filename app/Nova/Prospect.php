@@ -47,7 +47,7 @@ class Prospect extends Resource
             Text::make('address')->hideFromIndex(),
             Text::make('city')->sortable(),
             Text::make('state')->sortable(),
-            Text::make('county'),
+            Text::make('county')->hideFromIndex(),
             Text::make('zip')->hideFromIndex(),
             Text::make('phone'),
             Text::make('contact_firstname')->hideFromIndex(),
@@ -56,9 +56,10 @@ class Prospect extends Resource
             Text::make('direct_phone')->hideFromIndex(),
             Text::make('email'),
             Text::make('website')->hideFromIndex(),
-            Text::make('employee_count'),
+            Text::make('employee_count')->hideFromIndex(),
             Text::make('annual_sales')->sortable(),
             Text::make('sic_code'),
+            Text::make('industry')->sortable(),
         ];
     }
 

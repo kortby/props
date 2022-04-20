@@ -32,37 +32,38 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
-        // Nova::mainMenu(function (Request $request) {
-        //     return [
-        //         MenuSection::dashboard(Main::class)->icon('chart-bar'),
+        Nova::mainMenu(function (Request $request) {
+            return [
+                MenuSection::dashboard(Main::class)->icon('home'),
 
-        //         MenuSection::make('Properties', [
-        //             MenuItem::resource(Property::class),
-        //             MenuItem::resource(PropertyType::class),
-        //         ])->icon('office-building')->collapsable(),
+                MenuSection::make('Properties', [
+                    MenuItem::resource(Property::class),
+                    MenuItem::resource(PropertyType::class),
+                ])->icon('office-building')->collapsable(),
 
-        //         MenuSection::make('Units', [
-        //             MenuItem::resource(Unit::class),
-        //             MenuItem::resource(UnitType::class),
-        //         ])->icon('document-duplicate')->collapsable(),
+                MenuSection::make('Units', [
+                    MenuItem::resource(Unit::class),
+                    MenuItem::resource(UnitType::class),
+                ])->icon('document-duplicate')->collapsable(),
 
-        //         MenuSection::make('Maintenance', [
-        //             MenuItem::resource(Maintenance::class),
-        //             MenuItem::resource(Category::class),
-        //         ])->icon('cog')->collapsable(),
+                MenuSection::make('Maintenance', [
+                    MenuItem::resource(Maintenance::class),
+                    MenuItem::resource(Category::class),
+                ])->icon('cog')->collapsable(),
 
-        //         // MenuSection::make('User Manager', [
-        //         //     MenuItem::resource(User::class),
-        //         // ])->icon('document-text')->collapsable(),
+                MenuSection::make('Contacts', [
+                    MenuItem::resource(Prospect::class),
+                ])->icon('annotation')->collapsable(),
 
-        //         MenuSection::make('Contacts', [
-        //             MenuItem::resource(Prospect::class),
-        //         ])->icon('user')->collapsable(),
-        //     ];
-        // });
+
+                MenuSection::make('Users')->path('/resources/users')->icon('users'),
+                MenuSection::make('Permisssions')->path('/resources/permissions')->icon('shield-check'),
+                MenuSection::make('Roles')->path('/resources/roles')->icon('briefcase'),
+            ];
+        });
 
         /*Nova::userMenu(function (Request $request, Menu $menu) {
-            if ($request->user()->hasRole(2)) {
+            if ($request->user()->hasRole('Super-Admin')) {
                 $menu->append(
                     MenuItem::make('Subscriber Dashboard')
                         ->path('/subscribers/dashboard')
@@ -132,8 +133,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             NovaPermissionTool::make()
-                ->rolePolicy(RolePolicy::class)
-                ->permissionPolicy(PermissionPolicy::class),
         ];
     }
 

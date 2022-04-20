@@ -49,5 +49,11 @@ return [
     'restore-unit',
     'force-delete-unit',
 
-
+    'view-any-prospect',
+    'view-prospect',
+    'create-prospect',
+    'update-prospect',
+    'delete-prospect',
+    'restore-prospect',
+    'force-delete-prospect',
 ];
