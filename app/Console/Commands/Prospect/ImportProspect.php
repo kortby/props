@@ -30,7 +30,11 @@ class ImportProspect extends Command
      */
     public function handle()
     {
-         Excel::import(new PropscetsImport, Storage::disk('public')->get('/prospects/apartments-prospects.csv'));
+        $this->output->title('Starting import');
+        (new PropscetsImport)->withOutput($this->output)->import('./storage/app/public/prospects/apartments-prospects.csv');
+        $this->output->success('Import successful');
 
     }
+
+
 }

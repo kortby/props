@@ -33,52 +33,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         Nova::mainMenu(function (Request $request) {
-            return [
-                MenuSection::dashboard(Main::class)->icon('home'),
-
-                MenuSection::make('Properties', [
-                    MenuItem::resource(Property::class),
-                    MenuItem::resource(PropertyType::class),
-                ])->icon('office-building')->collapsable(),
-
-                MenuSection::make('Units', [
-                    MenuItem::resource(Unit::class),
-                    MenuItem::resource(UnitType::class),
-                ])->icon('document-duplicate')->collapsable(),
-
-                MenuSection::make('Maintenance', [
-                    MenuItem::resource(Maintenance::class),
-                    MenuItem::resource(Category::class),
-                ])->icon('cog')->collapsable(),
-
-                MenuSection::make('Contacts', [
-                    MenuItem::resource(Prospect::class),
-                ])->icon('annotation')->collapsable(),
-
-
-                MenuSection::make('Users')->path('/resources/users')->icon('users'),
-                MenuSection::make('Permisssions')->path('/resources/permissions')->icon('shield-check'),
-                MenuSection::make('Roles')->path('/resources/roles')->icon('briefcase'),
-            ];
+            return $this->getMenuSections();
         });
 
-        /*Nova::userMenu(function (Request $request, Menu $menu) {
-            if ($request->user()->hasRole('Super-Admin')) {
-                $menu->append(
-                    MenuItem::make('Subscriber Dashboard')
-                        ->path('/subscribers/dashboard')
-                );
-            }
 
-            $menu->prepend(
-                MenuItem::make(
-                    'My Profile',
-                    "/resources/user/{$request->user()->getKey()}"
-                )
-            );
-
-            return $menu;
-        });*/
     }
 
     /**
@@ -134,6 +92,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             NovaPermissionTool::make()
         ];
+
     }
 
     /**
@@ -144,5 +103,55 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * @return array
+     */
+    private function getMenuSections(): array
+    {
+        $menuSections =  [
+            MenuSection::dashboard(Main::class)->icon('home'),
+
+            MenuSection::make('Properties', [
+                MenuItem::resource(Property::class),
+                MenuItem::resource(PropertyType::class),
+            ])->icon('office-building')->collapsable(),
+
+            MenuSection::make('Units', [
+                MenuItem::resource(Unit::class),
+                MenuItem::resource(UnitType::class),
+            ])->icon('document-duplicate')->collapsable(),
+
+            MenuSection::make('Maintenance', [
+                MenuItem::resource(Maintenance::class),
+                MenuItem::resource(Category::class),
+            ])->icon('cog')->collapsable(),
+
+            MenuSection::make('Contacts', [
+                MenuItem::resource(Prospect::class),
+            ])->icon('annotation')->collapsable(),
+
+
+            MenuSection::make('Users')->path('/resources/users')->icon('users'),
+
+
+        ];
+
+        if(in_array(auth()->user()->id, [1])) {
+
+            $permissions = MenuSection::make('Permisssions')
+                ->path('/resources/permissions')
+                ->icon('shield-check');
+
+            $roles = MenuSection::make('Roles')
+                ->path('/resources/roles')
+                ->icon('briefcase');
+
+            array_push($menuSections, $roles);
+            array_push($menuSections, $permissions);
+        }
+
+        return $menuSections;
     }
 }

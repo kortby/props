@@ -13,6 +13,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
 class Property extends Resource
 {
@@ -65,6 +67,16 @@ class Property extends Resource
             new Panel('Amenities', $this->amenitiesFields()),
 
             new Panel('Address Information', $this->addressFields()),
+
+            Images::make('Images', 'property_collection') // second parameter is the media collection name
+            //->conversionOnPreview('medium-size') // conversion used to display the "original" image
+            ->conversionOnDetailView('thumb') // conversion used on the model's view
+            ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+            ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+            ->fullSize() // full size column
+            ->rules('required') // validation rules for the collection of images
+            // validation rules for the collection of images
+            ->singleImageRules('dimensions:min_width=100'),
 
             HasMany::make('Units'),
         ];

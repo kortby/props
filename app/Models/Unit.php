@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Actions\Actionable;
 use Laravel\Nova\Fields\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Unit extends Model
+class Unit extends Model implements HasMedia
 {
-    use HasFactory, Searchable, Actionable;
+    use HasFactory, Searchable, Actionable, InteractsWithMedia;
 
     protected $fillable = [
         'is_active',
@@ -32,5 +35,17 @@ class Unit extends Model
     public function unitType()
     {
         return $this->belongsTo(UnitType::class);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(130)
+            ->height(130);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('units_collection');
     }
 }

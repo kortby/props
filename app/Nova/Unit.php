@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Nova\Actions\AvailableUnit;
 use App\Nova\Actions\NotAvailableUnit;
 use App\Nova\Filters\UnitActive;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -64,6 +65,16 @@ class Unit extends Resource
             Textarea::make('Desription')->hideFromIndex()->rules('required', 'max:650'),
             Number::make('Unit floor number')->hideFromIndex()->min(0)->max(80),
             new Panel('Unit details', $this->detailsFields()),
+
+            Images::make('Images', 'units_collection') // second parameter is the media collection name
+            //->conversionOnPreview('medium-size') // conversion used to display the "original" image
+            ->conversionOnDetailView('thumb') // conversion used on the model's view
+            ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+            ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+            ->fullSize() // full size column
+            ->rules('required') // validation rules for the collection of images
+            // validation rules for the collection of images
+            ->singleImageRules('dimensions:min_width=100'),
         ];
     }
 
