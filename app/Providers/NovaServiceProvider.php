@@ -132,21 +132,19 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Prospect::class),
             ])->icon('annotation')->collapsable(),
 
-
             MenuSection::make('Users')->path('/resources/users')->icon('users'),
-
 
         ];
 
-        if(in_array(auth()->user()->id, [1])) {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             $permissions = MenuSection::make('Permisssions')
-                ->path('/resources/permissions')
-                ->icon('shield-check');
+                                ->path('/resources/permissions')
+                                ->icon('shield-check');
 
             $roles = MenuSection::make('Roles')
-                ->path('/resources/roles')
-                ->icon('briefcase');
+                            ->path('/resources/roles')
+                            ->icon('briefcase');
 
             array_push($menuSections, $roles);
             array_push($menuSections, $permissions);
