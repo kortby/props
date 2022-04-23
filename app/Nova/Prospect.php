@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Nova\Filters\ProspectState;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -54,12 +55,13 @@ class Prospect extends Resource
             Text::make('contact_lastname')->hideFromIndex(),
             Text::make('title')->hideFromIndex(),
             Text::make('direct_phone')->hideFromIndex(),
-            Text::make('email'),
+            Text::make('email')->hideFromIndex(),
             Text::make('website')->hideFromIndex(),
             Text::make('employee_count')->hideFromIndex(),
             Text::make('annual_sales')->sortable(),
-            Text::make('sic_code'),
+            Text::make('sic_code')->hideFromIndex(),
             Text::make('industry')->sortable(),
+            // Boolean::make('is_client'),
         ];
     }
 
