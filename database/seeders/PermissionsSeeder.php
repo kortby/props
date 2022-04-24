@@ -62,6 +62,16 @@ class PermissionsSeeder extends Seeder
         ]);
         $user->assignRole($role1);
 
+        $role3 = Role::create(['name' => 'property-manager']);
+
+        $pm = \App\Models\User::factory()->create([
+            'name' => 'Property manager User',
+            'email' => 'propertymanager@example.com',
+            'password'=>Hash::make('azerty'),
+            'user_id'=>$user->id
+        ]);
+        $pm->assignRole($role3);
+
 
     }
 }

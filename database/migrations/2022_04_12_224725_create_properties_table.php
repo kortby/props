@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('country');
             $table->integer('postal_code');
             $table->string('phone');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

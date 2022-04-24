@@ -15,6 +15,8 @@ class PropertySeeder extends Seeder
      */
     public function run()
     {
-        Property::factory()->count(1)->create();
+        Property::factory()->count(1)->create([
+            'user_id'=>3
+        ]);
     }
 }

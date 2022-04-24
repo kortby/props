@@ -15,6 +15,8 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        Unit::factory()->count(50)->create();
+        Unit::factory()->count(50)->create([
+            'user_id'=>3
+        ]);
     }
 }
