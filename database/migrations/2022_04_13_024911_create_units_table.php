@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('unit_heading');
-            $table->unsignedBigInteger('property_id')->nullable();
-            $table->unsignedBigInteger('unit_type_id')->nullable();
             $table->integer('number_of_bedroom');
             $table->integer('number_of_bathroom');
             $table->integer('number_of_balcony');
@@ -28,6 +26,11 @@ return new class extends Migration
             $table->integer('unit_number');
             $table->integer('unit_floor_number');
             $table->integer('size');
+
+            $table->foreignId('property_id');
+            $table->foreignId('unit_type_id');
+            $table->foreignId('user_id');
+
             $table->timestamps();
         });
     }
