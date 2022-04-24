@@ -42,6 +42,17 @@ class Unit extends Resource
         'unit_number',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+
+        }
+
+        return $query->where('user_id', auth()->user()->id);
+    }
+
     /**
      * Get the fields displayed by the resource.
      *

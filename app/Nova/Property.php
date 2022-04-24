@@ -41,6 +41,17 @@ class Property extends Resource
         'name',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+
+        }
+
+        return $query->where('user_id', auth()->user()->id);
+    }
+
     public function title()
     {
         return $this->name . ' - ' . $this->city;

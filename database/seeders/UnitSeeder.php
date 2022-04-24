@@ -16,7 +16,13 @@ class UnitSeeder extends Seeder
     public function run()
     {
         Unit::factory()->count(50)->create([
+            'property_id'=>1,
             'user_id'=>3
+        ]);
+
+        Unit::factory()->count(50)->create([
+            'property_id'=>2,
+            'user_id'=>4
         ]);
     }
 }
