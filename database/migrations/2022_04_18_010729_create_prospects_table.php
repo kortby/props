@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('annual_sales')->nullable();
             $table->string('sic_code')->nullable();
             $table->string('industry')->nullable();
+            $table->boolean('is_client')->default(false);
             $table->timestamps();
         });
     }

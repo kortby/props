@@ -8,13 +8,16 @@
         "php": "^8.0.2",
         "ebess/advanced-nova-media-library": "^4.0",
         "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.5.2",
         "kiritokatklian/nova-permission": "^4.0",
         "laravel/framework": "^9.2",
+        "laravel/jetstream": "^2.7",
         "laravel/nova": "~4.1.0",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
         "psr/simple-cache": "^1.0",
+        "tightenco/ziggy": "^1.0",
         "tucker-eric/laravel-docusign": "dev-master"
     },
     "require-dev": {
