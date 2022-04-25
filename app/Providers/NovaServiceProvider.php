@@ -5,12 +5,16 @@ namespace App\Providers;
 use App\Models\User;
 use App\Nova\Category;
 use App\Nova\Maintenance;
-use App\Nova\Property;
+use App\Models\Property as PropertyModel;
+use App\Models\Unit as UnitModel;
 use App\Nova\PropertyType;
 use App\Nova\Prospect;
+use App\Nova\Property;
 use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
+use App\Observers\PropertyObserver;
+use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
@@ -40,7 +44,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         });
 
         Observable::make(User::class, UserObserver::class);
-
+        Observable::make(PropertyModel::class, PropertyObserver::class);
+        Observable::make(UnitModel::class, UnitObserver::class);
 
     }
 

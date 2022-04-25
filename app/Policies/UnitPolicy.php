@@ -30,7 +30,13 @@ class UnitPolicy
      */
     public function view(User $user, Unit $unit)
     {
-        return $user->can('view-unit');
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('view-unit');
+
+        }
+
+        return $user->can('view-unit') && $unit->user_id === auth()->user()->id;
     }
 
     /**
@@ -53,7 +59,7 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit)
     {
-        return $user->can('update-unit');
+        return $user->can('update-unit') && $unit->user_id === auth()->user()->id;
     }
 
     /**
@@ -65,7 +71,7 @@ class UnitPolicy
      */
     public function delete(User $user, Unit $unit)
     {
-        return $user->can('delete-unit');
+        return $user->can('delete-unit') && $unit->user_id === auth()->user()->id;
     }
 
     /**
@@ -77,7 +83,7 @@ class UnitPolicy
      */
     public function restore(User $user, Unit $unit)
     {
-        return $user->can('restore-unit');
+        return $user->can('restore-unit') && $unit->user_id === auth()->user()->id;
     }
 
     /**
@@ -89,6 +95,6 @@ class UnitPolicy
      */
     public function forceDelete(User $user, Unit $unit)
     {
-        return $user->can('force-unit');
+        return $user->can('force-delete-unit') && $unit->user_id === auth()->user()->id;
     }
 }
