@@ -47,6 +47,12 @@ class PropertyPolicy
      */
     public function create(User $user)
     {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return false;
+
+        }
+
         return $user->can('create-property');
     }
 

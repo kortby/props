@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('frequency');
             $table->date('finished')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

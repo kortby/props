@@ -49,8 +49,6 @@ class PermissionsSeeder extends Seeder
         }
 
 
-
-
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
         // create demo users
@@ -62,6 +60,7 @@ class PermissionsSeeder extends Seeder
         $user->assignRole($role1);
 
         $role3 = Role::create(['name' => 'property-manager']);
+        $role4 = Role::create(['name' => 'property-agent']);
 
         $pm = \App\Models\User::factory()->create([
             'name' => 'Property manager User',
@@ -71,6 +70,14 @@ class PermissionsSeeder extends Seeder
         ]);
         $pm->assignRole($role3);
 
+        $pa = \App\Models\User::factory()->create([
+            'name' => 'Property agent',
+            'email' => 'propertyagent@example.com',
+            'password'=>Hash::make('azerty'),
+            'user_id'=>$pm->id
+        ]);
+        $pa->assignRole($role4);
+
         $pm2 = \App\Models\User::factory()->create([
             'name' => 'Property manager User 2',
             'email' => 'propertymanager2@example.com',
@@ -79,6 +86,17 @@ class PermissionsSeeder extends Seeder
         ]);
         $pm2->assignRole($role3);
 
+        $pa2 = \App\Models\User::factory()->create([
+            'name' => 'Property agent 2',
+            'email' => 'propertyagent2@example.com',
+            'password'=>Hash::make('azerty'),
+            'user_id'=>$pm2->id
+        ]);
+        $pa2->assignRole($role4);
+
+
+
+        $role5 = Role::create(['name' => 'renter']);
 
     }
 }

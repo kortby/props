@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Nova\Category;
+use App\Nova\Company;
 use App\Nova\Maintenance;
 use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
@@ -123,7 +124,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         $menuSections =  [
             MenuSection::dashboard(Main::class)->icon('home'),
 
-            MenuSection::make('Properties', [
+            MenuSection::make('Companies/Properties', [
+                MenuItem::resource(Company::class),
                 MenuItem::resource(Property::class),
                 MenuItem::resource(PropertyType::class),
             ])->icon('office-building')->collapsable(),

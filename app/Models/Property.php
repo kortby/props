@@ -13,6 +13,11 @@ class Property extends Model implements HasMedia
 {
     use HasFactory, Searchable, InteractsWithMedia;
 
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     public function units()
     {
         return $this->hasMany(Unit::class);
