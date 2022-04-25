@@ -11,6 +11,9 @@ use Spatie\Permission\PermissionRegistrar;
 
 class PermissionsSeeder extends Seeder
 {
+
+    //use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      *
@@ -21,31 +24,27 @@ class PermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $role2 = Role::create(['name' => 'Super-Admin']);
+        $role1 = Role::create(['name' => 'Super-Admin']);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Super-Admin',
             'email' => 'superadmin@example.com',
             'password'=>Hash::make('azerty')
         ]);
-        $user->assignRole($role2);
+        $user->assignRole($role1);
 
-        // create permissions
-        // Category
         foreach (config('permissions') as $permission) {
 
             Permission::create(['name'=>$permission]);
 
         }
 
-
-
         // create roles and assign existing permissions
-        $role1 = Role::create(['name' => 'app-manager']);
+        $role2 = Role::create(['name' => 'app-manager']);
 
-        foreach (config('permissions') as $permission) {
+        foreach (Permission::all() as $permission) {
 
-            $role1->givePermissionTo($permission);
+            $role2->givePermissionTo($permission->name);
 
         }
 

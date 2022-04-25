@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        // return $user->can('view-users');
+         return $user->can('view-any-user');
         return true;
     }
 
@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        // return $user->can('view-users');
+         return $user->can('view-user');
         return true;
     }
 
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        // return $user->can('create-users');
+        return $user->can('create-user');
         return true;
     }
 
@@ -55,7 +55,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->can('update-users');
+        return $user->can('update-user');
     }
 
     /**
@@ -67,7 +67,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->can('delete-users');
+        return $user->can('delete-user');
     }
 
     /**
@@ -79,7 +79,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        //
+        return $user->can('restore-user');
     }
 
     /**
@@ -91,6 +91,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model)
     {
-        //
+        return $user->can('force-delete-user');
     }
 }

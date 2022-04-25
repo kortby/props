@@ -37,6 +37,17 @@ class User extends Resource
         'id', 'name', 'email',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+
+        }
+
+        return $query->where('user_id', auth()->user()->id);
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -45,29 +56,7 @@ class User extends Resource
      */
     public function fields(NovaRequest $request)
     {
-        return [
-            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
-
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
-
-            MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class),
-            MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class),
-        ];
+        return $this->detailView($request);
     }
 
     /**
@@ -112,5 +101,39 @@ class User extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    private function detailView($request) {
+
+        $detail = [
+            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
+
+            Gravatar::make()->maxWidth(50),
+
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Password::make('Password')
+                ->onlyOnForms()
+                ->creationRules('required', Rules\Password::defaults())
+                ->updateRules('nullable', Rules\Password::defaults()),
+        ];
+
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            array_push($detail, MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class));
+            array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
+
+        }
+
+        return $detail;
+
     }
 }

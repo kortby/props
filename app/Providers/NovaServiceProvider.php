@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Nova\Category;
 use App\Nova\Maintenance;
 use App\Nova\Property;
@@ -10,6 +11,7 @@ use App\Nova\Prospect;
 use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
+use App\Observers\UserObserver;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use Illuminate\Http\Request;
@@ -19,6 +21,7 @@ use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Laravel\Nova\Observable;
 use \Vyuldashev\NovaPermission\NovaPermissionTool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
@@ -35,6 +38,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::mainMenu(function (Request $request) {
             return $this->getMenuSections();
         });
+
+        Observable::make(User::class, UserObserver::class);
 
 
     }
