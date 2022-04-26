@@ -18,10 +18,26 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/products', function () {
+    return Inertia::render('Products');
+});
+
+Route::get('/features', function () {
+    return Inertia::render('Features');
+});
+
+Route::get('/prices', function () {
+    sleep(2);
+    return Inertia::render('Prices');
+});
+
+Route::get('/company', function () {
+    return Inertia::render('Company');
 });
 
 Route::middleware([

@@ -11,7 +11,7 @@
                     <div
                         class="flex items-center justify-between w-full md:w-auto"
                     >
-                        <a href="#">
+                        <a href="/">
                             <span class="sr-only">Workflow</span>
                             <img
                                 class="h-8 w-auto sm:h-10"
@@ -55,7 +55,7 @@
         >
             <PopoverPanel
                 focus
-                class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+                class="absolute z-auto top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
             >
                 <div
                     class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden"
@@ -102,10 +102,10 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 
 const navigation = [
-    { name: "Product", href: "#" },
-    { name: "Features", href: "#" },
-    { name: "Marketplace", href: "#" },
-    { name: "Company", href: "#" },
+    { name: "Product", href: "/products" },
+    { name: "Features", href: "/features" },
+    { name: "Prices", href: "/prices" },
+    { name: "Company", href: "/company" },
 ];
 
 export default {
