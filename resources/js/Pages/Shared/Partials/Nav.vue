@@ -78,20 +78,20 @@
                         </div>
                     </div>
                     <div class="px-2 pt-2 pb-3 space-y-1">
-                        <a
+                        <Link
                             v-for="item in navigation"
                             :key="item.name"
                             :href="item.href"
                             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                            >{{ item.name }}</a
-                        >
+                            >{{ item.name }}
+                        </link>
                     </div>
-                    <a
+                    <Link
                         href="#"
                         class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
                     >
                         Log in
-                    </a>
+                    </Link>
                 </div>
             </PopoverPanel>
         </transition>
@@ -100,6 +100,7 @@
 <script>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
+import { Link } from "@inertiajs/inertia-vue3";
 
 const navigation = [
     { name: "Product", href: "/products" },
@@ -115,6 +116,7 @@ export default {
         PopoverPanel,
         MenuIcon,
         XIcon,
+        Link,
     },
     setup() {
         return {

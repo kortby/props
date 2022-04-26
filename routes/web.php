@@ -32,7 +32,6 @@ Route::get('/features', function () {
 });
 
 Route::get('/prices', function () {
-    sleep(2);
     return Inertia::render('Prices');
 });
 
@@ -48,4 +47,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/maintenance', function () {
+        return Inertia::render('Maintenance');
+    })->name('maintenance');
 });
