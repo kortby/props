@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Unit;
+use App\Models\Category;
+use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UnitSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +16,11 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        Unit::factory()->count(50)->create([
-            'property_id'=>1,
+        Company::factory()->count(2)->create([
             'user_id'=>3
         ]);
 
-        Unit::factory()->count(50)->create([
-            'property_id'=>2,
+        Company::factory()->count(1)->create([
             'user_id'=>4
         ]);
     }

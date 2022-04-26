@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('industry')->nullable();
             $table->boolean('is_client')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -41,6 +41,17 @@ class Property extends Resource
         'name',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+
+        }
+
+        return $query->where('user_id', auth()->user()->id);
+    }
+
     public function title()
     {
         return $this->name . ' - ' . $this->city;
@@ -56,7 +67,8 @@ class Property extends Resource
     {
         return [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
-            Text::make('Company name', 'name')->rules('required', 'max:120'),
+            Text::make('Property name', 'name')->rules('required', 'max:120'),
+            BelongsTo::make( 'Company'),
             BelongsTo::make('Property Type', 'propertyType'),
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),

@@ -30,7 +30,13 @@ class PropertyPolicy
      */
     public function view(User $user, Property $property)
     {
-        return $user->can('view-property');
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('view-property');
+
+        }
+
+        return $user->can('view-property') && $property->user_id === auth()->user()->id;
     }
 
     /**
@@ -41,6 +47,12 @@ class PropertyPolicy
      */
     public function create(User $user)
     {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return false;
+
+        }
+
         return $user->can('create-property');
     }
 
@@ -53,7 +65,7 @@ class PropertyPolicy
      */
     public function update(User $user, Property $property)
     {
-        return $user->can('update-property');
+        return $user->can('update-property') && $property->user_id === auth()->user()->id;
     }
 
     /**
@@ -65,7 +77,7 @@ class PropertyPolicy
      */
     public function delete(User $user, Property $property)
     {
-        return $user->can('delete-property');
+        return $user->can('delete-property')&& $property->user_id === auth()->user()->id;
     }
 
     /**
@@ -77,7 +89,7 @@ class PropertyPolicy
      */
     public function restore(User $user, Property $property)
     {
-        return $user->can('restore-property');
+        return $user->can('restore-property') && $property->user_id === auth()->user()->id;
     }
 
     /**
@@ -89,6 +101,6 @@ class PropertyPolicy
      */
     public function forceDelete(User $user, Property $property)
     {
-        return $user->can('force-delete-property');
+        return $user->can('force-delete-property') && $property->user_id === auth()->user()->id;
     }
 }

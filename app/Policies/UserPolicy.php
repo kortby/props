@@ -17,8 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        // return $user->can('view-users');
-        return true;
+         return $user->can('view-any-user');
     }
 
     /**
@@ -30,8 +29,13 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        // return $user->can('view-users');
-        return true;
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('view-user');
+
+        }
+
+        return $user->can('view-user') && $model->user_id === auth()->user()->id;
     }
 
     /**
@@ -42,8 +46,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        // return $user->can('create-users');
-        return true;
+        return $user->can('create-user');
     }
 
     /**
@@ -55,7 +58,13 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->can('update-users');
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('update-user');
+
+        }
+
+        return $user->can('update-user') && $model->user_id === auth()->user()->id;
     }
 
     /**
@@ -67,7 +76,13 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->can('delete-users');
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('delete-user') ;
+
+        }
+
+        return $user->can('delete-user') && $model->user_id === auth()->user()->id;
     }
 
     /**
@@ -79,7 +94,13 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        //
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('restore-user') ;
+
+        }
+
+        return $user->can('restore-user') && $model->user_id === auth()->user()->id;
     }
 
     /**
@@ -91,6 +112,12 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model)
     {
-        //
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return $user->can('force-delete-user') ;
+
+        }
+
+        return $user->can('force-delete-user') && $model->user_id === auth()->user()->id;
     }
 }

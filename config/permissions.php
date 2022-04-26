@@ -1,6 +1,15 @@
 <?php
 
 return [
+
+    'view-any-user',
+    'view-user',
+    'create-user',
+    'update-user',
+    'delete-user',
+    'restore-user',
+    'force-delete-user',
+
     'view-any-category',
     'view-category',
     'create-category',
