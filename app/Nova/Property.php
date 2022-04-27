@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
@@ -49,7 +50,7 @@ class Property extends Resource
 
         }
 
-        return $query->where('user_id', auth()->user()->id);
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
     }
 
     public function title()

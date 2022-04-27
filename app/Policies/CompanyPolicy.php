@@ -47,7 +47,7 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-company');
+        return $user->can('create-company') && auth()->user()->hasAnyRole(['property-manager' , 'property-agent' ]);
     }
 
     /**

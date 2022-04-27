@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Nova\Actions\AvailableUnit;
 use App\Nova\Actions\NotAvailableUnit;
 use App\Nova\Filters\UnitActive;
+use App\Services\GetParentAndChildByAuthenticated;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class Unit extends Resource
 
         }
 
-        return $query->where('user_id', auth()->user()->id);
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
     }
 
     /**

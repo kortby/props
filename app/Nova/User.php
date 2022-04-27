@@ -2,13 +2,16 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -45,7 +48,7 @@ class User extends Resource
 
         }
 
-        return $query->where('user_id', auth()->user()->id);
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
     }
 
     /**
@@ -124,7 +127,23 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
+
+
         ];
+
+        if(auth()->user()->hasRole('property-manager')) {
+
+            array_push($detail, Select::make('Role')
+                            ->rules('required')
+                            ->options(DB::table('roles')->whereIn('id', [4,5])->get()->pluck('name', 'id')->toArray())
+                            ->displayUsingLabels()
+                            ->fillUsing(function(NovaRequest $request, $model, $attribute, $requestAttribute) {
+                                return null;
+                            })
+            );
+
+
+        }
 
         if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
 

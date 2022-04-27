@@ -44,6 +44,7 @@ class PermissionsSeeder extends Seeder
 
         foreach (Permission::all() as $permission) {
             $role2->givePermissionTo($permission->name);
+            $role1->givePermissionTo($permission->name);
         }
 
 
@@ -80,8 +81,7 @@ class PermissionsSeeder extends Seeder
         $pm = \App\Models\User::factory()->create([
             'name' => 'Property manager User',
             'email' => 'propertymanager@example.com',
-            'password'=>Hash::make('azerty'),
-            'user_id'=>$user->id
+            'password'=>Hash::make('azerty')
         ]);
         $pm->assignRole($role3);
 
@@ -96,8 +96,8 @@ class PermissionsSeeder extends Seeder
         $pm2 = \App\Models\User::factory()->create([
             'name' => 'Property manager User 2',
             'email' => 'propertymanager2@example.com',
-            'password'=>Hash::make('azerty'),
-            'user_id'=>$user->id
+            'password'=>Hash::make('azerty')
+
         ]);
         $pm2->assignRole($role3);
 

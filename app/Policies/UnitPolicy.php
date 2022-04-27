@@ -47,7 +47,7 @@ class UnitPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-unit');
+        return $user->can('create-unit') && auth()->user()->hasAnyRole(['property-manager' , 'property-agent' ]);
     }
 
     /**
