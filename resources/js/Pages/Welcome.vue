@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <Layout>
+    <Layout title="Welcome">
         <div>
             <div class="relative bg-white pt-16 pb-32 overflow-hidden">
                 <div class="relative">
@@ -38,7 +38,7 @@
                                     </p>
                                     <div class="mt-6">
                                         <a
-                                            href="#"
+                                            href="/prices"
                                             class="inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
                                         >
                                             Get started

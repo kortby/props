@@ -18,8 +18,6 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
@@ -47,7 +45,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/payment', function () {
+        return Inertia::render('Payment');
+    })->name('payment');
     Route::get('/maintenance', function () {
         return Inertia::render('Maintenance');
     })->name('maintenance');
+    Route::get('/amenities', function () {
+        return Inertia::render('Amenities');
+    })->name('amenities');
 });

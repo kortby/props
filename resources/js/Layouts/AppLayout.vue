@@ -64,10 +64,22 @@ const logout = () => {
                                     Dashboard
                                 </JetNavLink>
                                 <JetNavLink
+                                    :href="route('payment')"
+                                    :active="route().current('payment')"
+                                >
+                                    Payment
+                                </JetNavLink>
+                                <JetNavLink
                                     :href="route('maintenance')"
                                     :active="route().current('maintenance')"
                                 >
                                     Maintenance
+                                </JetNavLink>
+                                <JetNavLink
+                                    :href="route('amenities')"
+                                    :active="route().current('amenities')"
+                                >
+                                    Amenities
                                 </JetNavLink>
                             </div>
                         </div>

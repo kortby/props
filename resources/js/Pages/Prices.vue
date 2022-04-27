@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <Layout>
+    <Layout title="Prices">
         <div class="bg-gray-900">
             <div class="pt-12 px-4 sm:px-6 lg:px-8 lg:pt-20">
                 <div class="text-center">
