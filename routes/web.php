@@ -18,10 +18,23 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/products', function () {
+    return Inertia::render('Products');
+});
+
+Route::get('/features', function () {
+    return Inertia::render('Features');
+});
+
+Route::get('/prices', function () {
+    return Inertia::render('Prices');
+});
+
+Route::get('/company', function () {
+    return Inertia::render('Company');
 });
 
 Route::middleware([
@@ -32,4 +45,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/payment', function () {
+        return Inertia::render('Payment');
+    })->name('payment');
+    Route::get('/maintenance', function () {
+        return Inertia::render('Maintenance');
+    })->name('maintenance');
+    Route::get('/amenities', function () {
+        return Inertia::render('Amenities');
+    })->name('amenities');
 });
