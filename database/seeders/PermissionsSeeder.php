@@ -33,19 +33,17 @@ class PermissionsSeeder extends Seeder
         ]);
         $user->assignRole($role1);
 
-        foreach (config('permissions') as $permission) {
-
-            Permission::create(['name'=>$permission]);
-
+        foreach (config('permissions') as $resource) {
+            foreach ($resource as $permission) {
+                Permission::create(['name' => $permission]);
+            }
         }
 
         // create roles and assign existing permissions
         $role2 = Role::create(['name' => 'app-manager']);
 
         foreach (Permission::all() as $permission) {
-
             $role2->givePermissionTo($permission->name);
-
         }
 
 
@@ -61,6 +59,23 @@ class PermissionsSeeder extends Seeder
 
         $role3 = Role::create(['name' => 'property-manager']);
         $role4 = Role::create(['name' => 'property-agent']);
+
+        foreach (config('permissions') as $key => $resource) {
+
+            if(in_array($key, ['users', 'company', 'property', 'unit'] )){
+                foreach ($resource as $permission) {
+                    $role3->givePermissionTo($permission);
+                }
+            }
+
+            if(in_array($key, ['users', 'property', 'unit'] )){
+                foreach ($resource as $permission) {
+                    $role4->givePermissionTo($permission);
+                }
+            }
+
+
+        }
 
         $pm = \App\Models\User::factory()->create([
             'name' => 'Property manager User',
@@ -93,8 +108,6 @@ class PermissionsSeeder extends Seeder
             'user_id'=>$pm2->id
         ]);
         $pa2->assignRole($role4);
-
-
 
         $role5 = Role::create(['name' => 'renter']);
 

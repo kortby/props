@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Company extends Resource
@@ -32,6 +33,17 @@ class Company extends Resource
         'id',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+
+        }
+
+        return $query->where('user_id', auth()->user()->id);
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -43,6 +55,7 @@ class Company extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Company name', 'name')->rules('required', 'max:120'),
+            Textarea::make('Address', 'address')->rules('required'),
         ];
     }
 
