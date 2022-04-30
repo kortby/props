@@ -14,15 +14,17 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        if(auth()->user()->hasRole('property-manager')) {
+        if(auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
+
             $user->user_id = auth()->id();
+
         }
 
     }
 
     public function created(User $user)
     {
-        if(auth()->user()->hasRole('property-manager')) {
+        if(auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
 
             $user->assignRole(request()->role);
 
