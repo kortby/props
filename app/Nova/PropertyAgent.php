@@ -4,18 +4,15 @@ namespace App\Nova;
 
 use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Password;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class User extends Resource
+class PropertyAgent extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -29,7 +26,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -37,18 +34,14 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id',
     ];
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
-
-            return parent::indexQuery($request, $query);
-
-        }
-
-        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+        return $query->whereHas('roles', function($q){
+            return $q->where('name','property-agent');
+        })->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
     }
 
     /**
@@ -59,7 +52,32 @@ class User extends Resource
      */
     public function fields(NovaRequest $request)
     {
-        return $this->detailView($request);
+        return [
+            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
+
+            Gravatar::make()->maxWidth(50),
+
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Password::make('Password')
+                ->onlyOnForms()
+                ->creationRules('required', Rules\Password::defaults())
+                ->updateRules('nullable', Rules\Password::defaults()),
+
+            Hidden::make('role')
+                    ->default('property-agent')
+                    ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                        return null;
+                    })
+        ];
     }
 
     /**
@@ -104,42 +122,5 @@ class User extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
-    }
-
-    private function detailView($request) {
-
-        $detail = [
-            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
-
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
-
-
-        ];
-
-
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
-
-            array_push($detail, MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class));
-            array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
-
-        }
-
-        return $detail;
-
     }
 }
