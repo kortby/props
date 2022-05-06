@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('unit_floor_number');
             $table->integer('size');
 
+            $table->foreignId('unit_feature_id');
             $table->foreignId('property_id');
             $table->foreignId('unit_type_id');
             $table->foreignId('user_id');

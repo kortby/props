@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MaintenanceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,9 +49,7 @@ Route::middleware([
     Route::get('/payment', function () {
         return Inertia::render('Payment');
     })->name('payment');
-    Route::get('/maintenance', function () {
-        return Inertia::render('Maintenance');
-    })->name('maintenance');
+    Route::get('/maintenance', [MaintenanceController::class, 'create'])->name('maintenance');
     Route::get('/amenities', function () {
         return Inertia::render('Amenities');
     })->name('amenities');

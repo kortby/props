@@ -37,6 +37,11 @@ class Unit extends Model implements HasMedia
         return $this->belongsTo(UnitType::class);
     }
 
+    public function unitFeature()
+    {
+        return $this->hasOne(UnitFeature::class);
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

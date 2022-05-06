@@ -9,6 +9,8 @@ use App\Nova\Maintenance;
 use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
 use App\Models\Company as CompanyModel;
+use App\Models\UnitFeature as UnitFeatureModel;
+use App\Nova\UnitFeature;
 use App\Nova\PropertyAgent;
 use App\Nova\PropertyType;
 use App\Nova\Prospect;
@@ -21,6 +23,7 @@ use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
 use App\Observers\CompanyObserver;
+use App\Observers\UnitFeatureObserver;
 use App\Policies\RolePolicy;
 use App\Policies\PermissionPolicy;
 use Illuminate\Http\Request;
@@ -51,8 +54,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(User::class, UserObserver::class);
         Observable::make(PropertyModel::class, PropertyObserver::class);
         Observable::make(UnitModel::class, UnitObserver::class);
+        Observable::make(UnitFeatureModel::class, UnitFeatureObserver::class);
         Observable::make(CompanyModel::class, CompanyObserver::class);
-
     }
 
     /**
@@ -80,7 +83,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Gate::define('viewNova', function ($user) {
             return in_array($user->email, []);
         });
-/*
+        /*
         Gate::define('viewRole', function ($user) {
             return $user->can('view-roles');
         });*/
@@ -108,7 +111,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             NovaPermissionTool::make()
         ];
-
     }
 
     /**
@@ -138,6 +140,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             MenuSection::make('Units', [
                 MenuItem::resource(Unit::class),
                 MenuItem::resource(UnitType::class),
+                MenuItem::resource(UnitFeature::class),
             ])->icon('document-duplicate')->collapsable(),
 
             MenuSection::make('Maintenance', [
@@ -152,7 +155,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         ];
 
-        if(auth()->user()->hasRole('property-manager')) {
+        if (auth()->user()->hasRole('property-manager')) {
 
             $menuUser = MenuSection::make('Users', [
                 MenuItem::resource(PropertyAgent::class),
@@ -162,25 +165,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             array_push($menuSections, $menuUser);
         }
 
-        if(auth()->user()->hasRole('property-agent')) {
+        if (auth()->user()->hasRole('property-agent')) {
 
             array_push($menuSections, MenuSection::make('Renters')
                 ->path('/resources/renters')
                 ->icon('users'));
-
         }
 
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             $users = MenuSection::make('Users')->path('/resources/users')->icon('users');
 
             $permissions = MenuSection::make('Permisssions')
-                                ->path('/resources/permissions')
-                                ->icon('shield-check');
+                ->path('/resources/permissions')
+                ->icon('shield-check');
 
             $roles = MenuSection::make('Roles')
-                            ->path('/resources/roles')
-                            ->icon('briefcase');
+                ->path('/resources/roles')
+                ->icon('briefcase');
 
             array_push($menuSections, $users);
             array_push($menuSections, $roles);

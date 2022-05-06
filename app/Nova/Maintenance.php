@@ -79,6 +79,7 @@ class Maintenance extends Resource
                 'high' => 'warning',
                 'critical' => 'danger',
             ])->sortable(),
+            Text::make('phone'),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }

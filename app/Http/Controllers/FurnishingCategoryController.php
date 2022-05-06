@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Maintenance;
+use App\Models\FurnishingCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Inertia\Inertia;
 
-class MaintenanceController extends Controller
+class FurnishingCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +24,7 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Maintenance');
+        //
     }
 
     /**
@@ -37,22 +35,16 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            Maintenance::create($request->all());
-            return back()->with('success', 'Maintenance has been created');
-        } catch (\Exception $e) {
-            Log::error($e);
-        }
-        return back()->with('error', 'Not created!');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Maintenance  $maintenance
+     * @param  \App\Models\FurnishingCategory  $furnishingCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Maintenance $maintenance)
+    public function show(FurnishingCategory $furnishingCategory)
     {
         //
     }
@@ -60,10 +52,10 @@ class MaintenanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Maintenance  $maintenance
+     * @param  \App\Models\FurnishingCategory  $furnishingCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Maintenance $maintenance)
+    public function edit(FurnishingCategory $furnishingCategory)
     {
         //
     }
@@ -72,10 +64,10 @@ class MaintenanceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Maintenance  $maintenance
+     * @param  \App\Models\FurnishingCategory  $furnishingCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Maintenance $maintenance)
+    public function update(Request $request, FurnishingCategory $furnishingCategory)
     {
         //
     }
@@ -83,10 +75,10 @@ class MaintenanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Maintenance  $maintenance
+     * @param  \App\Models\FurnishingCategory  $furnishingCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Maintenance $maintenance)
+    public function destroy(FurnishingCategory $furnishingCategory)
     {
         //
     }

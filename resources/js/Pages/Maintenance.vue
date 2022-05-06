@@ -88,21 +88,21 @@
                 </div>
                 <div class="mt-12">
                     <form
-                        action="#"
+                        action="/maintenance/store"
                         method="POST"
                         class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                     >
                         <div class="sm:col-span-2">
                             <label
-                                for="company"
+                                for="title"
                                 class="block text-sm font-medium text-gray-700"
-                                >Unit Number</label
+                                >Title</label
                             >
                             <div class="mt-1">
                                 <input
                                     type="text"
-                                    name="company"
-                                    id="company"
+                                    name="title"
+                                    id="title"
                                     autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                                 />
@@ -110,16 +110,48 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label
-                                for="email"
+                                for="unit-id"
+                                class="block text-sm font-medium text-gray-700"
+                                >Unit Number</label
+                            >
+                            <div class="mt-1">
+                                <input
+                                    type="text"
+                                    name="unit_id"
+                                    id="unit-id"
+                                    autocomplete="organization"
+                                    class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label
+                                for="category-id"
                                 class="block text-sm font-medium text-gray-700"
                                 >Maintenance category</label
                             >
                             <div class="mt-1">
                                 <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autocomplete="email"
+                                    id="category-id"
+                                    name="category_id"
+                                    type="text"
+                                    autocomplete="organization"
+                                    class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label
+                                for="preferred_maintenece_time"
+                                class="block text-sm font-medium text-gray-700"
+                                >Preferred maintenece date</label
+                            >
+                            <div class="mt-1">
+                                <input
+                                    id="preferred_maintenece_time"
+                                    name="preferred_maintenece_time"
+                                    type="date"
+                                    autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                                 />
                             </div>
@@ -149,7 +181,7 @@
                                 </div>
                                 <input
                                     type="text"
-                                    name="phone-number"
+                                    name="phone"
                                     id="phone-number"
                                     autocomplete="tel"
                                     class="py-3 px-4 block w-full pl-20 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
@@ -159,14 +191,14 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label
-                                for="message"
+                                for="description"
                                 class="block text-sm font-medium text-gray-700"
                                 >More Details</label
                             >
                             <div class="mt-1">
                                 <textarea
-                                    id="message"
-                                    name="message"
+                                    id="description"
+                                    name="description"
                                     rows="4"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
                                 />
@@ -207,16 +239,15 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label
-                                for="email"
+                                for="access-code"
                                 class="block text-sm font-medium text-gray-700"
-                                >Alarm Code (if any)</label
+                                >Access Code (if any)</label
                             >
                             <div class="mt-1">
                                 <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autocomplete="email"
+                                    id="access-code"
+                                    name="access_code"
+                                    type="text"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                                 />
                             </div>
