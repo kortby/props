@@ -19,6 +19,8 @@ use App\Nova\Renter;
 use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
+use App\Nova\FurnishingCategory;
+use App\Nova\FurnishingItem;
 use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
@@ -141,6 +143,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Unit::class),
                 MenuItem::resource(UnitType::class),
                 MenuItem::resource(UnitFeature::class),
+                MenuItem::resource(FurnishingItem::class),
+                MenuItem::resource(FurnishingCategory::class),
             ])->icon('document-duplicate')->collapsable(),
 
             MenuSection::make('Maintenance', [

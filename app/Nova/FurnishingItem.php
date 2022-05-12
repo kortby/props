@@ -3,7 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class FurnishingItem extends Resource
@@ -20,7 +22,7 @@ class FurnishingItem extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -28,7 +30,7 @@ class FurnishingItem extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
     ];
 
     /**
@@ -41,6 +43,8 @@ class FurnishingItem extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            BelongsTo::make('furnishingCategory'),
         ];
     }
 

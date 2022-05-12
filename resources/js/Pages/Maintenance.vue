@@ -88,8 +88,7 @@
                 </div>
                 <div class="mt-12">
                     <form
-                        action="/maintenance/store"
-                        method="POST"
+                        @submit.prevent="submit"
                         class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                     >
                         <div class="sm:col-span-2">
@@ -101,6 +100,7 @@
                             <div class="mt-1">
                                 <input
                                     type="text"
+                                    v-model="form.title"
                                     name="title"
                                     id="title"
                                     autocomplete="organization"
@@ -116,11 +116,17 @@
                             >
                             <div class="mt-1">
                                 <input
-                                    type="text"
-                                    name="unit_id"
+                                    type="number"
+                                    v-model="unit_id"
+                                    :disabled="disabled_input"
                                     id="unit-id"
+                                    name="unit_id"
                                     autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                    :class="{
+                                        'disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:invalid:ring-pink-500':
+                                            disabled_input,
+                                    }"
                                 />
                             </div>
                         </div>
@@ -128,17 +134,21 @@
                             <label
                                 for="category-id"
                                 class="block text-sm font-medium text-gray-700"
-                                >Maintenance category</label
+                                >Maintenance Category</label
                             >
-                            <div class="mt-1">
-                                <input
-                                    id="category-id"
-                                    name="category_id"
-                                    type="text"
-                                    autocomplete="organization"
-                                    class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
-                                />
-                            </div>
+                            <select
+                                id="category-id"
+                                v-model="category_id"
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            >
+                                <option
+                                    v-for="category in categories"
+                                    :key="category.id"
+                                    :value="category.id"
+                                >
+                                    {{ category.name }}
+                                </option>
+                            </select>
                         </div>
                         <div class="sm:col-span-2">
                             <label
@@ -149,6 +159,7 @@
                             <div class="mt-1">
                                 <input
                                     id="preferred_maintenece_time"
+                                    v-model="form.preferred_maintenece_time"
                                     name="preferred_maintenece_time"
                                     type="date"
                                     autocomplete="organization"
@@ -181,6 +192,7 @@
                                 </div>
                                 <input
                                     type="text"
+                                    v-model="form.phone"
                                     name="phone"
                                     id="phone-number"
                                     autocomplete="tel"
@@ -198,6 +210,7 @@
                             <div class="mt-1">
                                 <textarea
                                     id="description"
+                                    v-model="form.description"
                                     name="description"
                                     rows="4"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
@@ -208,9 +221,10 @@
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">
                                     <Switch
-                                        v-model="agreed"
+                                        v-model="form.permission_to_enter"
+                                        name="permission_to_enter"
                                         :class="[
-                                            agreed
+                                            form.permission_to_enter
                                                 ? 'bg-indigo-600'
                                                 : 'bg-gray-200',
                                             'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
@@ -222,7 +236,7 @@
                                         <span
                                             aria-hidden="true"
                                             :class="[
-                                                agreed
+                                                form.permission_to_enter
                                                     ? 'translate-x-5'
                                                     : 'translate-x-0',
                                                 'inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
@@ -246,6 +260,7 @@
                             <div class="mt-1">
                                 <input
                                     id="access-code"
+                                    v-model="form.access_code"
                                     name="access_code"
                                     type="text"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
@@ -271,17 +286,41 @@
 import { ref } from "vue";
 import { Switch } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { reactive } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
+    props: {
+        unit_id: Number,
+        categories: Object,
+        user: Number,
+    },
     components: {
         Switch,
         AppLayout,
     },
-    setup() {
-        const agreed = ref(false);
+    data() {
+        const form = reactive({
+            title: null,
+            unit_id: this.unit_id,
+            category_id: this.categories[0].id,
+            preferred_maintenece_time: null,
+            phone: this.user.phone,
+            description: null,
+            access_code: null,
+            permission_to_enter: true,
+        });
 
+        const submit = () => {
+            Inertia.post("/maintenance", form);
+        };
         return {
-            agreed,
+            form,
+            submit,
+            unit_id: ref(this.$page.props.unit_id),
+            disabled_input: true,
+            phone: ref(this.$page.props.user.phone),
+            category_id: ref(this.$page.props.categories[2].id),
         };
     },
 };

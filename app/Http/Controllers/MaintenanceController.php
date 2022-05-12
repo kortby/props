@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +27,10 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Maintenance');
+        return Inertia::render('Maintenance', [
+            'unit_id' => '12',
+            'categories' => Category::select('id', 'name')->get(),
+        ]);
     }
 
     /**
@@ -37,13 +41,23 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
+        $attributes = $request->validate([
+            'title' => 'required',
+            'unit_id' => 'required',
+            'category_id' => 'required',
+            'preferred_maintenece_time' => '',
+            'phone' => 'required',
+            'description' => 'required',
+            'access_code' => 'required',
+            'permission_to_enter' => 'required'
+        ]);
         try {
-            Maintenance::create($request->all());
-            return back()->with('success', 'Maintenance has been created');
+            Maintenance::create($attributes);
+            return redirect('/')->with('success', 'Thank you! We will contact you sortly.');
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return back()->with('error', 'Not created!');
+        return redirect('/')->with('error', 'Not created!');
     }
 
     /**

@@ -21,6 +21,7 @@ class UnitFactory extends Factory
             'unit_heading' => $this->faker->name(),
             'property_id' => rand(1, 3),
             'unit_type_id' => rand(0, 6),
+            'unit_feature_id' => rand(1, 9),
             'number_of_bedroom' => rand(1, 5),
             'number_of_bathroom' => rand(1, 3),
             'number_of_balcony' => rand(0, 3),

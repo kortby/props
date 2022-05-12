@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -42,10 +43,9 @@ class User extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             return parent::indexQuery($request, $query);
-
         }
 
         return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
@@ -106,7 +106,8 @@ class User extends Resource
         return [];
     }
 
-    private function detailView($request) {
+    private function detailView($request)
+    {
 
         $detail = [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
@@ -123,6 +124,8 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
+            Number::make('Phone Number', 'phone')->textAlign('left'),
+
             Password::make('Password')
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
@@ -132,14 +135,12 @@ class User extends Resource
         ];
 
 
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             array_push($detail, MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class));
             array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
-
         }
 
         return $detail;
-
     }
 }

@@ -29,7 +29,8 @@ class PermissionsSeeder extends Seeder
         $user = \App\Models\User::factory()->create([
             'name' => 'Super-Admin',
             'email' => 'superadmin@example.com',
-            'password'=>Hash::make('azerty')
+            'password' => Hash::make('azerty'),
+            'phone' => rand(4151001000, 4159998888),
         ]);
         $user->assignRole($role1);
 
@@ -54,7 +55,8 @@ class PermissionsSeeder extends Seeder
         $user = \App\Models\User::factory()->create([
             'name' => 'App Admin User',
             'email' => 'appadmin@example.com',
-            'password'=>Hash::make('azerty')
+            'password' => Hash::make('azerty'),
+            'phone' => rand(4151001000, 4159998888),
         ]);
         $user->assignRole($role1);
 
@@ -63,40 +65,41 @@ class PermissionsSeeder extends Seeder
 
         foreach (config('permissions') as $key => $resource) {
 
-            if(in_array($key, ['users', 'company', 'property', 'unit'] )){
+            if (in_array($key, ['users', 'company', 'property', 'unit'])) {
                 foreach ($resource as $permission) {
                     $role3->givePermissionTo($permission);
                 }
             }
 
-            if(in_array($key, ['users', 'property', 'unit'] )){
+            if (in_array($key, ['users', 'property', 'unit'])) {
                 foreach ($resource as $permission) {
                     $role4->givePermissionTo($permission);
                 }
             }
-
-
         }
 
         $pm = \App\Models\User::factory()->create([
             'name' => 'Property manager User',
             'email' => 'propertymanager@example.com',
-            'password'=>Hash::make('azerty')
+            'password' => Hash::make('azerty'),
+            'phone' => rand(4151001000, 4159998888),
         ]);
         $pm->assignRole($role3);
 
         $pa = \App\Models\User::factory()->create([
             'name' => 'Property agent',
             'email' => 'propertyagent@example.com',
-            'password'=>Hash::make('azerty'),
-            'user_id'=>$pm->id
+            'password' => Hash::make('azerty'),
+            'phone' => rand(4151001000, 4159998888),
+            'user_id' => $pm->id
         ]);
         $pa->assignRole($role4);
 
         $pm2 = \App\Models\User::factory()->create([
             'name' => 'Property manager User 2',
             'email' => 'propertymanager2@example.com',
-            'password'=>Hash::make('azerty')
+            'phone' => rand(4151001000, 4159998888),
+            'password' => Hash::make('azerty')
 
         ]);
         $pm2->assignRole($role3);
@@ -104,12 +107,12 @@ class PermissionsSeeder extends Seeder
         $pa2 = \App\Models\User::factory()->create([
             'name' => 'Property agent 2',
             'email' => 'propertyagent2@example.com',
-            'password'=>Hash::make('azerty'),
-            'user_id'=>$pm2->id
+            'phone' => rand(4151001000, 4159998888),
+            'password' => Hash::make('azerty'),
+            'user_id' => $pm2->id
         ]);
         $pa2->assignRole($role4);
 
         $role5 = Role::create(['name' => 'renter']);
-
     }
 }

@@ -50,6 +50,7 @@ Route::middleware([
         return Inertia::render('Payment');
     })->name('payment');
     Route::get('/maintenance', [MaintenanceController::class, 'create'])->name('maintenance');
+    Route::post('/maintenance', [MaintenanceController::class, 'store'])->name('postMaintenance');
     Route::get('/amenities', function () {
         return Inertia::render('Amenities');
     })->name('amenities');

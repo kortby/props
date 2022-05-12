@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('status')->default('new');
-            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->foreignId('unit_id')->nullable();
             $table->string('description');
-            $table->unsignedBigInteger('category_id');
+            $table->foreignId('category_id');
             $table->string('phone');
             $table->string('proirity')->default('high');
             $table->date('due_date')->nullable();

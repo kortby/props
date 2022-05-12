@@ -45,10 +45,9 @@ class Unit extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             return parent::indexQuery($request, $query);
-
         }
 
         return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
@@ -79,14 +78,14 @@ class Unit extends Resource
             new Panel('Unit details', $this->detailsFields()),
 
             Images::make('Images', 'units_collection') // second parameter is the media collection name
-            //->conversionOnPreview('medium-size') // conversion used to display the "original" image
-            ->conversionOnDetailView('thumb') // conversion used on the model's view
-            ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
-            ->conversionOnForm('thumb') // conversion used to display the image on the model's form
-            ->fullSize() // full size column
-            ->rules('required') // validation rules for the collection of images
-            // validation rules for the collection of images
-            ->singleImageRules('dimensions:min_width=100'),
+                //->conversionOnPreview('medium-size') // conversion used to display the "original" image
+                ->conversionOnDetailView('thumb') // conversion used on the model's view
+                ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+                ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+                ->fullSize() // full size column
+                ->rules('required') // validation rules for the collection of images
+                // validation rules for the collection of images
+                ->singleImageRules('dimensions:min_width=100')->hideFromIndex(),
         ];
     }
 
@@ -157,10 +156,10 @@ class Unit extends Resource
         return [
             Number::make('Bedrooms', 'number_of_bedroom')->textAlign('center')->sortable()->min(0)->max(15)->help(
                 'How many bedrooms?'
-            ),
+            )->hideFromIndex(),
             Number::make('Bathrooms', 'number_of_bathroom')->textAlign('center')->sortable()->min(0)->max(15)->help(
                 'How many bedrooms?'
-            ),
+            )->hideFromIndex(),
             Number::make('Size')->displayUsing(function ($name) {
                 return strtoupper($name . ' sqft');
             })->sortable()->sortable()->min(0)->max(10000)->help(
