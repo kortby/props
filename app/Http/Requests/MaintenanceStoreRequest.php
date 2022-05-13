@@ -24,13 +24,13 @@ class MaintenanceStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|max:155',
             'unit_id' => 'required',
             'category_id' => 'required',
-            'preferred_maintenece_time' => '',
-            'phone' => 'required',
-            'description' => 'required',
-            'access_code' => 'required',
+            'preferred_maintenece_time' => 'after:' . now(),
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'description' => 'required|max:255',
+            'access_code' => 'max:25',
             'permission_to_enter' => 'required'
         ];
     }

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'users'=>[
+    'users' => [
         'view-any-user',
         'view-user',
         'create-user',
@@ -10,7 +10,7 @@ return [
         'restore-user',
         'force-delete-user',
     ],
-    'category'=>[
+    'category' => [
         'view-any-category',
         'view-category',
         'create-category',
@@ -19,7 +19,7 @@ return [
         'restore-category',
         'force-delete-category',
     ],
-    'maintenance'=>[
+    'maintenance' => [
         'view-any-maintenance',
         'view-maintenance',
         'create-maintenance',
@@ -28,7 +28,7 @@ return [
         'restore-maintenance',
         'force-delete-maintenance',
     ],
-    'property-type'=>[
+    'property-type' => [
         'view-any-property-type',
         'view-property-type',
         'create-property-type',
@@ -37,7 +37,7 @@ return [
         'restore-property-type',
         'force-delete-property-type',
     ],
-    'company'=>[
+    'company' => [
         'view-any-company',
         'view-company',
         'create-company',
@@ -46,7 +46,7 @@ return [
         'restore-company',
         'force-delete-company',
     ],
-    'property'=>[
+    'property' => [
         'view-any-property',
         'view-property',
         'create-property',
@@ -55,7 +55,7 @@ return [
         'restore-property',
         'force-delete-property',
     ],
-    'unit-type'=>[
+    'unit-type' => [
         'view-any-unit-type',
         'view-unit-type',
         'create-unit-type',
@@ -64,7 +64,7 @@ return [
         'restore-unit-type',
         'force-delete-unit-type',
     ],
-    'unit'=>[
+    'unit' => [
         'view-any-unit',
         'view-unit',
         'create-unit',
@@ -73,7 +73,7 @@ return [
         'restore-unit',
         'force-delete-unit',
     ],
-    'prospect'=>[
+    'prospect' => [
         'view-any-prospect',
         'view-prospect',
         'create-prospect',
@@ -81,6 +81,33 @@ return [
         'delete-prospect',
         'restore-prospect',
         'force-delete-prospect',
-    ]
+    ],
+    'unit-feature' => [
+        'view-any-unit-feature',
+        'view-unit-feature',
+        'create-unit-feature',
+        'update-unit-feature',
+        'delete-unit-feature',
+        'restore-unit-feature',
+        'force-delete-unit-feature',
+    ],
+    'unit-funishing-item' => [
+        'view-any-funishing-item',
+        'view-funishing-item',
+        'create-funishing-item',
+        'update-funishing-item',
+        'delete-funishing-item',
+        'restore-funishing-item',
+        'force-delete-funishing-item',
+    ],
+    'unit-funishing-category' => [
+        'view-any-funishing-category',
+        'view-funishing-category',
+        'create-funishing-category',
+        'update-funishing-category',
+        'delete-funishing-category',
+        'restore-funishing-category',
+        'force-delete-funishing-category',
+    ],
 
 ];

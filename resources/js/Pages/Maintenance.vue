@@ -105,7 +105,14 @@
                                     id="title"
                                     autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                    :class="{ 'border-red-500': errors.title }"
                                 />
+                                <span
+                                    v-if="errors.title"
+                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                    v-text="errors.title"
+                                >
+                                </span>
                             </div>
                         </div>
                         <div class="sm:col-span-2">
@@ -164,8 +171,18 @@
                                     type="date"
                                     autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                    :class="{
+                                        'border-red-500':
+                                            errors.preferred_maintenece_time,
+                                    }"
                                 />
                             </div>
+                            <span
+                                v-if="errors.preferred_maintenece_time"
+                                class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                v-text="errors.preferred_maintenece_time"
+                            >
+                            </span>
                         </div>
                         <div class="sm:col-span-2">
                             <label
@@ -174,31 +191,21 @@
                                 >Phone Number</label
                             >
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center"
-                                >
-                                    <label for="country" class="sr-only"
-                                        >Country</label
-                                    >
-                                    <select
-                                        id="country"
-                                        name="country"
-                                        class="h-full py-0 pl-4 pr-8 border-transparent bg-transparent text-gray-500 focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
-                                    >
-                                        <option>US</option>
-                                        <option>CA</option>
-                                        <option>EU</option>
-                                    </select>
-                                </div>
                                 <input
                                     type="text"
                                     v-model="form.phone"
                                     name="phone"
                                     id="phone-number"
-                                    autocomplete="tel"
-                                    class="py-3 px-4 block w-full pl-20 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                    class="py-3 px-4 block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                                     placeholder="+1 (555) 987-6543"
+                                    :class="{ 'border-red-500': errors.phone }"
                                 />
+                                <span
+                                    v-if="errors.phone"
+                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                    v-text="errors.phone"
+                                >
+                                </span>
                             </div>
                         </div>
                         <div class="sm:col-span-2">
@@ -214,7 +221,16 @@
                                     name="description"
                                     rows="4"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border border-gray-300 rounded-md"
+                                    :class="{
+                                        'border-red-500': errors.description,
+                                    }"
                                 />
+                                <span
+                                    v-if="errors.description"
+                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                    v-text="errors.description"
+                                >
+                                </span>
                             </div>
                         </div>
                         <div class="sm:col-span-2">
@@ -264,7 +280,16 @@
                                     name="access_code"
                                     type="text"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                                    :class="{
+                                        'border-red-500': errors.access_code,
+                                    }"
                                 />
+                                <span
+                                    v-if="errors.access_code"
+                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                    v-text="errors.access_code"
+                                >
+                                </span>
                             </div>
                         </div>
                         <div class="sm:col-span-2">
@@ -294,6 +319,7 @@ export default {
         unit_id: Number,
         categories: Object,
         user: Number,
+        errors: Object,
     },
     components: {
         Switch,

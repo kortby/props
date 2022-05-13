@@ -47,18 +47,18 @@ class UnitFeature extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('unit'),
-            Boolean::make('is_air_conditioning'),
-            Number::make('num_of_assigned_car_parking'),
-            Boolean::make('has_carpet'),
-            Boolean::make('has_hardwood_flooring'),
-            Boolean::make('is_ceiling_fan_cooling'),
-            Boolean::make('has_in_unit_fireplace'),
-            Boolean::make('has_in_unit_garden'),
-            Boolean::make('has_in_unit_laundry'),
-            Boolean::make('has_walkin_closet'),
-            Boolean::make('are_pets_allowed'),
-            BelongsToMany::make('FurnishingItems'),
+            BelongsTo::make('Unit'),
+            Boolean::make('Is air conditioning')->hideFromIndex(),
+            Number::make('Parking', 'num_of_assigned_car_parking')->textAlign('left'),
+            Boolean::make('Has carpet')->hideFromIndex(),
+            Boolean::make('Has hardwood flooring'),
+            Boolean::make('Is ceiling fan cooling'),
+            Boolean::make('Has in unit fireplace')->hideFromIndex(),
+            Boolean::make('Has in unit garden')->hideFromIndex(),
+            Boolean::make('Has in unit laundry'),
+            Boolean::make('Has walkin closet')->hideFromIndex(),
+            Boolean::make('Are pets allowed'),
+            BelongsToMany::make('Furnishing Items'),
         ];
     }
 

@@ -44,13 +44,12 @@ class MaintenanceController extends Controller
     public function store(MaintenanceStoreRequest $request)
     {
         try {
-
             Maintenance::create($request->all());
-            return  Redirect::route('maintenance')->with('success', 'Thank you! We will contact you shortly.');
+            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return redirect()->route('dashboard')->with('error', 'Not created!');
+        return redirect()->route('maintenance');
     }
 
     /**
