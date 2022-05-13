@@ -22,9 +22,9 @@ class UnitFeature extends Model
         'are_pets_allowed',
     ];
 
-    public function units()
+    public function unit()
     {
-        return $this->hasMany(Unit::class);
+        return $this->belongsTo(Unit::class);
     }
 
     public function furnishingItems()

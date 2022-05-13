@@ -11,6 +11,6 @@ class FurnishingCategory extends Model
 
     public function furnishingItems()
     {
-        return $this->hasMany(FurnishingItem::class, 'furnishing_item_id');
+        return $this->hasMany(FurnishingItem::class);
     }
 }

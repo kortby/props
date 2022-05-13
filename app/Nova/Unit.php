@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -167,6 +168,7 @@ class Unit extends Resource
             ),
             Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
             Boolean::make('Carpet area')->hideFromIndex(),
+            HasOne::make('Unit Feature'),
         ];
     }
 }

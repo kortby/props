@@ -47,6 +47,7 @@ class UnitFeature extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('unit'),
             Boolean::make('is_air_conditioning'),
             Number::make('num_of_assigned_car_parking'),
             Boolean::make('has_carpet'),
