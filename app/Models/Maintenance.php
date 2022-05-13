@@ -10,6 +10,8 @@ class Maintenance extends Model
 {
     use HasFactory, Searchable;
 
+    protected $guarded = ['id', 'created', 'updated_at', 'deleted_at'];
+
     /**
      * The attributes that should be mutated to dates.
      *

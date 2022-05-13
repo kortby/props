@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MaintenanceStoreRequest;
 use App\Models\Category;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class MaintenanceController extends Controller
@@ -37,27 +39,19 @@ class MaintenanceController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(MaintenanceStoreRequest $request)
     {
-        $attributes = $request->validate([
-            'title' => 'required',
-            'unit_id' => 'required',
-            'category_id' => 'required',
-            'preferred_maintenece_time' => '',
-            'phone' => 'required',
-            'description' => 'required',
-            'access_code' => 'required',
-            'permission_to_enter' => 'required'
-        ]);
         try {
-            Maintenance::create($attributes);
-            return redirect('/')->with('success', 'Thank you! We will contact you sortly.');
+
+            Maintenance::create($request->all());
+            return  Redirect::route('maintenance')->with('success','Thank you! We will contact you shortly.');
+
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return redirect('/')->with('error', 'Not created!');
+        return redirect()->route('maintenance')->with('error', 'Not created!');
     }
 
     /**

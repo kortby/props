@@ -8,6 +8,7 @@ import JetDropdown from "@/Jetstream/Dropdown.vue";
 import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
 import JetNavLink from "@/Jetstream/NavLink.vue";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
+import FlashMessages from "../Pages/Shared/FlashMessages";
 
 defineProps({
     title: String,
@@ -509,6 +510,7 @@ const logout = () => {
 
             <!-- Page Content -->
             <main>
+                <flash-messages />
                 <slot />
             </main>
         </div>
