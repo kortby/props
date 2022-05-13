@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('unit_features', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('unit_id');
             $table->boolean('is_air_conditioning');
             $table->integer('num_of_assigned_car_parking');
             $table->boolean('has_carpet');
