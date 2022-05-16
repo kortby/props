@@ -13,4 +13,14 @@ class AmenitySchedule extends Model
     {
         return $this->belongsTo(Amenity::class);
     }
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start',
+        'end',
+    ];
 }
