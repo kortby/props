@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('due_date')->nullable();
             $table->dateTime('preferred_maintenece_time')->nullable();
             $table->string('frequency')->default('onetime');
+            $table->string('cost')->default(0);
             $table->string('access_code')->nullable();
             $table->date('finished')->nullable();
             $table->boolean('permission_to_enter')->default(true);

@@ -10,6 +10,8 @@ use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
 use App\Models\Company as CompanyModel;
 use App\Models\UnitFeature as UnitFeatureModel;
+use App\Nova\Amenity;
+use App\Nova\AmenitySchedule;
 use App\Nova\UnitFeature;
 use App\Nova\PropertyAgent;
 use App\Nova\PropertyType;
@@ -156,7 +158,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Prospect::class),
             ])->icon('annotation')->collapsable(),
 
-
+            MenuSection::make('Amenity', [
+                MenuItem::resource(Amenity::class),
+                MenuItem::resource(AmenitySchedule::class),
+            ])->icon('clipboard-list')->collapsable(),
         ];
 
         if (auth()->user()->hasRole('property-manager')) {

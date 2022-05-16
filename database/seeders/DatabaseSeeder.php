@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             MaintenanceSeeder::class,
             FurnishingCategorySeeder::class,
             FurnishingItemSeeder::class,
+            AmenitySeeder::class,
         ]);
     }
 }

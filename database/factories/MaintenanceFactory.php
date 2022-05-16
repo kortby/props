@@ -31,6 +31,7 @@ class MaintenanceFactory extends Factory
             'preferred_maintenece_time' => null,
             'frequency' => $frequency[rand(0, 5)],
             'finished' => null,
+            'cost' => rand(50, 13240),
         ];
     }
 }

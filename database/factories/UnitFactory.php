@@ -32,6 +32,7 @@ class UnitFactory extends Factory
             'unit_number' => rand(0, 1000),
             'unit_floor_number' => rand(0, 10),
             'size' => rand(300, 1240),
+            'price' => rand(700, 3240),
         ];
     }
 }
