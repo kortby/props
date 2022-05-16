@@ -27,7 +27,7 @@ class UnitFactory extends Factory
             'number_of_balcony' => rand(0, 3),
             'date_available_from' => now(),
             'is_active' => true,
-            'desription' => $this->faker->name(),
+            'desription' => $this->faker->sentence,
             'carpet_area' => false,
             'unit_number' => rand(0, 1000),
             'unit_floor_number' => rand(0, 10),

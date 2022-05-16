@@ -44,8 +44,8 @@ class AmenitySchedule extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Amenity'),
-            DateTime::make('start'),
-            DateTime::make('end'),
+            DateTime::make('start')->rules('required', 'after:today')->sortable(),
+            DateTime::make('end')->rules('required', 'after:today')->sortable(),
         ];
     }
 

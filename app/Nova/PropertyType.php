@@ -44,7 +44,7 @@ class PropertyType extends Resource
         return [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Name')->rules('required', 'max:50'),
-            HasMany::make('Units'),
+            HasMany::make('Properties'),
         ];
     }
 

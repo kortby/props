@@ -16,14 +16,6 @@ class AmenityFactory extends Factory
      */
     public function definition()
     {
-        $amenities = ['Club Room', 'Guest Suite'];
-        return [
-            'name' => $amenities[rand(0, 1)],
-            'description' => 'Maximum Reservation Time:4 hrs
-            Must be booked at least:2 Days in advance and no more than 60 Days in advance
-            Individual Max Reservations Per Day:3
-            Cleaning Fee:$100.00',
-            'price' => 100,
-        ];
+        //
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\FurnishingCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +16,6 @@ class FurnishingItemFactory extends Factory
      */
     public function definition()
     {
-        $items = ['Washer & dryer', 'Closet', 'Oven', 'Microwave', 'Dish Washer', 'Refrigerator'];
-        return [
-            'name' => $items[rand(0, 5)],
-            'furnishing_category_id' => FurnishingCategory::factory()->create()->id,
-        ];
+        //
     }
 }

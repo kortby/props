@@ -15,6 +15,9 @@ class PropertyTypeSeeder extends Seeder
      */
     public function run()
     {
-        PropertyType::factory()->count(13)->create();
+        $types = ['Residential', 'Commercial', 'Affordable Housing', 'Student Housing', 'Comminity Associations', 'Mobile Homes', 'Self Storage'];
+        foreach ($types as $type) {
+            PropertyType::create(['name' => $type]);
+        }
     }
 }

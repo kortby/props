@@ -139,7 +139,7 @@ class Maintenance extends Resource
     {
         return [
             Date::make('Due date'),
-            DateTime::make('Preferred maintenece time')->hideFromIndex(),
+            DateTime::make('Preferred maintenece time')->hideFromIndex()->rules('after:today')->sortable(),
             Select::make('Frequency')->options([
                 'once' => 'One Time',
                 'daily' => 'Daily',

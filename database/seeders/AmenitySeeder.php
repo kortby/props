@@ -15,6 +15,24 @@ class AmenitySeeder extends Seeder
      */
     public function run()
     {
-        Amenity::factory()->count(2)->create();
+        $amenities = [
+            [
+                'name' => 'Club Room',
+                'description' => 'Maximum Reservation Time:4 hrs
+                Must be booked at least:2 Days in advance and no more than 60 Days in advance
+                Individual Max Reservations Per Day:3
+                Cleaning Fee:$100.00',
+                'price' => 100,
+            ],
+            [
+                'name' => 'Guest suite',
+                'description' => 'Must be booked at least:5 Days in advance and no more than 60 Days in advance',
+                'price' => 150,
+            ]
+        ];
+
+        foreach ($amenities as $amenity) {
+            Amenity::create($amenity);
+        }
     }
 }
