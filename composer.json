@@ -12,7 +12,7 @@
         "kiritokatklian/nova-permission": "^4.0",
         "laravel/framework": "^9.2",
         "laravel/jetstream": "^2.7",
-        "laravel/nova": "~4.1.0",
+        "laravel/nova": "~4.5.4",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
