@@ -76,7 +76,7 @@ class Unit extends Resource
             ),
             Currency::make('Price', 'price')->rules('required')->textAlign('left'),
             Boolean::make('Active', 'is_active'),
-            Textarea::make('Desription')->hideFromIndex()->rules('required', 'max:650'),
+            Textarea::make('Description')->hideFromIndex()->rules('required', 'max:650'),
             Number::make('Unit floor number')->hideFromIndex()->min(0)->max(80),
             new Panel('Unit details', $this->detailsFields()),
 
@@ -169,7 +169,6 @@ class Unit extends Resource
                 'How many square feet?'
             ),
             Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
-            Boolean::make('Carpet area')->hideFromIndex(),
             HasOne::make('Unit Feature'),
         ];
     }

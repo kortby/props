@@ -21,8 +21,7 @@ return new class extends Migration
             $table->integer('number_of_balcony');
             $table->date('date_available_from')->nullable();
             $table->boolean('is_active');
-            $table->string('desription')->nullable();
-            $table->boolean('carpet_area');
+            $table->string('description')->nullable();
             $table->integer('unit_number');
             $table->integer('unit_floor_number');
             $table->integer('size');

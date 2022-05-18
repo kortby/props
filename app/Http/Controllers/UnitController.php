@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UnitController extends Controller
 {
@@ -46,7 +47,24 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
-        //
+        return Inertia::render('Unit', [
+            'unit_heading' => $unit->unit_heading,
+            'number_of_bedroom' => $unit->number_of_bedroom,
+            'number_of_bathroom' => $unit->number_of_bathroom,
+            'number_of_balcony' => $unit->number_of_balcony,
+            'date_available_from' => $unit->date_available_from,
+            'description' => $unit->description,
+            'unit_number' => $unit->unit_number,
+            'size' => $unit->size,
+            'price' => $unit->price,
+            'property_name' => $unit->property->name,
+            'property_address_1' => $unit->property->address_line_1,
+            'property_address_2' => $unit->property->address_line_2,
+            'property_city' => $unit->property->city,
+            'property_state' => $unit->property->state,
+            'property_postal_code' => $unit->property->postal_code,
+            'property_phone' => $unit->property->phone,
+        ]);
     }
 
     /**
