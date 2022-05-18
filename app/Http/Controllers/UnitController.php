@@ -64,6 +64,7 @@ class UnitController extends Controller
             'property_state' => $unit->property->state,
             'property_postal_code' => $unit->property->postal_code,
             'property_phone' => $unit->property->phone,
+            'images' => [],
         ]);
     }
 
