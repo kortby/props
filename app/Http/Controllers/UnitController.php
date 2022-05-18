@@ -47,6 +47,7 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
+        dd($unit->getMedia('units_collection')[0]->getUrl());
         return Inertia::render('Unit', [
             'unit_heading' => $unit->unit_heading,
             'number_of_bedroom' => $unit->number_of_bedroom,
