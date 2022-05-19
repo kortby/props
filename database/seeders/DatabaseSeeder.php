@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             FurnishingCategorySeeder::class,
             FurnishingItemSeeder::class,
             AmenitySeeder::class,
+            // ProspectSeeder::class,
         ]);
     }
 }
