@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8de7f3b6db0cb510552201617423a26c",
+    "content-hash": "f1bd9ccf3cd243f1aea4e69a9cdf8aec",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -254,6 +254,47 @@
                 }
             ],
             "time": "2021-10-10T11:59:43+00:00"
+        },
+        {
+            "name": "coderello/nova-login-as",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coderello/nova-login-as.git",
+                "reference": "f0dac4d064f8cab96907d39032de964c7818290f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coderello/nova-login-as/zipball/f0dac4d064f8cab96907d39032de964c7818290f",
+                "reference": "f0dac4d064f8cab96907d39032de964c7818290f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Coderello\\LoginAs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "An easy way to login as any user from Laravel Nova.",
+            "keywords": [
+                "as",
+                "laravel",
+                "login",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/coderello/nova-login-as/issues",
+                "source": "https://github.com/coderello/nova-login-as/tree/0.1.1"
+            },
+            "abandoned": true,
+            "time": "2019-02-21T09:44:58+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -10652,5 +10693,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
