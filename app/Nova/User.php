@@ -104,7 +104,11 @@ class User extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new \Coderello\LoginAs\Actions\LoginAs)->redirectTo(function ($user) {
+                return route('nova.pages.dashboard');
+            }),
+        ];
     }
 
     private function detailView($request)
