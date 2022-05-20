@@ -9,6 +9,17 @@ class AmenitySchedule extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'amenity_id',
+        'start',
+        'end',
+    ];
+
     public function amenity()
     {
         return $this->belongsTo(Amenity::class);

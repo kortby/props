@@ -9,6 +9,8 @@ class Amenity extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'updated_at', 'deleted_at'];
+
     public function amenitySchedules()
     {
         return $this->hasMany(AmenitySchedule::class);

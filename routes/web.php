@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmenityScheduleController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Foundation\Application;
@@ -49,12 +50,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
     Route::get('/payment', function () {
         return Inertia::render('Payment');
     })->name('payment');
+
     Route::get('/maintenance', [MaintenanceController::class, 'create'])->name('maintenance');
     Route::post('/maintenance', [MaintenanceController::class, 'store'])->name('postMaintenance');
-    Route::get('/amenities', function () {
-        return Inertia::render('Amenities');
-    })->name('amenities');
+
+    Route::get('/amenities', [AmenityScheduleController::class, 'create'])->name('amenities');
+    Route::post('/amenities', [AmenityScheduleController::class, 'store'])->name('postAmenities');
+    // Route::resource('amenities', AmenityScheduleController::class);
 });

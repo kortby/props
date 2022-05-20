@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScheduleAmenityRequest;
+use App\Models\Amenity;
 use App\Models\AmenitySchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Laravel\Nova\Notifications\NovaNotification;
+use Illuminate\Support\Facades\Log;
 
 class AmenityScheduleController extends Controller
 {
@@ -24,7 +30,9 @@ class AmenityScheduleController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Amenities', [
+            'amenities' => Amenity::select('id', 'name', 'price', 'description')->get(),
+        ]);
     }
 
     /**
@@ -33,9 +41,18 @@ class AmenityScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ScheduleAmenityRequest $request)
     {
-        //
+        try {
+            AmenitySchedule::create($request->all());
+            $request->user()->notify(
+                NovaNotification::make()->message('New Amenity has been requested.')->icon('cog')->type('success'),
+            );
+            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return redirect()->route('amenities');
     }
 
     /**
