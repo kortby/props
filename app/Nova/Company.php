@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -31,15 +32,14 @@ class Company extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
     ];
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             return parent::indexQuery($request, $query);
-
         }
 
         return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
@@ -57,6 +57,7 @@ class Company extends Resource
             ID::make()->sortable(),
             Text::make('Company name', 'name')->rules('required', 'max:120'),
             Textarea::make('Address', 'address')->rules('required'),
+            HasMany::make('Properties'),
         ];
     }
 

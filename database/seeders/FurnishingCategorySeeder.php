@@ -15,6 +15,9 @@ class FurnishingCategorySeeder extends Seeder
      */
     public function run()
     {
-        FurnishingCategory::factory()->count(4)->create();
+        $categories = ['Bedroom', 'Kitchen', 'Bathroom', 'Living Room'];
+        foreach ($categories as $category) {
+            FurnishingCategory::create(['name' => $category]);
+        }
     }
 }

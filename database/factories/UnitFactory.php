@@ -27,11 +27,11 @@ class UnitFactory extends Factory
             'number_of_balcony' => rand(0, 3),
             'date_available_from' => now(),
             'is_active' => true,
-            'desription' => $this->faker->name(),
-            'carpet_area' => false,
+            'description' => $this->faker->sentence,
             'unit_number' => rand(0, 1000),
             'unit_floor_number' => rand(0, 10),
             'size' => rand(300, 1240),
+            'price' => rand(700, 3240),
         ];
     }
 }

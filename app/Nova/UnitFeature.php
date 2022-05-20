@@ -47,7 +47,7 @@ class UnitFeature extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Unit'),
+            BelongsTo::make('Unit Number', 'unit', 'App\Nova\Unit')->searchable(),
             Boolean::make('Is air conditioning')->hideFromIndex(),
             Number::make('Parking', 'num_of_assigned_car_parking')->textAlign('left'),
             Boolean::make('Has carpet')->hideFromIndex(),

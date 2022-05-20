@@ -16,9 +16,6 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $services = ['Safety', 'Cleaning', 'Gas & Electric', 'Cooling & Heating', 'Water & Pluming', 'Security', 'Trees and Clear Debris', 'Trash Receptacles'];
-        return [
-            'name' => $services[rand(0, 7)],
-        ];
+        //
     }
 }

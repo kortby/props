@@ -66,7 +66,7 @@
                         <a
                             :href="link.href"
                             class="text-base font-medium text-indigo-700 hover:text-indigo-600"
-                            >Contact us<span aria-hidden="true">
+                            >Learn more<span aria-hidden="true">
                                 &rarr;</span
                             ></a
                         >

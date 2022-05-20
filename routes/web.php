@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,8 @@ Route::get('/prices', function () {
 Route::get('/company', function () {
     return Inertia::render('Company');
 });
+
+Route::get('/units/{unit}', [UnitController::class, 'show']);
 
 Route::middleware([
     'auth:sanctum',

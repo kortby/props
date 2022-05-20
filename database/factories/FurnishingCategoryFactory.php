@@ -16,9 +16,6 @@ class FurnishingCategoryFactory extends Factory
      */
     public function definition()
     {
-        $category = ['Bedroom', 'Kitchen', 'Bathroom', 'Living Room'];
-        return [
-            'name' => $category[rand(0, 3)],
-        ];
+        //
     }
 }

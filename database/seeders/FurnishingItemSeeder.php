@@ -15,6 +15,12 @@ class FurnishingItemSeeder extends Seeder
      */
     public function run()
     {
-        FurnishingItem::factory()->count(6)->create();
+        $items = ['Washer & dryer', 'Closet', 'Oven', 'Microwave', 'Dish Washer', 'Refrigerator'];
+        foreach ($items as $item) {
+            FurnishingItem::create([
+                'name' => $item,
+                'furnishing_category_id' => rand(0, 3),
+            ]);
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
@@ -12,6 +13,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Notifications\NovaNotification;
 use Laravel\Nova\Panel;
 
 class Maintenance extends Resource
@@ -80,6 +82,7 @@ class Maintenance extends Resource
                 'critical' => 'danger',
             ])->sortable(),
             Text::make('phone'),
+            Currency::make('Cost', 'cost')->rules('required')->textAlign('left'),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];
     }
@@ -137,7 +140,7 @@ class Maintenance extends Resource
     {
         return [
             Date::make('Due date'),
-            DateTime::make('Preferred maintenece time'),
+            DateTime::make('Preferred maintenece time')->hideFromIndex()->rules('after:today')->sortable(),
             Select::make('Frequency')->options([
                 'once' => 'One Time',
                 'daily' => 'Daily',
@@ -146,7 +149,7 @@ class Maintenance extends Resource
                 'monthly' => 'Monthly',
                 'quarterly' => 'Quarterly'
             ]),
-            Date::make('Finished'),
+            Date::make('Finished')->hideFromIndex(),
         ];
     }
 }

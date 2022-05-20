@@ -10,6 +10,8 @@ use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
 use App\Models\Company as CompanyModel;
 use App\Models\UnitFeature as UnitFeatureModel;
+use App\Nova\Amenity;
+use App\Nova\AmenitySchedule;
 use App\Nova\UnitFeature;
 use App\Nova\PropertyAgent;
 use App\Nova\PropertyType;
@@ -37,6 +39,7 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Laravel\Nova\Observable;
 use \Vyuldashev\NovaPermission\NovaPermissionTool;
+use Illuminate\Support\Facades\Blade;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -58,6 +61,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(UnitModel::class, UnitObserver::class);
         Observable::make(UnitFeatureModel::class, UnitFeatureObserver::class);
         Observable::make(CompanyModel::class, CompanyObserver::class);
+
+        Nova::footer(function ($request) {
+            $footer = '<div class="mt-12 border-t border-gray-200 pt-8">
+            <p class="text-gray-400 text-center text-xs mt-8">&copy; 2022 ManageXYZ, Inc. All rights reserved.</p>
+            </div>';
+            return Blade::render($footer);
+        });
     }
 
     /**
@@ -156,7 +166,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Prospect::class),
             ])->icon('annotation')->collapsable(),
 
-
+            MenuSection::make('Amenity', [
+                MenuItem::resource(Amenity::class),
+                MenuItem::resource(AmenitySchedule::class),
+            ])->icon('clipboard-list')->collapsable(),
         ];
 
         if (auth()->user()->hasRole('property-manager')) {

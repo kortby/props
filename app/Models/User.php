@@ -62,15 +62,15 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function parent() {
+    public function parent()
+    {
 
-        return $this->belongsTo(User::class , 'user_id');
-
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function childs() {
+    public function childs()
+    {
 
-        return $this->hasMany(User::class , 'user_id');
-
+        return $this->hasMany(User::class, 'user_id');
     }
 }

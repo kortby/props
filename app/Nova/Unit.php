@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -73,8 +74,9 @@ class Unit extends Resource
             Date::make('Available date', 'date_available_from')->help(
                 'When this is going to be available?'
             ),
+            Currency::make('Price', 'price')->rules('required')->textAlign('left'),
             Boolean::make('Active', 'is_active'),
-            Textarea::make('Desription')->hideFromIndex()->rules('required', 'max:650'),
+            Textarea::make('Description')->hideFromIndex()->rules('required', 'max:650'),
             Number::make('Unit floor number')->hideFromIndex()->min(0)->max(80),
             new Panel('Unit details', $this->detailsFields()),
 
@@ -167,7 +169,6 @@ class Unit extends Resource
                 'How many square feet?'
             ),
             Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
-            Boolean::make('Carpet area')->hideFromIndex(),
             HasOne::make('Unit Feature'),
         ];
     }

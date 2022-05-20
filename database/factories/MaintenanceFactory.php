@@ -23,7 +23,7 @@ class MaintenanceFactory extends Factory
             'title' => $this->faker->name(),
             'unit_id' => rand(1, 8),
             'status' => $status[rand(0, 4)],
-            'description' => $this->faker->name(),
+            'description' => $this->faker->paragraph,
             'category_id' => rand(1, 8),
             'phone' => rand(4150001111, 4159999999),
             'proirity' => $proirity[rand(0, 3)],
@@ -31,6 +31,7 @@ class MaintenanceFactory extends Factory
             'preferred_maintenece_time' => null,
             'frequency' => $frequency[rand(0, 5)],
             'finished' => null,
+            'cost' => rand(50, 13240),
         ];
     }
 }
