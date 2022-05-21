@@ -2,7 +2,7 @@
 
 namespace App\Nova\Dashboards;
 
-use App\Nova\Metrics\MaintenanceCategory;
+use App\Nova\Metrics\Maintenance;
 use App\Nova\Metrics\NewUsers;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Dashboards\Main as Dashboard;
@@ -18,7 +18,7 @@ class Main extends Dashboard
     {
         return [
             new NewUsers,
-            new MaintenanceCategory,
+            new Maintenance,
         ];
     }
 }

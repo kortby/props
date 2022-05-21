@@ -2,11 +2,11 @@
 
 namespace App\Nova\Metrics;
 
-use App\Models\Maintenance;
+use App\Models\Maintenance as ModelsMaintenance;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 
-class MaintenanceCategory extends Partition
+class Maintenance extends Partition
 {
     /**
      * Calculate the value of the metric.
@@ -16,7 +16,7 @@ class MaintenanceCategory extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, Maintenance::class, 'title');
+        return $this->count($request, ModelsMaintenance::class, 'category_id', 'category_id');
     }
 
     /**
@@ -36,6 +36,6 @@ class MaintenanceCategory extends Partition
      */
     public function uriKey()
     {
-        return 'maintenance-category';
+        return 'maintenance';
     }
 }
