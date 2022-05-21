@@ -25,8 +25,8 @@ class ScheduleAmenityRequest extends FormRequest
     {
         return [
             'amenity_id' => 'required',
-            'start' => 'required|date',
-            'end' => 'required|date|after_or_equal:start',
+            'start' => 'required|date|after:' . now(),
+            'end' => 'required|date|after_or_equal:start|after:' . now(),
         ];
     }
 }

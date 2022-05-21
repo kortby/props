@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute bottom-4 right-4">
+    <div class="absolute top-16 pt-2 right-4">
         <div
             v-if="$page.props.flash.success && show"
             class="flex items-center justify-between mb-8 max-w-3xl bg-green-500 rounded"
@@ -96,6 +96,11 @@ export default {
             },
             deep: true,
         },
+        setTimeout,
     },
+    mounted() {
+        setTimeout(() => { this.show = false; }, 3000);
+    }
+
 };
 </script>

@@ -19,7 +19,7 @@
                 <h1
                     class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl"
                 >
-                    Support
+                    Welcome!
                 </h1>
                 <p class="mt-6 max-w-3xl text-xl text-gray-300">
                     Varius facilisi mauris sed sit. Non sed et duis dui leo,
@@ -79,25 +79,26 @@
 
 <script>
 import { NewspaperIcon, PhoneIcon, SupportIcon } from "@heroicons/vue/outline";
+import { CashIcon, CogIcon } from '@heroicons/vue/solid';
 
 const supportLinks = [
     {
         name: "Make a Payment",
-        href: "#",
+        href: "/payment",
         description:
             "Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.",
-        icon: PhoneIcon,
+        icon: CashIcon,
     },
     {
         name: "Request a maintenance",
-        href: "#",
+        href: "/maintenance",
         description:
             "Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.",
-        icon: SupportIcon,
+        icon: CogIcon,
     },
     {
-        name: "Resurve Amnities",
-        href: "#",
+        name: "Resurve Amenities",
+        href: "/amenities",
         description:
             "Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.",
         icon: NewspaperIcon,

@@ -128,7 +128,7 @@ import { reactive } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { Inertia } from "@inertiajs/inertia";
-
+// https://vue3datepicker.com/installation/#global
 export default {
     props: {
         amenities: Object,

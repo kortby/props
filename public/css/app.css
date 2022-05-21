@@ -1174,6 +1174,24 @@ select {
 .right-4 {
   right: 1rem;
 }
+.bottom-2 {
+  bottom: 0.5rem;
+}
+.top-2 {
+  top: 0.5rem;
+}
+.top-6 {
+  top: 1.5rem;
+}
+.top-12 {
+  top: 3rem;
+}
+.top-14 {
+  top: 3.5rem;
+}
+.top-16 {
+  top: 4rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1312,6 +1330,9 @@ select {
 }
 .inline-block {
   display: inline-block;
+}
+.inline {
+  display: inline;
 }
 .flex {
   display: flex;
