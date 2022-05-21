@@ -43,7 +43,7 @@ class Category extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->hideFromIndex()->hideFromDetail(),
+            ID::make()->hideFromIndex(),
             Text::make('Name')->sortable(),
             Text::make('Sub Type'),
             Textarea::make('Notes'),
