@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Text;
@@ -34,6 +36,16 @@ class Amenity extends Resource
         'name',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -44,6 +56,7 @@ class Amenity extends Resource
     {
         return [
             ID::make()->sortable()->hideFromIndex(),
+            BelongsTo::make('property')->sortable(),
             Text::make('name')->rules('required'),
             Textarea::make('Description')->hideFromIndex()->rules('required', 'max:250')->rules('required'),
             Currency::make('Price', 'price')->rules('required')->textAlign('left'),

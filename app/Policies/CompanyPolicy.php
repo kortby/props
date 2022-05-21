@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Company;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CompanyPolicy
@@ -36,7 +37,7 @@ class CompanyPolicy
 
         }
 
-        return $user->can('view-company') && $model->user_id === auth()->user()->id;
+        return $user->can('view-company') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -47,7 +48,7 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-company') && auth()->user()->hasAnyRole(['property-manager' , 'property-agent' ]);
+        return $user->can('create-company') && auth()->user()->hasAnyRole(['property-manager' , 'company-owner' , 'property-agent' ]);
     }
 
     /**
@@ -65,7 +66,7 @@ class CompanyPolicy
 
         }
 
-        return $user->can('update-company') && $model->user_id === auth()->user()->id;
+        return $user->can('update-company') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -83,7 +84,7 @@ class CompanyPolicy
 
         }
 
-        return $user->can('delete-company') && $model->user_id === auth()->user()->id;
+        return $user->can('delete-company') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -101,7 +102,7 @@ class CompanyPolicy
 
         }
 
-        return $user->can('restore-company') && $model->user_id === auth()->user()->id;
+        return $user->can('restore-company') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -119,6 +120,11 @@ class CompanyPolicy
 
         }
 
-        return $user->can('force-delete-company') && $model->user_id === auth()->user()->id;
+        return $user->can('force-delete-company') && $this->getEligibleUserIds($model);
+    }
+
+    private function getEligibleUserIds(Company $model): bool
+    {
+        return in_array($model->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

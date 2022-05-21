@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('price')->default(0);
-            $table->foreignId('parent_id');
-            $table->foreignId('property_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('property_id')->constrained();
             $table->timestamps();
         });
     }

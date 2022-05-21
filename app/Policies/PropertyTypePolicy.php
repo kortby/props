@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\Property;
 use App\Models\PropertyType;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PropertyTypePolicy
@@ -30,7 +32,7 @@ class PropertyTypePolicy
      */
     public function view(User $user, PropertyType $propertyType)
     {
-        return $user->can('view-property-type');
+        return $user->can('view-property-type') && $this->getEligibleUserIds($propertyType);;
     }
 
     /**
@@ -41,7 +43,7 @@ class PropertyTypePolicy
      */
     public function create(User $user)
     {
-        return $user->can('create-property-type');
+        return $user->can('create-property-type') ;
     }
 
     /**
@@ -53,7 +55,7 @@ class PropertyTypePolicy
      */
     public function update(User $user, PropertyType $propertyType)
     {
-        return $user->can('update-property-type');
+        return $user->can('update-property-type') && $this->getEligibleUserIds($propertyType);;
     }
 
     /**
@@ -65,7 +67,7 @@ class PropertyTypePolicy
      */
     public function delete(User $user, PropertyType $propertyType)
     {
-        return $user->can('delete-property-type');
+        return $user->can('delete-property-type') && $this->getEligibleUserIds($propertyType);;
     }
 
     /**
@@ -77,7 +79,7 @@ class PropertyTypePolicy
      */
     public function restore(User $user, PropertyType $propertyType)
     {
-        return $user->can('restore-property-type');
+        return $user->can('restore-property-type') && $this->getEligibleUserIds($propertyType);;
     }
 
     /**
@@ -89,6 +91,11 @@ class PropertyTypePolicy
      */
     public function forceDelete(User $user, PropertyType $propertyType)
     {
-        return $user->can('force-delete-property-type');
+        return $user->can('force-delete-property-type') && $this->getEligibleUserIds($propertyType);
+    }
+
+    private function getEligibleUserIds(PropertyType $propertyType): bool
+    {
+        return in_array($propertyType->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

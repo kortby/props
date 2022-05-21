@@ -19,7 +19,7 @@ class Renter extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\Renter::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -42,7 +42,7 @@ class Renter extends Resource
         return $query->whereHas('roles', function($q){
             return $q->where('name','renter');
         })
-        ->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle())
+        ->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle())
             ;
     }
 

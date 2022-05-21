@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Maintenance;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaintenancePolicy
@@ -30,7 +31,7 @@ class MaintenancePolicy
      */
     public function view(User $user, Maintenance $maintenance)
     {
-        return $user->can('view-maintenance');
+        return $user->can('view-maintenance')  && $this->getEligibleUserIds($maintenance);
     }
 
     /**
@@ -53,7 +54,7 @@ class MaintenancePolicy
      */
     public function update(User $user, Maintenance $maintenance)
     {
-        return $user->can('update-maintenance');
+        return $user->can('update-maintenance')  && $this->getEligibleUserIds($maintenance);
     }
 
     /**
@@ -65,7 +66,7 @@ class MaintenancePolicy
      */
     public function delete(User $user, Maintenance $maintenance)
     {
-        return $user->can('delete-maintenance');
+        return $user->can('delete-maintenance')  && $this->getEligibleUserIds($maintenance);
     }
 
     /**
@@ -77,7 +78,7 @@ class MaintenancePolicy
      */
     public function restore(User $user, Maintenance $maintenance)
     {
-        return $user->can('restore-maintenance');
+        return $user->can('restore-maintenance')  && $this->getEligibleUserIds($maintenance);
     }
 
     /**
@@ -89,6 +90,11 @@ class MaintenancePolicy
      */
     public function forceDelete(User $user, Maintenance $maintenance)
     {
-        return $user->can('force-delete-maintenance');
+        return $user->can('force-delete-maintenance') && $this->getEligibleUserIds($maintenance);
+    }
+
+    private function getEligibleUserIds(Maintenance $maintenance): bool
+    {
+        return in_array($maintenance->unit->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

@@ -115,9 +115,6 @@ class User extends Resource
         $detail = [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
 
-            BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex(),
-            BelongsTo::make('Prop', 'prop' , 'App\Nova\Property' ),
-
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -138,15 +135,18 @@ class User extends Resource
 
         ];
 
-       /* if (auth()->user()->hasAnyRole(config('company-owner'))) {
-            array_push($detail, );
-        }*/
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+            array_push($detail, BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex());
+        }
+
+        if (auth()->user()->hasAnyRole('company-owner')) {
+            array_push($detail, BelongsTo::make('Prop', 'prop' , 'App\Nova\Property'));
+        }
 
 
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
-
             array_push($detail, MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class));
-            array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
+            //array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
         }
 
         return $detail;

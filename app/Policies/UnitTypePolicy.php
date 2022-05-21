@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\UnitType;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UnitTypePolicy
@@ -30,7 +31,7 @@ class UnitTypePolicy
      */
     public function view(User $user, UnitType $type)
     {
-        return $user->can('view-unit-type');
+        return $user->can('view-unit-type') && $this->getEligibleUserIds($type);;
     }
 
     /**
@@ -53,7 +54,7 @@ class UnitTypePolicy
      */
     public function update(User $user, UnitType $type)
     {
-        return $user->can('update-unit-type');
+        return $user->can('update-unit-type') && $this->getEligibleUserIds($type);
     }
 
     /**
@@ -65,7 +66,7 @@ class UnitTypePolicy
      */
     public function delete(User $user, UnitType $type)
     {
-        return $user->can('delete-unit-type');
+        return $user->can('delete-unit-type') && $this->getEligibleUserIds($type);
     }
 
     /**
@@ -77,7 +78,7 @@ class UnitTypePolicy
      */
     public function restore(User $user, UnitType $type)
     {
-        return $user->can('restore-unit-type');
+        return $user->can('restore-unit-type') && $this->getEligibleUserIds($type);
     }
 
     /**
@@ -89,6 +90,11 @@ class UnitTypePolicy
      */
     public function forceDelete(User $user, UnitType $type)
     {
-        return $user->can('force-delete-unit-type');
+        return $user->can('force-delete-unit-type') && $this->getEligibleUserIds($type);
+    }
+
+    private function getEligibleUserIds(UnitType $type): bool
+    {
+        return in_array($type->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

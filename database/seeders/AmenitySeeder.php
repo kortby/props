@@ -32,7 +32,12 @@ class AmenitySeeder extends Seeder
         ];
 
         foreach ($amenities as $amenity) {
-            Amenity::create($amenity);
+
+            $amenity['user_id'] = 5;
+
+            $amenity['property_id'] = 1;
+
+            Amenity::factory()->count(5)->create($amenity);
         }
     }
 }

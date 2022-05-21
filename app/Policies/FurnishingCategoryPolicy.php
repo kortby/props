@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\FurnishingCategory;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FurnishingCategoryPolicy
@@ -30,7 +31,7 @@ class FurnishingCategoryPolicy
      */
     public function view(User $user, FurnishingCategory $furnishingCategory)
     {
-        return $user->can('view-furnishing-category');
+        return $user->can('view-furnishing-category') && $this->getEligibleUserIds($furnishingCategory);
     }
 
     /**
@@ -53,7 +54,7 @@ class FurnishingCategoryPolicy
      */
     public function update(User $user, FurnishingCategory $furnishingCategory)
     {
-        return $user->can('update-furnishing-category');
+        return $user->can('update-furnishing-category') && $this->getEligibleUserIds($furnishingCategory);
     }
 
     /**
@@ -65,7 +66,7 @@ class FurnishingCategoryPolicy
      */
     public function delete(User $user, FurnishingCategory $furnishingCategory)
     {
-        return $user->can('delete-furnishing-category');
+        return $user->can('delete-furnishing-category') && $this->getEligibleUserIds($furnishingCategory);
     }
 
     /**
@@ -77,7 +78,7 @@ class FurnishingCategoryPolicy
      */
     public function restore(User $user, FurnishingCategory $furnishingCategory)
     {
-        return $user->can('restore-furnishing-category');
+        return $user->can('restore-furnishing-category') && $this->getEligibleUserIds($furnishingCategory);
     }
 
     /**
@@ -89,6 +90,11 @@ class FurnishingCategoryPolicy
      */
     public function forceDelete(User $user, FurnishingCategory $furnishingCategory)
     {
-        return $user->can('force-delete-furnishing-category');
+        return $user->can('force-delete-furnishing-category') && $this->getEligibleUserIds($furnishingCategory);
+    }
+
+    private function getEligibleUserIds(FurnishingCategory $furnishingCategory): bool
+    {
+        return in_array($furnishingCategory->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

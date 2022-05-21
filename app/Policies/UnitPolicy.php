@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\PropertyType;
 use App\Models\Unit;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UnitPolicy
@@ -36,7 +38,7 @@ class UnitPolicy
 
         }
 
-        return $user->can('view-unit') && $unit->user_id === auth()->user()->id;
+        return $user->can('view-unit') && $this->getEligibleUserIds($unit);
     }
 
     /**
@@ -59,7 +61,7 @@ class UnitPolicy
      */
     public function update(User $user, Unit $unit)
     {
-        return $user->can('update-unit') && $unit->user_id === auth()->user()->id;
+        return $user->can('update-unit') && $this->getEligibleUserIds($unit);
     }
 
     /**
@@ -71,7 +73,7 @@ class UnitPolicy
      */
     public function delete(User $user, Unit $unit)
     {
-        return $user->can('delete-unit') && $unit->user_id === auth()->user()->id;
+        return $user->can('delete-unit') && $this->getEligibleUserIds($unit);
     }
 
     /**
@@ -83,7 +85,7 @@ class UnitPolicy
      */
     public function restore(User $user, Unit $unit)
     {
-        return $user->can('restore-unit') && $unit->user_id === auth()->user()->id;
+        return $user->can('restore-unit') && $this->getEligibleUserIds($unit);
     }
 
     /**
@@ -95,6 +97,11 @@ class UnitPolicy
      */
     public function forceDelete(User $user, Unit $unit)
     {
-        return $user->can('force-delete-unit') && $unit->user_id === auth()->user()->id;
+        return $user->can('force-delete-unit') && $this->getEligibleUserIds($unit);
+    }
+
+    private function getEligibleUserIds(Unit $unit): bool
+    {
+        return in_array($unit->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

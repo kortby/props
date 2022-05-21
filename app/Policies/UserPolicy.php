@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -35,7 +36,7 @@ class UserPolicy
 
         }
 
-        return $user->can('view-user') && $model->parent === auth()->user()->id;
+        return $user->can('view-user') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -64,7 +65,7 @@ class UserPolicy
 
         }
 
-        return $user->can('update-user') && $model->parent === auth()->user()->id;
+        return $user->can('update-user') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -82,7 +83,7 @@ class UserPolicy
 
         }
 
-        return $user->can('delete-user') && $model->parent === auth()->user()->id;
+        return $user->can('delete-user') && $this->getEligibleUserIds($model);
     }
 
     /**
@@ -100,7 +101,7 @@ class UserPolicy
 
         }
 
-        return $user->can('restore-user') && $model->parent === auth()->user()->id;
+        return $user->can('restore-user') &&  $this->getEligibleUserIds($model);
     }
 
     /**
@@ -118,6 +119,15 @@ class UserPolicy
 
         }
 
-        return $user->can('force-delete-user') && $model->parent === auth()->user()->id;
+        return $user->can('force-delete-user') && $this->getEligibleUserIds($model);
+    }
+
+    /**
+     * @param User $model
+     * @return bool
+     */
+    private function getEligibleUserIds(User $model): bool
+    {
+        return in_array($model->parent_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

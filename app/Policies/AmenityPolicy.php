@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Amenity;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AmenityPolicy
@@ -30,7 +31,7 @@ class AmenityPolicy
      */
     public function view(User $user, Amenity $amenity)
     {
-        return $user->can('view-amenity');
+        return $user->can('view-amenity') && $this->getEligibleUserIds($amenity);
     }
 
     /**
@@ -53,7 +54,7 @@ class AmenityPolicy
      */
     public function update(User $user, Amenity $amenity)
     {
-        return $user->can('update-amenity');
+        return $user->can('update-amenity') && $this->getEligibleUserIds($amenity);
     }
 
     /**
@@ -65,7 +66,7 @@ class AmenityPolicy
      */
     public function delete(User $user, Amenity $amenity)
     {
-        return $user->can('delete-amenity');
+        return $user->can('delete-amenity') && $this->getEligibleUserIds($amenity);
     }
 
     /**
@@ -77,7 +78,7 @@ class AmenityPolicy
      */
     public function restore(User $user, Amenity $amenity)
     {
-        return $user->can('restore-amenity');
+        return $user->can('restore-amenity') && $this->getEligibleUserIds($amenity);
     }
 
     /**
@@ -89,6 +90,11 @@ class AmenityPolicy
      */
     public function forceDelete(User $user, Amenity $amenity)
     {
-        return $user->can('force-delete-amenity');
+        return $user->can('force-delete-amenity') && $this->getEligibleUserIds($amenity);
+    }
+
+    private function getEligibleUserIds(Amenity $amenity): bool
+    {
+        return in_array($amenity->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

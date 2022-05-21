@@ -20,8 +20,12 @@ class PropertyTypeSeeder extends Seeder
             PropertyType::create(['name' => $type]);
         }*/
 
-        PropertyType::factory()->count(20)->create([
+        PropertyType::factory()->count(6)->create([
             'user_id'=>5
          ]);
+
+        PropertyType::factory()->count(3)->create([
+            'user_id'=>7
+        ]);
     }
 }

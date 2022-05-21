@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\User;
 use App\Nova\Category;
 use App\Nova\Company;
+use App\Nova\FurnishingCategory;
+
 use App\Nova\Maintenance;
 use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
@@ -13,10 +15,13 @@ use App\Models\UnitFeature as UnitFeatureModel;
 use App\Models\FurnishingCategory as FurnishingCategoryModel;
 use \App\Models\PropertyType as PropertyTypeModel;
 use \App\Models\UnitType as UnitTypeModel;
+use \App\Models\Category as CategoryModel;
+use App\Models\Amenity as AmenityModel;
+use App\Models\Renter as RenterModel;
 use App\Nova\Amenity;
 use App\Nova\AmenitySchedule;
 use App\Nova\UnitFeature;
-use App\Nova\PropertyAgent;
+
 use App\Nova\PropertyType;
 use App\Nova\Prospect;
 use App\Nova\Property;
@@ -24,9 +29,10 @@ use App\Nova\Renter;
 use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
-use App\Nova\FurnishingCategory;
+
 use App\Nova\FurnishingItem;
 use App\Observers\PropertyObserver;
+use App\Observers\RenterObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
 use App\Observers\CompanyObserver;
@@ -34,6 +40,8 @@ use App\Observers\UnitFeatureObserver;
 use App\Observers\FurnishingCategoryObserver;
 use App\Observers\PropertyTypeObserver;
 use App\Observers\UnitTypeObserver;
+use App\Observers\CategoryObserver;
+use App\Observers\AmenityObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Menu\MenuItem;
@@ -67,6 +75,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(FurnishingCategoryModel::class, FurnishingCategoryObserver::class);
         Observable::make(PropertyTypeModel::class, PropertyTypeObserver::class);
         Observable::make(UnitTypeModel::class, UnitTypeObserver::class);
+        Observable::make(CategoryModel::class, CategoryObserver::class);
+        Observable::make(AmenityModel::class, AmenityObserver::class);
+        Observable::make(RenterModel::class, RenterObserver::class);
 
         Nova::footer(function ($request) {
             $footer = '<div class="mt-12 border-t border-gray-200 pt-8">
@@ -155,8 +166,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Unit::class),
                 MenuItem::resource(UnitType::class),
                 MenuItem::resource(UnitFeature::class),
-                MenuItem::resource(FurnishingItem::class),
+
                 MenuItem::resource(FurnishingCategory::class),
+                MenuItem::resource(FurnishingItem::class),
             ])->icon('document-duplicate')->collapsible(),
 
             MenuSection::make('Maintenance', [
@@ -164,9 +176,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Category::class),
             ])->icon('cog')->collapsible(),
 
-            MenuSection::make('Contacts', [
-                MenuItem::resource(Prospect::class),
-            ])->icon('annotation')->collapsible(),
 
             MenuSection::make('Amenity', [
                 MenuItem::resource(Amenity::class),
@@ -174,22 +183,29 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ])->icon('clipboard-list')->collapsible(),
         ];
 
+        ////Super Admin and app manager
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
-            $users = MenuItem::make('Users')->path('/resources/users');
+            $contacts = MenuSection::make('Contacts', [
+                MenuItem::resource(Prospect::class),
+            ])->icon('annotation')->collapsible();
 
+            $users = MenuItem::make('Users')->path('/resources/users');
+/*
             $permissions = MenuItem::make('Permisssions')
-                ->path('/resources/permissions');
+                ->path('/resources/permissions');*/
 
             $roles = MenuItem::make('Roles')
                 ->path('/resources/roles');
 
             $userMenuSection = MenuSection::make('Users', [
                 $users,
-                $permissions,
+                //$permissions,
                 $roles
-            ])->icon('users')->collapsible();
+            ])->icon('users')
+            ->collapsible();
 
+            array_push($menuSections, $contacts);
             array_push($menuSections, $userMenuSection);
         }
 

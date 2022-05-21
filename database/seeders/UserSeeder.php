@@ -23,13 +23,13 @@ class UserSeeder extends Seeder
         ]);
         $sa->assignRole(1);
 
-        $user = \App\Models\User::factory()->create([
+        $appAdmin = \App\Models\User::factory()->create([
             'name' => 'App Admin User',
             'email' => 'appadmin@example.com',
             'password' => Hash::make('azerty'),
             'phone' => rand(4151001000, 4159998888),
         ]);
-        $user->assignRole(2);
+        $appAdmin->assignRole(2);
 
         $co1 = \App\Models\User::factory()->create([
             'name' => 'Company Owner User 1',
@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
             'email' => 'propertymanager2@example.com',
             'phone' => rand(4151001000, 4159998888),
             'password' => Hash::make('azerty'),
-            'parent_id' => $co1->id
+            'parent_id' => $co2->id
 
         ]);
         $pm2->assignRole(4);

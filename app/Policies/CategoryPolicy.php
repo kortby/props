@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Category;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CategoryPolicy
@@ -30,7 +31,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category)
     {
-        return $user->can('view-category');
+        return $user->can('view-category') && $this->getEligibleUserIds($category);
     }
 
     /**
@@ -53,7 +54,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category)
     {
-        return $user->can('update-category');
+        return $user->can('update-category') && $this->getEligibleUserIds($category);
     }
 
     /**
@@ -65,7 +66,7 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category)
     {
-        return $user->can('delete-category');
+        return $user->can('delete-category') && $this->getEligibleUserIds($category);
     }
 
     /**
@@ -77,7 +78,7 @@ class CategoryPolicy
      */
     public function restore(User $user, Category $category)
     {
-        return $user->can('restore-category');
+        return $user->can('restore-category') && $this->getEligibleUserIds($category);
     }
 
     /**
@@ -89,6 +90,11 @@ class CategoryPolicy
      */
     public function forceDelete(User $user, Category $category)
     {
-        return $user->can('force-delete-category');
+        return $user->can('force-delete-category') && $this->getEligibleUserIds($category);
+    }
+
+    private function getEligibleUserIds(Category $category): bool
+    {
+        return in_array($category->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

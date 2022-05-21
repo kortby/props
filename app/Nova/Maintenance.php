@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
@@ -40,6 +41,18 @@ class Maintenance extends Resource
     public static $search = [
         'title',
     ];
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereHas('unit', function($query){
+            $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+        });
+    }
 
     /**
      * Get the fields displayed by the resource.

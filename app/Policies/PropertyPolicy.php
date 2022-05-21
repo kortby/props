@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Property;
 use App\Models\User;
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PropertyPolicy
@@ -36,7 +37,7 @@ class PropertyPolicy
 
         }
 
-        return $user->can('view-property') && $property->user_id === auth()->user()->id;
+        return $user->can('view-property') && $this->getEligibleUserIds($property);
     }
 
     /**
@@ -48,7 +49,7 @@ class PropertyPolicy
     public function create(User $user)
     {
 
-        return $user->can('create-property') && auth()->user()->hasAnyRole(['property-manager' , 'property-agent' ]);
+        return $user->can('create-property') && auth()->user()->hasAnyRole(['property-manager' , 'company-owner' , 'property-agent' ]);
     }
 
     /**
@@ -60,7 +61,7 @@ class PropertyPolicy
      */
     public function update(User $user, Property $property)
     {
-        return $user->can('update-property') && $property->user_id === auth()->user()->id;
+        return $user->can('update-property') && $this->getEligibleUserIds($property);
     }
 
     /**
@@ -72,7 +73,7 @@ class PropertyPolicy
      */
     public function delete(User $user, Property $property)
     {
-        return $user->can('delete-property')&& $property->user_id === auth()->user()->id;
+        return $user->can('delete-property')&& $this->getEligibleUserIds($property);
     }
 
     /**
@@ -84,7 +85,7 @@ class PropertyPolicy
      */
     public function restore(User $user, Property $property)
     {
-        return $user->can('restore-property') && $property->user_id === auth()->user()->id;
+        return $user->can('restore-property') && $this->getEligibleUserIds($property);
     }
 
     /**
@@ -96,6 +97,11 @@ class PropertyPolicy
      */
     public function forceDelete(User $user, Property $property)
     {
-        return $user->can('force-delete-property') && $property->user_id === auth()->user()->id;
+        return $user->can('force-delete-property') && $this->getEligibleUserIds($property);
+    }
+
+    private function getEligibleUserIds(Property $property): bool
+    {
+        return in_array($property->user_id, (new GetParentAndChildByAuthenticated())->handle());
     }
 }

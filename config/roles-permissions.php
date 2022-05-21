@@ -2,5 +2,5 @@
 
 return [
     'Super-Admin',
-    'company-owner'
+    'app-manager'
 ];

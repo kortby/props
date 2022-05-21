@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -32,6 +33,16 @@ class FurnishingCategory extends Resource
     public static $search = [
         'name',
     ];
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
 
     /**
      * Get the fields displayed by the resource.

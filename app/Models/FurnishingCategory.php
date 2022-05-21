@@ -9,6 +9,7 @@ class FurnishingCategory extends Model
 {
     use HasFactory;
 
+
     public function furnishingItems()
     {
         return $this->hasMany(FurnishingItem::class);

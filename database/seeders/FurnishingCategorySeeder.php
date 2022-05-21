@@ -20,9 +20,13 @@ class FurnishingCategorySeeder extends Seeder
             FurnishingCategory::create(['name' => $category]);
         }*/
 
-        FurnishingCategory::factory()->count(20)->create([
-        'user_id'=>5
-    ]);
+        FurnishingCategory::factory()->count(3)->create([
+             'user_id'=>5
+        ]);
+
+        FurnishingCategory::factory()->count(7)->create([
+            'user_id'=>7
+        ]);
 
     }
 }
