@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('unit_types', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

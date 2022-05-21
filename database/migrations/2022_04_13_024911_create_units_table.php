@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('unit_heading');
             $table->integer('number_of_bedroom');
             $table->integer('number_of_bathroom');
             $table->integer('number_of_balcony');
             $table->date('date_available_from')->nullable();
             $table->boolean('is_active');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('unit_number');
             $table->integer('unit_floor_number');
             $table->integer('size');

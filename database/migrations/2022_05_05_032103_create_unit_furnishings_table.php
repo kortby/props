@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('unit_furnishing', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->foreignId('unit_feature_unit_id');
             $table->foreignId('furnishing_item_id');
             $table->integer('number_of_items')->default(0);

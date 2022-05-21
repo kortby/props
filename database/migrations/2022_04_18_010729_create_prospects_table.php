@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('prospects', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('company_name')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();

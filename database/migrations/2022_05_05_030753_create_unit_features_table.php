@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('unit_features', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->foreignId('unit_id');
             $table->boolean('is_air_conditioning');
             $table->integer('num_of_assigned_car_parking');

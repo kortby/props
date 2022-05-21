@@ -14,9 +14,9 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        if(auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
+        if(auth()->user()->hasRole('company-owner') || auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
 
-            $user->user_id = auth()->id();
+            $user->parent_id = auth()->id();
 
         }
 

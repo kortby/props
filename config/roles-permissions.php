@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'Super-Admin'
+    'Super-Admin',
+    'company-owner'
 ];

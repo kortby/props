@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('maintenances', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('status')->default('new');
             $table->foreignId('unit_id')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->foreignId('category_id');
             $table->string('phone');
             $table->string('proirity')->default('high');

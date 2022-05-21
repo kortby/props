@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('amenities', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('price')->default(0);
+            $table->foreignId('parent_id');
+            $table->foreignId('property_id');
             $table->timestamps();
         });
     }

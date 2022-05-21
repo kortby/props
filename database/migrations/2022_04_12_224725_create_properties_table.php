@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('properties', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->integer('total_floors');
             $table->integer('number_of_units');
             $table->integer('property_type_id')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('has_fitness_center');
             $table->boolean('has_swimming_pool');
             $table->boolean('has_laundry');

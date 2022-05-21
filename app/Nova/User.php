@@ -3,18 +3,16 @@
 namespace App\Nova;
 
 use App\Services\GetParentAndChildByAuthenticated;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
+
 use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\Avatar;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Gravatar;
+
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource
@@ -49,7 +47,7 @@ class User extends Resource
             return parent::indexQuery($request, $query);
         }
 
-        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+        return $query->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle());
     }
 
     /**
@@ -117,7 +115,8 @@ class User extends Resource
         $detail = [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
 
-            Gravatar::make()->maxWidth(50),
+            BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex(),
+            BelongsTo::make('Prop', 'prop' , 'App\Nova\Property' ),
 
             Text::make('Name')
                 ->sortable()
@@ -136,8 +135,12 @@ class User extends Resource
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
 
-            // Avatar::make('Avatar')->path('media'),
+
         ];
+
+       /* if (auth()->user()->hasAnyRole(config('company-owner'))) {
+            array_push($detail, );
+        }*/
 
 
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('furnishing_items', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->foreignId('furnishing_category_id');
             $table->timestamps();

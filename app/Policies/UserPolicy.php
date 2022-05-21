@@ -35,7 +35,7 @@ class UserPolicy
 
         }
 
-        return $user->can('view-user') && $model->user_id === auth()->user()->id;
+        return $user->can('view-user') && $model->parent === auth()->user()->id;
     }
 
     /**
@@ -64,7 +64,7 @@ class UserPolicy
 
         }
 
-        return $user->can('update-user') && $model->user_id === auth()->user()->id;
+        return $user->can('update-user') && $model->parent === auth()->user()->id;
     }
 
     /**
@@ -82,7 +82,7 @@ class UserPolicy
 
         }
 
-        return $user->can('delete-user') && $model->user_id === auth()->user()->id;
+        return $user->can('delete-user') && $model->parent === auth()->user()->id;
     }
 
     /**
@@ -100,7 +100,7 @@ class UserPolicy
 
         }
 
-        return $user->can('restore-user') && $model->user_id === auth()->user()->id;
+        return $user->can('restore-user') && $model->parent === auth()->user()->id;
     }
 
     /**
@@ -118,6 +118,6 @@ class UserPolicy
 
         }
 
-        return $user->can('force-delete-user') && $model->user_id === auth()->user()->id;
+        return $user->can('force-delete-user') && $model->parent === auth()->user()->id;
     }
 }
