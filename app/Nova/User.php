@@ -7,13 +7,19 @@ use App\Services\GetParentAndChildByAuthenticated;
 
 use Illuminate\Validation\Rules;
 
+use Laravel\Nova\Fields\FormData;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Spatie\Permission\Models\Role;
+use Vyuldashev\NovaPermission\RoleSelect;
+use Vyuldashev\NovaPermission\RoleBooleanGroup;
 
 class User extends Resource
 {
@@ -113,7 +119,29 @@ class User extends Resource
     {
 
         $detail = [
-            ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
+            ID::make()->sortable()->hideFromDetail(),
+
+            RoleSelect::make('Role', 'roles')
+                ->options($this->getRoles()->toArray())
+                ->resolveUsing(function () {
+                    return $this->roles->first()->id ?? '---';
+                })->displayUsing(function () {
+                    return $this->roles->first()->name ?? '---';
+                })->searchable()
+                ->hideWhenUpdating()
+            ,
+
+            BelongsTo::make('Prop', 'prop' , 'App\Nova\Property')
+                /*->hide()->dependsOn(
+                ['roles'],
+                function (BelongsTo $field, NovaRequest $request, FormData $formData) {
+                    if(in_array($formData->roles, [4,5,6])){
+                        $field->show();
+                    }
+                }
+            )*/
+            ,
+
 
             Text::make('Name')
                 ->sortable()
@@ -133,22 +161,36 @@ class User extends Resource
                 ->updateRules('nullable', Rules\Password::defaults()),
 
 
+
         ];
 
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
             array_push($detail, BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex());
         }
 
-        if (auth()->user()->hasAnyRole('company-owner')) {
-            array_push($detail, BelongsTo::make('Prop', 'prop' , 'App\Nova\Property'));
-        }
-
-
-        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
-            array_push($detail, MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class));
-            //array_push($detail, MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class));
-        }
-
         return $detail;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    private function getRoles(): \Illuminate\Support\Collection
+    {
+        $query = Role::query();
+
+        if (auth()->user()->hasAnyRole('company-owner')) {
+             $query->whereIn('id' , [4,5,6]);
+        }
+
+        if (auth()->user()->hasAnyRole('property-manager')) {
+             $query->whereIn('id' , [5,6]);
+        }
+
+        if (auth()->user()->hasAnyRole('property-agent')) {
+             $query->whereIn('id' , [6]);
+        }
+
+
+        return $query->pluck('name', 'id');
     }
 }

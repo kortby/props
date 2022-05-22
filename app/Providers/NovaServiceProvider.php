@@ -21,18 +21,13 @@ use App\Models\Renter as RenterModel;
 use App\Nova\Amenity;
 use App\Nova\AmenitySchedule;
 use App\Nova\UnitFeature;
-
 use App\Nova\PropertyType;
-use App\Nova\Prospect;
 use App\Nova\Property;
-use App\Nova\Renter;
 use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
-
 use App\Nova\FurnishingItem;
 use App\Observers\PropertyObserver;
-use App\Observers\RenterObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
 use App\Observers\CompanyObserver;
@@ -77,7 +72,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(UnitTypeModel::class, UnitTypeObserver::class);
         Observable::make(CategoryModel::class, CategoryObserver::class);
         Observable::make(AmenityModel::class, AmenityObserver::class);
-        Observable::make(RenterModel::class, RenterObserver::class);
 
         Nova::footer(function ($request) {
             $footer = '<div class="mt-12 border-t border-gray-200 pt-8">
@@ -181,50 +175,40 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Amenity::class),
                 MenuItem::resource(AmenitySchedule::class),
             ])->icon('clipboard-list')->collapsible(),
+
+            MenuSection::make('Users', [
+                MenuItem::resource(\App\Nova\User::class),
+            ])->icon('users')->collapsible()
         ];
 
         ////Super Admin and app manager
-        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        /*if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             $contacts = MenuSection::make('Contacts', [
                 MenuItem::resource(Prospect::class),
             ])->icon('annotation')->collapsible();
 
             $users = MenuItem::make('Users')->path('/resources/users');
-/*
+
             $permissions = MenuItem::make('Permisssions')
-                ->path('/resources/permissions');*/
+                ->path('/resources/permissions');
 
             $roles = MenuItem::make('Roles')
                 ->path('/resources/roles');
 
             $userMenuSection = MenuSection::make('Users', [
                 $users,
-                //$permissions,
+                $permissions,
                 $roles
             ])->icon('users')
             ->collapsible();
 
             array_push($menuSections, $contacts);
             array_push($menuSections, $userMenuSection);
-        }
+        }*/
 
-        if (auth()->user()->hasRole('company-owner')) {
 
-            $menuUser = MenuSection::make('Users', [
-                MenuItem::resource(\App\Nova\User::class),
-                MenuItem::resource(Renter::class),
-            ])->icon('users')->collapsible();
 
-            array_push($menuSections, $menuUser);
-        }
-
-        if (auth()->user()->hasRole('property-agent')) {
-
-            array_push($menuSections, MenuSection::make('Renters')
-                ->path('/resources/renters')
-                ->icon('users'));
-        }
 
 
 

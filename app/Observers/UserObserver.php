@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserObserver
 {
@@ -14,6 +15,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
+
         if(auth()->user()->hasRole('company-owner') || auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
 
             $user->parent_id = auth()->id();
@@ -24,12 +26,7 @@ class UserObserver
 
     public function created(User $user)
     {
-        if(auth()->user()->hasRole('property-manager') || auth()->user()->hasRole('property-agent') ) {
-
-            $user->assignRole(request()->role);
-
-        }
-
+        $user->assignRole(request()->roles);
     }
 
     /**
@@ -40,8 +37,21 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        //
+
+       // $user->syncRoles(request()->roles);
     }
+
+    public function retrieved(User $user)
+    {
+        /*if(request()->roles && request()->method() === 'PUT'){
+
+            $user->syncRoles(request()->roles);
+
+        }*/
+
+    }
+
+
 
     /**
      * Handle the User "deleted" event.

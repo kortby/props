@@ -27,6 +27,11 @@ class Unit extends Model implements HasMedia
         'date_available_from',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function property()
     {
         return $this->belongsTo(Property::class);
