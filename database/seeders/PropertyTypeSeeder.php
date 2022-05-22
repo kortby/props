@@ -15,17 +15,12 @@ class PropertyTypeSeeder extends Seeder
      */
     public function run()
     {
-        /*$types = ['Residential', 'Commercial', 'Affordable Housing', 'Student Housing', 'Comminity Associations', 'Mobile Homes', 'Self Storage'];
+        $types = ['Residential', 'Commercial', 'Affordable Housing', 'Student Housing', 'Comminity Associations', 'Mobile Homes', 'Self Storage'];
         foreach ($types as $type) {
-            PropertyType::create(['name' => $type]);
-        }*/
-
-        PropertyType::factory()->count(6)->create([
-            'user_id'=>5
-         ]);
-
-        PropertyType::factory()->count(3)->create([
-            'user_id'=>7
-        ]);
+            PropertyType::create([
+                'name' => $type,
+                'user_id' => rand(5,7),
+            ]);
+        }
     }
 }

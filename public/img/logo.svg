@@ -1,9 +1,0 @@
-<svg viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .small { font: italic 64px sans-serif; fill: #64748B}
-    .heavy { font: bold 58px sans-serif; fill: #18B69B; }
-  </style>
-
-  <text x="35" y="35" class="heavy">props</text>
-  <text x="5" y="82" class="small">Manager</text>
-</svg>

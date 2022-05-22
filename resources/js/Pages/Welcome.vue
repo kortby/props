@@ -85,13 +85,14 @@
                             >
                                 <img
                                     class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                                    src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg"
+                                    src="img/pages/welcome-1.png"
                                     alt="Inbox user interface"
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
+                <Features />
                 <div class="mt-24">
                     <div
                         class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24"
@@ -142,7 +143,7 @@
                             >
                                 <img
                                     class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                                    src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg"
+                                    src="img/pages/welcome-2.png"
                                     alt="Customer profile user interface"
                                 />
                             </div>
@@ -157,12 +158,14 @@
 <script>
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import Layout from "./Shared/Partials/Layout";
+import Features from "./Features";
 
 export default {
     components: {
         Layout,
         MenuIcon,
         XIcon,
+        Features,
     },
     setup() {},
 };

@@ -81,7 +81,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::footer(function ($request) {
             $footer = '<div class="mt-12 border-t border-gray-200 pt-8">
-            <p class="text-gray-400 text-center text-xs mt-8">&copy; 2022 ManageXYZ, Inc. All rights reserved.</p>
+            <p class="text-gray-400 text-center text-xs mt-8">&copy; '.date("Y").' PropsManager, Inc. All rights reserved.</p>
             </div>';
             return Blade::render($footer);
         });
