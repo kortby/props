@@ -2,13 +2,24 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
+use App\Services\GetParentAndChildByAuthenticated;
+
+
 use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\Gravatar;
+
+use Laravel\Nova\Fields\FormData;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Spatie\Permission\Models\Role;
+use Vyuldashev\NovaPermission\RoleSelect;
+use Vyuldashev\NovaPermission\RoleBooleanGroup;
 
 class User extends Resource
 {
@@ -35,6 +46,16 @@ class User extends Resource
         'id', 'name', 'email',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -43,26 +64,7 @@ class User extends Resource
      */
     public function fields(NovaRequest $request)
     {
-        return [
-            ID::make()->sortable(),
-
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
-        ];
+        return $this->detailView($request);
     }
 
     /**
@@ -106,6 +108,89 @@ class User extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new \Coderello\LoginAs\Actions\LoginAs)->redirectTo(function ($user) {
+                return route('nova.pages.dashboard');
+            }),
+        ];
+    }
+
+    private function detailView($request)
+    {
+
+        $detail = [
+            ID::make()->sortable()->hideFromDetail(),
+
+            RoleSelect::make('Role', 'roles')
+                ->options($this->getRoles()->toArray())
+                ->resolveUsing(function () {
+                    return $this->roles->first()->id ?? '---';
+                })->displayUsing(function () {
+                    return $this->roles->first()->name ?? '---';
+                })->searchable()
+                ->hideWhenUpdating()
+            ,
+
+            BelongsTo::make('Prop', 'prop' , 'App\Nova\Property')
+            /*->hide()->dependsOn(
+            ['roles'],
+            function (BelongsTo $field, NovaRequest $request, FormData $formData) {
+                if(in_array($formData->roles, [4,5,6])){
+                    $field->show();
+                }
+            }
+        )*/
+            ,
+
+
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Number::make('Phone Number', 'phone')->textAlign('left'),
+
+            Password::make('Password')
+                ->onlyOnForms()
+                ->creationRules('required', Rules\Password::defaults())
+                ->updateRules('nullable', Rules\Password::defaults()),
+
+
+
+        ];
+
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+            array_push($detail, BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex());
+        }
+
+        return $detail;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    private function getRoles(): \Illuminate\Support\Collection
+    {
+        $query = Role::query();
+
+        if (auth()->user()->hasAnyRole('company-owner')) {
+            $query->whereIn('id' , [4,5,6]);
+        }
+
+        if (auth()->user()->hasAnyRole('property-manager')) {
+            $query->whereIn('id' , [5,6]);
+        }
+
+        if (auth()->user()->hasAnyRole('property-agent')) {
+            $query->whereIn('id' , [6]);
+        }
+
+
+        return $query->pluck('name', 'id');
     }
 }
