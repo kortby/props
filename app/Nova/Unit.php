@@ -64,7 +64,9 @@ class Unit extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-           /* BelongsTo::make('User'),*/
+
+            BelongsTo::make('Renter', 'User', 'App\Nova\User'),
+
             ID::make()->hideFromIndex()->hideFromDetail(),
             Number::make('Unit number')->textAlign('left')->sortable()->rules('required')->min(1)->max(1000)->help(
                 'What is the unit number ?'
