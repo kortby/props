@@ -72,7 +72,7 @@
     "repositories": {
         "nova": {
             "type": "composer",
-            "url": "https://nova.laravel.com/"
+            "url": "https://nova.laravel.com"
         }
     }
 }

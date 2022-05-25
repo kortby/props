@@ -21,7 +21,7 @@ class MaintenanceFactory extends Factory
         $frequency = ['once', 'daily', 'weekly', 'bi-weekly', 'monthly', 'quarterly'];
         return [
             'title' => $this->faker->name(),
-            'unit_id' => rand(1, 8),
+            'unit_id' => rand(3, 4),
             'status' => $status[rand(0, 4)],
             'description' => $this->faker->paragraph,
             'category_id' => rand(1, 8),
