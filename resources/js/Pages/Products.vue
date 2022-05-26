@@ -1,11 +1,11 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
     <Layout title="Products">
-        <div class="relative bg-white py-16 sm:py-24">
+        <div class="relative bg-white py-6 sm:py-24">
             <div
                 class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start"
             >
-                <div class="relative sm:py-16 lg:py-0">
+                <div class="relative sm:py-6 lg:py-0">
                     <div
                         aria-hidden="true"
                         class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen"
@@ -113,6 +113,9 @@
                 >
                     <!-- Content area -->
                     <div class="pt-12 sm:pt-16 lg:pt-20">
+                        <div>
+                            <Animation />
+                        </div>
                         <h2
                             class="text-3xl text-gray-900 font-extrabold tracking-tight sm:text-4xl"
                         >
@@ -184,6 +187,8 @@
 
 <script>
 import Layout from "./Shared/Partials/Layout";
+import Animation from "./Shared/Partials/Animation";
+
 const stats = [
     { label: "Founded", value: "2021" },
     { label: "Employees", value: "5" },
@@ -193,6 +198,7 @@ const stats = [
 
 export default {
     components: {
+        Animation,
         Layout,
     },
     setup() {

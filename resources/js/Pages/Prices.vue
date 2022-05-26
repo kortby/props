@@ -17,9 +17,10 @@
                     <p
                         class="mt-3 max-w-4xl mx-auto text-xl text-gray-300 sm:mt-5 sm:text-2xl"
                     >
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Velit numquam eligendi quos odit doloribus
-                        molestiae voluptatum.
+                        Depends on how many units do you have and how much are
+                        your benefits. You can also open a premium services and
+                        request more features. Transering data is also
+                        available.
                     </p>
                 </div>
             </div>
@@ -42,7 +43,7 @@
                                                     class="text-center text-2xl font-medium text-gray-900"
                                                     id="tier-hobby"
                                                 >
-                                                    Hobby
+                                                    Small
                                                 </h3>
                                                 <div
                                                     class="mt-4 flex items-center justify-center"
@@ -58,7 +59,7 @@
                                                         <span
                                                             class="font-extrabold"
                                                         >
-                                                            79
+                                                            19
                                                         </span>
                                                     </span>
                                                     <span
@@ -153,7 +154,7 @@
                                                     <span
                                                         class="font-extrabold"
                                                     >
-                                                        199
+                                                        39
                                                     </span>
                                                 </span>
                                                 <span
@@ -229,7 +230,7 @@
                                                         <span
                                                             class="font-extrabold"
                                                         >
-                                                            349
+                                                            49
                                                         </span>
                                                     </span>
                                                     <span

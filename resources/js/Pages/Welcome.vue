@@ -12,14 +12,7 @@
                         >
                             <div>
                                 <div>
-                                    <span
-                                        class="h-12 w-12 rounded-md flex items-center justify-center bg-indigo-600"
-                                    >
-                                        <InboxIcon
-                                            class="h-6 w-6 text-white"
-                                            aria-hidden="true"
-                                        />
-                                    </span>
+                                    <Animation />
                                 </div>
                                 <div class="mt-6">
                                     <h2
@@ -102,14 +95,7 @@
                         >
                             <div>
                                 <div>
-                                    <span
-                                        class="h-12 w-12 rounded-md flex items-center justify-center bg-indigo-600"
-                                    >
-                                        <SparklesIcon
-                                            class="h-6 w-6 text-white"
-                                            aria-hidden="true"
-                                        />
-                                    </span>
+                                    <Animation />
                                 </div>
                                 <div class="mt-6">
                                     <h2
@@ -159,9 +145,11 @@
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 import Layout from "./Shared/Partials/Layout";
 import Features from "./Features";
+import Animation from "./Shared/Partials/Animation";
 
 export default {
     components: {
+        Animation,
         Layout,
         MenuIcon,
         XIcon,

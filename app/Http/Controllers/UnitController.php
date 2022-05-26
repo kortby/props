@@ -65,7 +65,11 @@ class UnitController extends Controller
             'property_state' => $unit->property->state,
             'property_postal_code' => $unit->property->postal_code,
             'property_phone' => $unit->property->phone,
-            'images' => [],
+            // 'images' => [
+            //     $unit->getMedia('units_collection')[0]->getUrl(),
+            //     $unit->getMedia('units_collection')[1]->getUrl(),
+            //     $unit->getMedia('units_collection')[2]->getUrl()
+            // ],
         ]);
     }
 

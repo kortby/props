@@ -4,6 +4,9 @@
             <div class="py-16 bg-gray-50 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 space-y-8 sm:px-6 lg:px-8">
                     <div class="text-base max-w-prose mx-auto lg:max-w-none">
+                        <div>
+                            <Animation />
+                        </div>
                         <h2
                             class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
                         >
@@ -200,10 +203,11 @@
 </template>
 <script>
 import Layout from "./Shared/Partials/Layout";
+import Animation from "./Shared/Partials/Animation";
 export default {
     components: {
         Layout,
+        Animation,
     },
-    setup() {},
 };
 </script>

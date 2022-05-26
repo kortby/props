@@ -37,7 +37,7 @@ class AmenitySeeder extends Seeder
 
             $amenity['property_id'] = 1;
 
-            Amenity::factory()->count(5)->create($amenity);
+            Amenity::factory()->create($amenity);
         }
     }
 }

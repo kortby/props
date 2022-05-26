@@ -33,8 +33,7 @@
                                     <dt
                                         class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500"
                                         v-html="'$' + amenity.price"
-                                    >
-                                    </dt>
+                                    ></dt>
                                     <dd
                                         class="order-2 mt-2 text-sm leading-6 font-medium text-gray-400"
                                         v-html="amenity.description"
@@ -78,12 +77,14 @@
                                 <label
                                     for="start"
                                     class="block text-sm font-medium text-gray-700"
-                                    >Preferred maintenece date</label
+                                    >Start date and time</label
                                 >
                                 <div class="mt-1">
-                            <Datepicker v-model="form.start"></Datepicker>
+                                    <Datepicker
+                                        v-model="form.start"
+                                    ></Datepicker>
                                 </div>
-                                
+
                                 <span
                                     v-if="errors.start"
                                     class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
@@ -95,7 +96,7 @@
                                 <label
                                     for="end"
                                     class="block text-sm font-medium text-gray-700"
-                                    >Preferred maintenece date</label
+                                    >End date and time</label
                                 >
                                 <div class="mt-1">
                                     <Datepicker v-model="form.end"></Datepicker>
@@ -147,7 +148,7 @@ export default {
 
         const submit = () => {
             Inertia.post("/amenities", form);
-            console.log('submitted');
+            console.log("submitted");
         };
         return {
             form,
