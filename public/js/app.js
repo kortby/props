@@ -22634,7 +22634,8 @@ __webpack_require__.r(__webpack_exports__);
     property_city: String,
     property_state: String,
     property_postal_code: Number,
-    property_phone: Number
+    property_phone: Number,
+    pictures: Array
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
@@ -22646,20 +22647,20 @@ __webpack_require__.r(__webpack_exports__);
       rating: Math.floor(Math.random() * 5),
       reviewCount: Math.floor(Math.random() * 500),
       href: "#",
-      images: [{
-        id: 1,
-        imageSrc: "https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
-        imageAlt: "Back of women's Basic Tee in black.",
+      pictures: [{
+        id: 0,
+        imageSrc: props.pictures[0],
+        imageAlt: "Apartment Architecture",
         primary: true
       }, {
-        id: 2,
-        imageSrc: "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg",
-        imageAlt: "Side profile of women's Basic Tee in black.",
+        id: 1,
+        imageSrc: props.pictures[1],
+        imageAlt: "Kitchen.",
         primary: false
       }, {
-        id: 3,
-        imageSrc: "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg",
-        imageAlt: "Front of women's Basic Tee in black.",
+        id: 2,
+        imageSrc: props.pictures[2],
+        imageAlt: "View from the top.",
         primary: false
       }],
       description: props.description,
@@ -29477,7 +29478,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   ))]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.unit.reviewCount) + " reviews ", 1
   /* TEXT */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Image gallery "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.unit.images, function (image) {
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Image gallery "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.unit.pictures, function (image) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
       key: image.id,
       src: image.imageSrc,

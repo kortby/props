@@ -70,7 +70,7 @@
                             class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8"
                         >
                             <img
-                                v-for="image in unit.images"
+                                v-for="image in unit.pictures"
                                 :key="image.id"
                                 :src="image.imageSrc"
                                 :alt="image.imageAlt"
@@ -193,6 +193,7 @@ let props = defineProps({
     property_state: String,
     property_postal_code: Number,
     property_phone: Number,
+    pictures: Array,
 });
 
 const unit = {
@@ -201,26 +202,23 @@ const unit = {
     rating: Math.floor(Math.random() * 5),
     reviewCount: Math.floor(Math.random() * 500),
     href: "#",
-    images: [
+    pictures: [
         {
-            id: 1,
-            imageSrc:
-                "https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
-            imageAlt: "Back of women's Basic Tee in black.",
+            id: 0,
+            imageSrc: props.pictures[0],
+            imageAlt: "Apartment Architecture",
             primary: true,
         },
         {
-            id: 2,
-            imageSrc:
-                "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg",
-            imageAlt: "Side profile of women's Basic Tee in black.",
+            id: 1,
+            imageSrc: props.pictures[1],
+            imageAlt: "Kitchen.",
             primary: false,
         },
         {
-            id: 3,
-            imageSrc:
-                "https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-02.jpg",
-            imageAlt: "Front of women's Basic Tee in black.",
+            id: 2,
+            imageSrc: props.pictures[2],
+            imageAlt: "View from the top.",
             primary: false,
         },
     ],

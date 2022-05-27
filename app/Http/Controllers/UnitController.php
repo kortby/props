@@ -47,7 +47,6 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
-        dd($unit->getMedia('units_collection')[0]->getUrl());
         return Inertia::render('Unit', [
             'unit_heading' => $unit->unit_heading,
             'number_of_bedroom' => $unit->number_of_bedroom,
@@ -65,11 +64,11 @@ class UnitController extends Controller
             'property_state' => $unit->property->state,
             'property_postal_code' => $unit->property->postal_code,
             'property_phone' => $unit->property->phone,
-            // 'images' => [
-            //     $unit->getMedia('units_collection')[0]->getUrl(),
-            //     $unit->getMedia('units_collection')[1]->getUrl(),
-            //     $unit->getMedia('units_collection')[2]->getUrl()
-            // ],
+            'pictures' => [
+                $unit->getMedia('units_collection')[0]->getUrl() ? $unit->getMedia('units_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $unit->getMedia('units_collection')[1]->getUrl() ? $unit->getMedia('units_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $unit->getMedia('units_collection')[2]->getUrl() ? $unit->getMedia('units_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+            ],
         ]);
     }
 
