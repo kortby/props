@@ -17,6 +17,7 @@ use \App\Models\PropertyType as PropertyTypeModel;
 use \App\Models\UnitType as UnitTypeModel;
 use \App\Models\Category as CategoryModel;
 use App\Models\Amenity as AmenityModel;
+use App\Models\Prospect as ProspectModel;
 use App\Models\Renter as RenterModel;
 use App\Nova\Amenity;
 use App\Nova\AmenitySchedule;
@@ -37,6 +38,7 @@ use App\Observers\PropertyTypeObserver;
 use App\Observers\UnitTypeObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\AmenityObserver;
+use App\Observers\ProspectObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Menu\MenuItem;
@@ -72,10 +74,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(UnitTypeModel::class, UnitTypeObserver::class);
         Observable::make(CategoryModel::class, CategoryObserver::class);
         Observable::make(AmenityModel::class, AmenityObserver::class);
+        Observable::make(ProspectModel::class, ProspectObserver::class);
 
         Nova::footer(function ($request) {
             $footer = '<div class="mt-12 border-t border-gray-200 pt-8">
-            <p class="text-gray-400 text-center text-xs mt-8">&copy; '.date("Y").' PropsManager, Inc. All rights reserved.</p>
+            <p class="text-gray-400 text-center text-xs mt-8">&copy; ' . date("Y") . ' PropsManager, Inc. All rights reserved.</p>
             </div>';
             return Blade::render($footer);
         });
@@ -178,6 +181,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             MenuSection::make('Users', [
                 MenuItem::resource(\App\Nova\User::class),
+                MenuItem::resource(\App\Nova\Prospect::class),
             ])->icon('users')->collapsible()
         ];
 

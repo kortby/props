@@ -11,7 +11,10 @@
     ## Roles and permissions
 
     -   super admin
-    -   property owner
+        - can create Company owner
+        - can access prospects
+   
+    -   property owner ( can edit all)
         -   property managers
             -   sales
             -   tenant ( pay bill, sign lease)

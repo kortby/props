@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use App\Nova\Filters\ProspectState;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
@@ -34,6 +35,16 @@ class Prospect extends Resource
         'company_name',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -61,7 +72,7 @@ class Prospect extends Resource
             Text::make('annual_sales')->sortable(),
             Text::make('sic_code')->hideFromIndex(),
             Text::make('industry')->sortable(),
-            // Boolean::make('is_client'),
+            Boolean::make('is_client'),
         ];
     }
 

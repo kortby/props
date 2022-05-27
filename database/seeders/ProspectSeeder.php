@@ -40,6 +40,8 @@ class ProspectSeeder extends Seeder
                     "annual_sales" => $data[14],
                     "sic_code" => $data[15],
                     "industry" => $data[16],
+                    "is_client" => false,
+                    "user_id" => 1,
                 ]);
             }
             $firstline = false;

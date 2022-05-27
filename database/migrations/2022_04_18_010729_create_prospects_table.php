@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('sic_code')->nullable();
             $table->string('industry')->nullable();
             $table->boolean('is_client')->default(false);
+            $table->boolean('user_id');
             $table->timestamps();
             $table->softDeletes();
         });
