@@ -9,12 +9,16 @@ use App\Services\GetParentAndChildByAuthenticated;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Status;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -65,8 +69,6 @@ class Unit extends Resource
     {
         return [
 
-            BelongsTo::make('Renter', 'User', 'App\Nova\User'),
-
             ID::make()->hideFromIndex()->hideFromDetail(),
             Number::make('Unit number')->textAlign('left')->sortable()->rules('required')->min(1)->max(1000)->help(
                 'What is the unit number ?'
@@ -92,6 +94,31 @@ class Unit extends Resource
                 ->rules('required') // validation rules for the collection of images
                 // validation rules for the collection of images
                 ->singleImageRules('dimensions:min_width=100')->hideFromIndex(),
+
+            BelongsToMany::make( 'Renter','renters',User::class)
+                        ->allowDuplicateRelations()
+                        ->fields(function ($request, $relatedModel) {
+                            return [
+                                Status::make('Status')
+                                    ->loadingWhen(['Scheduled'])
+                                    ->failedWhen(['Canceled', 'Bail ended']),
+                                Select::make('Status')
+                                    ->options(config('unit-status')['unit_user'])
+                                    ->displayUsingLabels()
+                                    ->sortable()
+                                    ->hideFromIndex()
+                                    /*->resolveUsing(function ($value) {
+                                        return config('unit-status')['unit_user'][$value];
+                                    })*/
+                                ,
+                                Date::make('Start')->resolveUsing(function ($value) {
+                                    return $value;
+                                }),
+                                Date::make('End')->resolveUsing(function ($value) {
+                                    return $value;
+                                }),
+                            ];
+                        }),
         ];
     }
 
