@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pivot\Renter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Actions\Actionable;
@@ -18,6 +19,11 @@ class Unit extends Model implements HasMedia
         'is_active',
     ];
 
+    /*protected  $casts = [
+      'start'=>'datetime',
+      'end'=>'datetime'
+    ];*/
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -25,27 +31,38 @@ class Unit extends Model implements HasMedia
      */
     protected $dates = [
         'date_available_from',
+        'start'=>'date',
+        'end'=>'date',
     ];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function property()
+    public function renters(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class)
+                    ->withPivot('status','start','end')
+                    ->withTimestamps();
+    }
+
+    public function property(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Property::class);
     }
 
-    public function unitType()
+    public function unitType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(UnitType::class);
     }
 
-    public function unitFeature()
+    public function unitFeature(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(UnitFeature::class);
     }
+
+
 
     public function registerMediaConversions(Media $media = null): void
     {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pivot\Renter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,6 +52,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'start'=>'date',
+        'end'=>'date',
     ];
 
     /**
@@ -62,19 +65,26 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public function childs()
+    public function childs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function prop()
+    public function prop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Property::class, 'property_id');
+    }
+
+    public function units(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Unit::class)
+
+                    ->withPivot('status','start','end')
+                    ->withTimestamps();
     }
 }
