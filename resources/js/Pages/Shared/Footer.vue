@@ -90,67 +90,29 @@
                     </div>
                 </div>
                 <div class="mt-12 xl:mt-0">
-                    <h3
-                        class="text-sm font-semibold text-gray-400 tracking-wider uppercase"
+                    <h1
+                        class="text-sm font-semibold text-gray-400 tracking-wider"
                     >
-                        Language &amp; Currency
-                    </h3>
+                        PropsManager
+                    </h1>
                     <form class="mt-4 sm:max-w-xs">
-                        <fieldset class="w-full">
+                        <div class="w-full">
                             <label for="language" class="sr-only"
                                 >Language</label
                             >
                             <div class="relative">
-                                <select
-                                    id="language"
-                                    name="language"
-                                    class="appearance-none block w-full bg-none bg-gray-700 border border-transparent rounded-md py-2 pl-3 pr-10 text-base text-white focus:outline-none focus:ring-white focus:border-white sm:text-sm"
+                                <p
+                                    class="text-base text-gray-300 hover:text-white pb-4"
                                 >
-                                    <option selected="">English</option>
-                                    <option>French</option>
-                                    <option>German</option>
-                                    <option>Japanese</option>
-                                    <option>Spanish</option>
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center"
+                                    (415)702-5409
+                                </p>
+                                <p
+                                    class="text-base text-gray-300 hover:text-white"
                                 >
-                                    <ChevronDownIcon
-                                        class="h-4 w-4 text-white"
-                                        aria-hidden="true"
-                                    />
-                                </div>
+                                    kortby@gmail.com
+                                </p>
                             </div>
-                        </fieldset>
-                        <fieldset class="mt-4 w-full">
-                            <label for="currency" class="sr-only"
-                                >Currency</label
-                            >
-                            <div class="mt-1.5 relative">
-                                <select
-                                    id="currency"
-                                    name="currency"
-                                    class="appearance-none w-full bg-none bg-gray-700 border border-transparent rounded-md block py-2 pl-3 pr-10 text-base text-white focus:outline-none focus:ring-white focus:border-white sm:text-sm"
-                                >
-                                    <option>ARS</option>
-                                    <option selected="">AUD</option>
-                                    <option>CAD</option>
-                                    <option>CHF</option>
-                                    <option>EUR</option>
-                                    <option>GBP</option>
-                                    <option>JPY</option>
-                                    <option>USD</option>
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center"
-                                >
-                                    <ChevronDownIcon
-                                        class="h-4 w-4 text-white"
-                                        aria-hidden="true"
-                                    />
-                                </div>
-                            </div>
-                        </fieldset>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -212,7 +174,8 @@
                     </a>
                 </div>
                 <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-                    &copy; 2020 Workflow, Inc. All rights reserved.
+                    &copy; {{ new Date().getFullYear() }} Workflow, Inc. All
+                    rights reserved.
                 </p>
             </div>
         </div>

@@ -101,7 +101,7 @@
                                                         class="block w-full text-center rounded-lg border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50"
                                                         aria-describedby="tier-hobby"
                                                     >
-                                                        Start your trial
+                                                        Subscribe
                                                     </a>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
                                                     <span
                                                         class="font-extrabold"
                                                     >
-                                                        39
+                                                        49
                                                     </span>
                                                 </span>
                                                 <span
@@ -194,7 +194,7 @@
                                                     class="block w-full text-center rounded-lg border border-transparent bg-indigo-600 px-6 py-4 text-xl leading-6 font-medium text-white hover:bg-indigo-700"
                                                     aria-describedby="tier-growth"
                                                 >
-                                                    Start your trial
+                                                    Subscribe
                                                 </a>
                                             </div>
                                         </div>
@@ -230,7 +230,7 @@
                                                         <span
                                                             class="font-extrabold"
                                                         >
-                                                            49
+                                                            99
                                                         </span>
                                                     </span>
                                                     <span
@@ -272,7 +272,7 @@
                                                         class="block w-full text-center rounded-lg border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50"
                                                         aria-describedby="tier-scale"
                                                     >
-                                                        Start your trial
+                                                        Subscribe
                                                     </a>
                                                 </div>
                                             </div>
@@ -293,21 +293,32 @@ import Layout from "./Shared/Partials/Layout";
 import { CheckIcon } from "@heroicons/vue/outline";
 
 const hobbyFeatures = [
-    "Pariatur quod similique",
-    "Sapiente libero doloribus",
-    "Vel ipsa esse repudiandae",
+    "CRM Software for future client",
+    "Maintenance",
+    "Online Payments",
+    "Tenant Screening and Portal",
+    "eLeasing signatures",
+    "Onboarding & Training Fee",
 ];
 const scaleFeatures = [
-    "Pariatur quod similique",
-    "Sapiente libero doloribus",
-    "Vel ipsa esse repudiandae",
+    "All Growth Features",
+    "Onboarding & Training Fee",
+    "QuickBooks Online Sync",
+    "User Access Roles",
+    "Data transfer",
 ];
 const growthFeatures = [
-    "Quia rem est sed impedit magnam",
-    "Dolorem vero ratione voluptates",
-    "Qui sed ab doloribus voluptatem dolore",
-    "Laborum commodi molestiae id et fugiat",
-    "Nam ut ipsa nesciunt culpa modi dolor",
+    "CRM Software for future client",
+    "Maintenance management & requests",
+    "Online Payments",
+    "Tenant Screening and Portal",
+    "eSignatures for leasing agreements",
+    "Accounting & Financials",
+    "Onboarding & Training Fee",
+    "Apartments display and sharing",
+    "Unlimited emails & Tenant Announcements",
+    "Onboarding & Training Fee",
+    "User Access Roles",
 ];
 export default {
     components: {
