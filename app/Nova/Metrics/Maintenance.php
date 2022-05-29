@@ -16,7 +16,7 @@ class Maintenance extends Partition
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->count($request, ModelsMaintenance::class, 'category_id', 'category_id');
+        return $this->count($request, ModelsMaintenance::class, 'category_id');
     }
 
     /**

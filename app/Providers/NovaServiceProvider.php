@@ -28,6 +28,7 @@ use App\Nova\Unit;
 use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
 use App\Nova\FurnishingItem;
+use App\Nova\Leasing;
 use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
@@ -173,6 +174,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Category::class),
             ])->icon('cog')->collapsible(),
 
+            MenuSection::Make('Leasing', [
+                MenuItem::resource(Leasing::class),
+            ])->icon('paper-clip')->collapsible(),
 
             MenuSection::make('Amenity', [
                 MenuItem::resource(Amenity::class),
