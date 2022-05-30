@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Date;
@@ -63,7 +64,14 @@ class Leasing extends Resource
                 'resolved' => 'Resolved',
                 'closed' => 'Closed',
                 'cancelled' => 'Cancelled',
-            ]),
+            ])->hideFromIndex()->hideFromDetail(),
+            Badge::make('Status')->map([
+                'new' => 'info',
+                'in-progress' => 'warning',
+                'resolved' => 'success',
+                'closed' => 'info',
+                'cancelled' => 'danger',
+            ])->sortable(),
         ];
     }
 
@@ -132,7 +140,7 @@ class Leasing extends Resource
                 ->rules('required', 'date', 'after:commencement_date'),
             Date::make('Termination period')->sortable()
                 ->rules('required', 'date', 'after:commencement_date')->hideFromIndex(),
-            Currency::make('Rent amount')->rules('required'),
+            Currency::make('Rent amount')->rules('required')->textAlign('left'),
             Date::make('Next due date')->sortable()
                 ->rules('required', 'date', 'after:commencement_date')->hideFromIndex(),
         ];
@@ -146,15 +154,15 @@ class Leasing extends Resource
     protected function rentPaymentFields()
     {
         return [
-            Currency::make('Late fees')->hideFromIndex(),
-            Currency::make('Security deposit')->hideFromIndex(),
+            Currency::make('Late fees')->hideFromIndex()->textAlign('left'),
+            Currency::make('Security deposit')->hideFromIndex()->textAlign('left'),
             Date::make('Deposit date')->sortable()
-                ->rules('required', 'date', 'after:commencement_date')->hideFromIndex(),
-            Currency::make('Water charges')->hideFromIndex(),
-            Currency::make('Utility admin charges')->hideFromIndex(),
-            Currency::make('Trash charges')->hideFromIndex(),
-            Currency::make('Security deposit')->hideFromIndex(),
-            Currency::make('Trash door charges')->hideFromIndex(),
+                ->rules('required', 'date', 'after:today')->hideFromIndex(),
+            Currency::make('Water charges')->hideFromIndex()->textAlign('left'),
+            Currency::make('Utility admin charges')->hideFromIndex()->textAlign('left'),
+            Currency::make('Trash charges')->hideFromIndex()->textAlign('left'),
+            Currency::make('Extra Monthly Charges')->hideFromIndex()->textAlign('left'),
+            Currency::make('Trash door charges')->hideFromIndex()->textAlign('left'),
         ];
     }
 }

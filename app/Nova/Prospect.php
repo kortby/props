@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
 class Prospect extends Resource
 {
@@ -55,24 +56,14 @@ class Prospect extends Resource
     {
         return [
             ID::make()->sortable()->hideFromIndex(),
-            Text::make('company_name'),
-            Text::make('address')->hideFromIndex(),
-            Text::make('city')->sortable(),
-            Text::make('state')->sortable(),
-            Text::make('county')->hideFromIndex(),
-            Text::make('zip')->hideFromIndex(),
-            Text::make('phone'),
-            Text::make('contact_firstname')->hideFromIndex(),
-            Text::make('contact_lastname')->hideFromIndex(),
-            Text::make('title')->hideFromIndex(),
-            Text::make('direct_phone')->hideFromIndex(),
+            Text::make('First name', 'contact_firstname')->hideFromIndex(),
+            Text::make('Last name', 'contact_lastname')->hideFromIndex(),
+            Text::make('Phone'),
+            Text::make('Job title', 'title')->hideFromIndex(),
             Text::make('email')->hideFromIndex(),
-            Text::make('website')->hideFromIndex(),
-            Text::make('employee_count')->hideFromIndex(),
-            Text::make('annual_sales')->sortable(),
-            Text::make('sic_code')->hideFromIndex(),
-            Text::make('industry')->sortable(),
-            Boolean::make('is_client'),
+            Boolean::make('Is client'),
+            new Panel('Company information', $this->companyFields()),
+            new Panel('General information', $this->generalInformationFields()),
         ];
     }
 
@@ -120,5 +111,39 @@ class Prospect extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    /**
+     * Get the prospect time fields for the resource.
+     *
+     * @return array
+     */
+    protected function generalInformationFields()
+    {
+        return [
+            Text::make('Address')->hideFromIndex(),
+            Text::make('City')->sortable(),
+            Text::make('State')->sortable(),
+            Text::make('County')->hideFromIndex(),
+            Text::make('Zip')->hideFromIndex(),
+            Text::make('Direct phone')->hideFromIndex(),
+            Text::make('Website')->hideFromIndex(),
+        ];
+    }
+
+    /**
+     * Get the prospect time fields for the resource.
+     *
+     * @return array
+     */
+    protected function companyFields()
+    {
+        return [
+            Text::make('Company name'),
+            Text::make('Employee count')->hideFromIndex(),
+            Text::make('Annual sales')->sortable(),
+            Text::make('Sic code')->hideFromIndex(),
+            Text::make('Industry')->sortable(),
+        ];
     }
 }
