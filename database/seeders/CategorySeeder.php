@@ -24,11 +24,20 @@ class CategorySeeder extends Seeder
 
             $array = [];
 
-            $array['name']=$category;
-            $array['user_id']=4;
+            $array['name'] = $category;
+            $array['user_id'] = 4;
 
             Category::factory()->create($array);
+        }
 
+        foreach ($categories as $category) {
+
+            $array = [];
+
+            $array['name'] = $category;
+            $array['user_id'] = 3;
+
+            Category::factory()->create($array);
         }
     }
 }

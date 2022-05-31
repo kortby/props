@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 
 class Leasing extends Resource
 {
@@ -52,8 +53,9 @@ class Leasing extends Resource
             Text::make('Leasing Number', 'lease_number')->rules('required'),
             Date::make('Entered on', 'entered_on')->sortable()
                 ->rules('required', 'date')->hideFromIndex(),
-            // BelongsTo::make('user_id'),
-            // BelongsTo::make('property_id'),
+            BelongsTo::make('unit_user'),
+            Files::make('Leasing Documents', 'leasing_collection'),
+
 
             new Panel('General Information', $this->generalInformationFields()),
             new Panel('Rent Payment', $this->rentPaymentFields()),
@@ -120,7 +122,7 @@ class Leasing extends Resource
     }
 
     /**
-     * Get the maintenance time fields for the resource.
+     * Get the leasing time fields for the resource.
      *
      * @return array
      */
@@ -147,7 +149,7 @@ class Leasing extends Resource
     }
 
     /**
-     * Get the maintenance time fields for the resource.
+     * Get the leasing time fields for the resource.
      *
      * @return array
      */

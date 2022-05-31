@@ -14,11 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('leasings', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('lease_number');
             $table->date('entered_on');
-            // $table->unsignedBigInteger('user_id');
-            // $table->unsignedBigInteger('property_id');
             $table->string('leasing_term')->default('monthly');
             $table->date('commencement_date');
             $table->date('experation_date');
@@ -36,7 +34,10 @@ return new class extends Migration
             $table->float('trash_charges')->default(0);
             $table->float('trash_door_charges')->default(0);
             $table->string('status')->default('new');
+            $table->foreignId('unit_user_id');
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

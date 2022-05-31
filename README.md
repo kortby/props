@@ -31,4 +31,8 @@
     `php artisan migrate:fresh --seed `
 
 
-        
+    ## To do
+        - fix dashboard maintenance
+        - add leasing relations
+        - fix register from website
+        - fix renter accessing nova

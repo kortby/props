@@ -14,6 +14,7 @@ class CreateUnitUserPivotTable extends Migration
     public function up()
     {
         Schema::create('unit_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('unit_id')->index();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index();
