@@ -138,7 +138,7 @@ class Leasing extends Resource
                 'yearly' => 'Yearly',
             ])->rules('required')->hideFromIndex(),
             Date::make('Commencement date')->sortable()
-                ->rules('required', 'date', 'after:today'),
+                ->rules('required', 'date', 'after_or_equal:today'),
             Date::make('Experation date')->sortable()
                 ->rules('required', 'date', 'after:commencement_date'),
             Date::make('Termination period')->sortable()
@@ -160,7 +160,7 @@ class Leasing extends Resource
             Currency::make('Late fees')->hideFromIndex()->textAlign('left'),
             Currency::make('Security deposit')->hideFromIndex()->textAlign('left'),
             Date::make('Deposit date')->sortable()
-                ->rules('required', 'date', 'after:today')->hideFromIndex(),
+                ->rules('required', 'date', 'after_or_equal:today')->hideFromIndex(),
             Currency::make('Water charges')->hideFromIndex()->textAlign('left'),
             Currency::make('Utility admin charges')->hideFromIndex()->textAlign('left'),
             Currency::make('Trash charges')->hideFromIndex()->textAlign('left'),

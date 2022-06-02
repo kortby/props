@@ -190,6 +190,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             MenuSection::make('Contact', [
                 MenuItem::resource(\App\Nova\Prospect::class),
+                MenuItem::resource(\App\Nova\Contractor::class),
             ])->icon('phone')->collapsible(),
 
             MenuSection::make('Users', [

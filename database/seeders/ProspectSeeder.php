@@ -17,7 +17,7 @@ class ProspectSeeder extends Seeder
     {
         Prospect::truncate();
 
-        $csvFile = fopen(base_path("database/data/prospect.csv"), "r");
+        $csvFile = fopen(base_path("database/data/mini/prospect-mini.csv"), "r");
 
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
