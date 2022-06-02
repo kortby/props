@@ -95,30 +95,29 @@ class Unit extends Resource
                 // validation rules for the collection of images
                 ->singleImageRules('dimensions:min_width=100')->hideFromIndex(),
 
-            BelongsToMany::make( 'Renter','renters',User::class)
-                        ->allowDuplicateRelations()
-                        ->fields(function ($request, $relatedModel) {
-                            return [
-                                Status::make('Status')
-                                    ->loadingWhen(['Scheduled'])
-                                    ->failedWhen(['Canceled', 'Bail ended']),
-                                Select::make('Status')
-                                    ->options(config('unit-status')['unit_user'])
-                                    ->displayUsingLabels()
-                                    ->sortable()
-                                    ->hideFromIndex()
-                                    /*->resolveUsing(function ($value) {
+            BelongsToMany::make('Renter', 'renters', User::class)
+                ->allowDuplicateRelations()
+                ->fields(function ($request, $relatedModel) {
+                    return [
+                        Status::make('Status')
+                            ->loadingWhen(['Scheduled'])
+                            ->failedWhen(['Canceled', 'Bail ended']),
+                        Select::make('Status')
+                            ->options(config('unit-status')['unit_user'])
+                            ->displayUsingLabels()
+                            ->sortable()
+                            ->hideFromIndex()
+                        /*->resolveUsing(function ($value) {
                                         return config('unit-status')['unit_user'][$value];
-                                    })*/
-                                ,
-                                Date::make('Start')->resolveUsing(function ($value) {
-                                    return $value;
-                                }),
-                                Date::make('End')->resolveUsing(function ($value) {
-                                    return $value;
-                                }),
-                            ];
+                                    })*/,
+                        Date::make('Start')->resolveUsing(function ($value) {
+                            return $value;
                         }),
+                        Date::make('End')->resolveUsing(function ($value) {
+                            return $value;
+                        }),
+                    ];
+                }),
         ];
     }
 

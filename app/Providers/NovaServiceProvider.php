@@ -29,6 +29,7 @@ use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
 use App\Nova\FurnishingItem;
 use App\Nova\Leasing;
+use App\Nova\ServiceFee;
 use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
@@ -179,6 +180,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             MenuSection::Make('Leasing', [
                 MenuItem::resource(Leasing::class),
+                MenuItem::resource(ServiceFee::class),
             ])->icon('paper-clip')->collapsible(),
 
             MenuSection::make('Amenity', [
@@ -186,9 +188,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(AmenitySchedule::class),
             ])->icon('clipboard-list')->collapsible(),
 
+            MenuSection::make('Contact', [
+                MenuItem::resource(\App\Nova\Prospect::class),
+            ])->icon('phone')->collapsible(),
+
             MenuSection::make('Users', [
                 MenuItem::resource(\App\Nova\User::class),
-                MenuItem::resource(\App\Nova\Prospect::class),
             ])->icon('users')->collapsible()
         ];
 

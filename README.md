@@ -32,7 +32,9 @@
 
 
     ## To do
-        - fix dashboard maintenance
-        - add leasing relations
-        - fix register from website
-        - fix renter accessing nova
+        - Amenities shoud have a relationship with property some are rentable some are Not.
+        - build a contact with contractors data with thier W9
+          - eviction lawyers
+          - plummers
+          - electrisitans ..
+        - building an easy rental payment plus late fees and expenses

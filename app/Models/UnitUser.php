@@ -25,6 +25,6 @@ class UnitUser extends Model
 
     public function getNameAttribute()
     {
-        return $this->user->name . ' ' . $this->unit->unit_number;
+        return $this->user->name . ' signing a lease for the unit number ' . $this->unit->unit_number;
     }
 }

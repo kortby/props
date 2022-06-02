@@ -27,15 +27,15 @@ class Leasing extends Model implements HasMedia
         'deposit_date',
     ];
 
+    public function leasing()
+    {
+        return $this->hasMany(Leasing::class);
+    }
+
     public function unitUser()
     {
         return $this->hasOne(UnitUser::class);
     }
-
-    // public function property()
-    // {
-    //     return $this->belongsTo(Property::class);
-    // }
 
     public function registerMediaCollections(): void
     {

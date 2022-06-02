@@ -53,6 +53,7 @@ class Leasing extends Resource
             Text::make('Leasing Number', 'lease_number')->rules('required'),
             Date::make('Entered on', 'entered_on')->sortable()
                 ->rules('required', 'date')->hideFromIndex(),
+            // BelongsTo::make('Agreement between', 'unit_user', 'App\Nova\UnitUser'),
             BelongsTo::make('unit_user'),
             Files::make('Leasing Documents', 'leasing_collection'),
 
