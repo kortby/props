@@ -30,8 +30,15 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
+        $unit_arr = [];
+        $units = [];
+        foreach (auth()->user()->units->pluck('unit_number', 'id') as $key => $value) {
+            $unit_arr['id'] = $key;
+            $unit_arr['unit_number'] = $value;
+            array_push($units, $unit_arr);
+        }
         return Inertia::render('Maintenance', [
-            'unit_id' => '12',
+            'units' => $units,
             'categories' => Category::select('id', 'name')->get(),
         ]);
     }

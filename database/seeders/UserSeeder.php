@@ -83,5 +83,14 @@ class UserSeeder extends Seeder
             'parent_id' => $co2->id
         ]);
         $pa2->assignRole(5);
+
+        $pa2 = \App\Models\User::factory()->create([
+            'name' => 'Renter',
+            'email' => 'renter@example.com',
+            'phone' => rand(4151001000, 4159998888),
+            'password' => Hash::make('azerty'),
+            'parent_id' => $co2->id
+        ]);
+        $pa2->assignRole(6);
     }
 }

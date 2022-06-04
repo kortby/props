@@ -16,10 +16,6 @@ class AmenityFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => $this->faker->name(),
-            'description' => $this->faker->paragraph,
-            'price' => $this->faker->numberBetween(100,200),
-        ];
+        return [];
     }
 }

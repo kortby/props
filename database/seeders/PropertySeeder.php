@@ -17,16 +17,16 @@ class PropertySeeder extends Seeder
     public function run()
     {
         Property::factory()->count(1)->create([
-            'user_id'=>3,
-            'company_id'=>Company::factory()->create([
-                'user_id'=>3
+            'user_id' => 3,
+            'company_id' => Company::factory()->create([
+                'user_id' => 3
             ])->id
         ]);
 
         Property::factory()->count(1)->create([
-            'user_id'=>4,
-            'company_id'=>Company::factory()->create([
-                'user_id'=>3
+            'user_id' => 4,
+            'company_id' => Company::factory()->create([
+                'user_id' => 4
             ])->id
         ]);
     }

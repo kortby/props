@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('amenities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('description');
-            $table->string('price')->default(0);
+            $table->text('description')->nullable();
+            $table->float('price')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('property_id')->constrained();
             $table->timestamps();

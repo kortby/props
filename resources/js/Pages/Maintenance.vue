@@ -127,8 +127,6 @@
                                     v-model="unit_id"
                                     :disabled="disabled_input"
                                     id="unit-id"
-                                    name="unit_id"
-                                    autocomplete="organization"
                                     class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                                     :class="{
                                         'disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:invalid:ring-pink-500':
@@ -316,8 +314,8 @@ import { Inertia } from "@inertiajs/inertia";
 
 export default {
     props: {
-        unit_id: Number,
-        categories: Object,
+        units: Array,
+        categories: Array,
         user: Number,
         errors: Object,
     },
@@ -328,7 +326,7 @@ export default {
     data() {
         const form = reactive({
             title: null,
-            unit_id: this.unit_id,
+            unit_id: this.units[0].id,
             category_id: this.categories[0].id,
             preferred_maintenece_time: null,
             phone: this.user.phone,
@@ -343,7 +341,7 @@ export default {
         return {
             form,
             submit,
-            unit_id: ref(this.$page.props.unit_id),
+            unit_id: ref(this.$page.props.units[0].unit_number),
             disabled_input: true,
             phone: ref(this.$page.props.user.phone),
             category_id: ref(this.$page.props.categories[2].id),

@@ -44,10 +44,9 @@ class Property extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        if(auth()->user()->hasAnyRole(config('roles-permissions'))) {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
             return parent::indexQuery($request, $query);
-
         }
 
         return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
@@ -69,7 +68,7 @@ class Property extends Resource
         return [
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Property name', 'name')->rules('required', 'max:120'),
-            BelongsTo::make( 'Company'),
+            BelongsTo::make('Company'),
             BelongsTo::make('Property Type', 'propertyType'),
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),
@@ -77,21 +76,20 @@ class Property extends Resource
             Text::make('Phone')->rules('max:11'),
             Textarea::make('Description')->rules('max:255'),
 
-            new Panel('Amenities', $this->amenitiesFields()),
-
             new Panel('Address Information', $this->addressFields()),
 
             Images::make('Images', 'property_collection') // second parameter is the media collection name
-            //->conversionOnPreview('medium-size') // conversion used to display the "original" image
-            ->conversionOnDetailView('thumb') // conversion used on the model's view
-            ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
-            ->conversionOnForm('thumb') // conversion used to display the image on the model's form
-            ->fullSize() // full size column
-            ->rules('required') // validation rules for the collection of images
-            // validation rules for the collection of images
-            ->singleImageRules('dimensions:min_width=100'),
+                //->conversionOnPreview('medium-size') // conversion used to display the "original" image
+                ->conversionOnDetailView('thumb') // conversion used on the model's view
+                ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+                ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+                ->fullSize() // full size column
+                ->rules('required') // validation rules for the collection of images
+                // validation rules for the collection of images
+                ->singleImageRules('dimensions:min_width=100'),
 
             HasMany::make('Units'),
+            HasMany::make('Amenities'),
         ];
     }
 
@@ -153,24 +151,6 @@ class Property extends Resource
             Text::make('State'),
             Text::make('Postal Code')->hideFromIndex(),
             Country::make('Country')->hideFromIndex(),
-        ];
-    }
-
-    /**
-     * Get the address fields for the resource.
-     *
-     * @return array
-     */
-    protected function amenitiesFields()
-    {
-        return [
-            Boolean::make('Has fitness center')->hideFromIndex(),
-            Boolean::make('Has swimming pool')->hideFromIndex(),
-            Boolean::make('Has laundry')->hideFromIndex(),
-            Boolean::make('Has wheelchair accessibilty')->hideFromIndex(),
-            Boolean::make('Has intercom facility')->hideFromIndex(),
-            Boolean::make('Has power backup')->hideFromIndex(),
-            Boolean::make('Has main door security')->hideFromIndex(),
         ];
     }
 }

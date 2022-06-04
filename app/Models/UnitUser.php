@@ -18,6 +18,11 @@ class UnitUser extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function leasing()
+    {
+        return $this->hasOne(Leasing::class);
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class);

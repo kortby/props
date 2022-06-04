@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Safety', 'Cleaning', 'Gas & Electric', 'Cooling & Heating', 'Water & Pluming', 'Security', 'Trees and Clear Debris', 'Trash Receptacles'
+            'Safety', 'Cleaning', 'Gas & Electric', 'Cooling & Heating', 'Water & Pluming', 'Security', 'Trees and Clear Debris', 'Trash Receptacles', 'Other'
         ];
 
         foreach ($categories as $category) {

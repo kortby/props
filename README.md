@@ -32,9 +32,11 @@
 
 
     ## To do
-        - Amenities shoud have a relationship with property some are rentable some are Not.
-        - build a contact with contractors data with thier W9
-          - eviction lawyers
-          - plummers
-          - electrisitans ..
+        - Fix Amenities permission.
+        - Fixing leasing creation
+        - Display furnitures on unit view
+        - Fix amenities renter on small screen
+        - how to get auth-user unit-number on requesting maintenance
+        - Adding more filters to prospects and contractors
+        - Fix contractors and prospects permission.
         - building an easy rental payment plus late fees and expenses

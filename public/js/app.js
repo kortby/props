@@ -21422,8 +21422,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    unit_id: Number,
-    categories: Object,
+    units: Array,
+    categories: Array,
     user: Number,
     errors: Object
   },
@@ -21434,7 +21434,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       title: null,
-      unit_id: this.unit_id,
+      unit_id: this.units[0].id,
       category_id: this.categories[0].id,
       preferred_maintenece_time: null,
       phone: this.user.phone,
@@ -21450,7 +21450,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: form,
       submit: submit,
-      unit_id: (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(this.$page.props.unit_id),
+      unit_id: (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(this.$page.props.units[0].unit_number),
       disabled_input: true,
       phone: (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(this.$page.props.user.phone),
       category_id: (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(this.$page.props.categories[2].id)
@@ -26534,8 +26534,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         disabled: $data.disabled_input,
         id: "unit-id",
-        name: "unit_id",
-        autocomplete: "organization",
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md", {
           'disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:invalid:ring-pink-500': $data.disabled_input
         }])

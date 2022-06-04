@@ -20,13 +20,6 @@ return new class extends Migration
             $table->integer('number_of_units');
             $table->integer('property_type_id')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('has_fitness_center');
-            $table->boolean('has_swimming_pool');
-            $table->boolean('has_laundry');
-            $table->boolean('has_wheelchair_accessibilty');
-            $table->boolean('has_intercom_facility');
-            $table->boolean('has_power_backup');
-            $table->boolean('has_main_door_security');
             $table->integer('number_of_elevators');
             $table->string('address_line_1');
             $table->string('address_line_2')->nullable();

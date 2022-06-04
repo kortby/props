@@ -20,23 +20,52 @@ class AmenitySeeder extends Seeder
                 'name' => 'Club Room',
                 'description' => 'Maximum Reservation Time:4 hrs
                 Must be booked at least:2 Days in advance and no more than 60 Days in advance
-                Individual Max Reservations Per Day:3
-                Cleaning Fee:$100.00',
-                'price' => 100,
+                Individual Max Reservations Per Day:3',
+                'price' => 100
             ],
             [
                 'name' => 'Guest suite',
                 'description' => 'Must be booked at least:5 Days in advance and no more than 60 Days in advance',
-                'price' => 150,
+                'price' => 150
+            ],
+            [
+                'name' => 'Swimming pool',
+                'description' => 'the spacious rooftop pool features an infinity edge, tons of seating, and expansive views. If that wasn\'t enough, they truly stepped it up a notch by offering an underwater sound system and one-acre of beautiful landscape.',
+                'price' => null
+            ],
+            [
+                'name' => 'Fitness center',
+                'description' => 'Modern Apartments with Timeless elegance.” The Axis on Wycliff, located in Turtle Creek, boasts modern details and cool interior tones, giving it a very luxurious vibe. Axis is also home to a two-level fitness facility. The bottom floor is cardio central, hosting all your treadmills, ellipticals, and a few arm/leg machines while the top floor has tons of floor space for stretching, HIIT workouts, and stationary bikes for cycling. Oh! And, it overlooks the pool, and working out with a pool view is always the best.',
+                'price' => null
+            ],
+            [
+                'name' => 'Laundry',
+                'description' => 'A leader in multifamily laundry since 1947, WASH sells top-brand commercial laundry equipment specially designed for multifamily settings, so you can rest assured that your new washers and dryers will stand up to the heavy demands of your apartment\'s busy common-area laundry room.',
+                'price' => null
             ]
         ];
 
         foreach ($amenities as $amenity) {
-
-            $amenity['user_id'] = 5;
-
+            $amenity['user_id'] = 4;
             $amenity['property_id'] = 1;
+            Amenity::factory()->create($amenity);
+        }
 
+        foreach ($amenities as $amenity) {
+            $amenity['user_id'] = 3;
+            $amenity['property_id'] = 1;
+            Amenity::factory()->create($amenity);
+        }
+
+        foreach ($amenities as $amenity) {
+            $amenity['user_id'] = 4;
+            $amenity['property_id'] = 2;
+            Amenity::factory()->create($amenity);
+        }
+
+        foreach ($amenities as $amenity) {
+            $amenity['user_id'] = 3;
+            $amenity['property_id'] = 2;
             Amenity::factory()->create($amenity);
         }
     }
