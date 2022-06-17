@@ -59,7 +59,7 @@ class Amenity extends Resource
             BelongsTo::make('property')->sortable(),
             Text::make('name')->rules('required'),
             Textarea::make('Description')->hideFromIndex()->rules('required', 'max:250')->rules('required'),
-            Currency::make('Price', 'price')->rules('required')->textAlign('left'),
+            Currency::make('Price', 'price')->rules('required')->textAlign('left')->default(0),
         ];
     }
 

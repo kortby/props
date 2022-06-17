@@ -148,7 +148,7 @@ export default {
 
         const submit = () => {
             Inertia.post("/amenities", form);
-            console.log("submitted");
+            console.log("Amenities scheduled");
         };
         return {
             form,

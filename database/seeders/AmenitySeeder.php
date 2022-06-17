@@ -46,26 +46,8 @@ class AmenitySeeder extends Seeder
         ];
 
         foreach ($amenities as $amenity) {
-            $amenity['user_id'] = 4;
-            $amenity['property_id'] = 1;
-            Amenity::factory()->create($amenity);
-        }
-
-        foreach ($amenities as $amenity) {
             $amenity['user_id'] = 3;
             $amenity['property_id'] = 1;
-            Amenity::factory()->create($amenity);
-        }
-
-        foreach ($amenities as $amenity) {
-            $amenity['user_id'] = 4;
-            $amenity['property_id'] = 2;
-            Amenity::factory()->create($amenity);
-        }
-
-        foreach ($amenities as $amenity) {
-            $amenity['user_id'] = 3;
-            $amenity['property_id'] = 2;
             Amenity::factory()->create($amenity);
         }
     }

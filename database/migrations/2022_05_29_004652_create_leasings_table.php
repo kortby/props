@@ -28,11 +28,8 @@ return new class extends Migration
             $table->string('late_fees')->nullable();
             $table->float('security_deposit')->default(0);
             $table->date('deposit_date')->nullable();
-            $table->float('extra_monthly_charges')->default(0);
             $table->float('water_charges')->default(0);
-            $table->float('utility_admin_charges')->default(0);
             $table->float('trash_charges')->default(0);
-            $table->float('trash_door_charges')->default(0);
             $table->string('status')->default('new');
             $table->foreignId('unit_user_id');
             $table->integer('service_fee_id')->nullable();

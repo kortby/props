@@ -32,11 +32,11 @@
 
 
     ## To do
-        - Fix Amenities permission.
-        - Fixing leasing creation
-        - Display furnitures on unit view
+        - Fix Amenities permission view. ---fixed just change seeder
+        - Fixing leasing creation --fixed just look at fees water
+        - Display furnitures on unit view -- later
         - Fix amenities renter on small screen
-        - how to get auth-user unit-number on requesting maintenance
-        - Adding more filters to prospects and contractors
+        - how to get auth-user unit-number on requesting maintenance --- fixed
+        - Adding more filters to prospects and contractors -- later
         - Fix contractors and prospects permission.
         - building an easy rental payment plus late fees and expenses

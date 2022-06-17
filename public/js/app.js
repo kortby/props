@@ -20731,7 +20731,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var submit = function submit() {
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.post("/amenities", form);
-      console.log("submitted");
+      console.log("Amenities scheduled");
     };
 
     return {

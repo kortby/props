@@ -31,7 +31,10 @@ class AmenityScheduleController extends Controller
     public function create()
     {
         return Inertia::render('Amenities', [
-            'amenities' => Amenity::select('id', 'name', 'price', 'description')->get(),
+            'amenities' => Amenity::select('id', 'name', 'price', 'description')
+                ->where('user_id', auth()->user()->parent_id)
+                ->where('price', '>', 0)
+                ->get(),
         ]);
     }
 
@@ -44,7 +47,12 @@ class AmenityScheduleController extends Controller
     public function store(ScheduleAmenityRequest $request)
     {
         try {
-            AmenitySchedule::create($request->all());
+            AmenitySchedule::create([
+                'user_id' => auth()->user()->parent_id,
+                'amenity_id' => $request->amenity_id,
+                'start' => $request->start,
+                'end' => $request->end,
+            ]);
             $request->user()->notify(
                 NovaNotification::make()->message('New Amenity has been requested.')->icon('cog')->type('success'),
             );

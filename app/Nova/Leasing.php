@@ -51,10 +51,12 @@ class Leasing extends Resource
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
 
             Text::make('Leasing Number', 'lease_number')->rules('required'),
-            Date::make('Entered on', 'entered_on')->sortable()
-                ->rules('required', 'date')->hideFromIndex(),
-            // BelongsTo::make('Agreement between', 'unit_user', 'App\Nova\UnitUser'),
-            BelongsTo::make('unit_user'),
+            Date::make('Entered on', 'entered_on')
+                ->sortable()
+                ->rules('required', 'date')
+                ->hideFromIndex(),
+            // BelongsTo::make( 'unit_user', 'App\Nova\UnitUser'),
+            BelongsTo::make('Unit User'),
             Files::make('Leasing Documents', 'leasing_collection'),
 
 
@@ -67,7 +69,7 @@ class Leasing extends Resource
                 'resolved' => 'Resolved',
                 'closed' => 'Closed',
                 'cancelled' => 'Cancelled',
-            ])->hideFromIndex()->hideFromDetail(),
+            ])->hideFromIndex()->hideFromDetail()->default('new'),
             Badge::make('Status')->map([
                 'new' => 'info',
                 'in-progress' => 'warning',
@@ -136,14 +138,13 @@ class Leasing extends Resource
                 'monthly' => 'Monthly',
                 'quarterly' => 'Quarterly',
                 'yearly' => 'Yearly',
-            ])->rules('required')->hideFromIndex(),
+            ])->rules('required')->hideFromIndex()->default('monthly'),
             Date::make('Commencement date')->sortable()
                 ->rules('required', 'date', 'after_or_equal:today'),
             Date::make('Experation date')->sortable()
                 ->rules('required', 'date', 'after:commencement_date'),
             Date::make('Termination period')->sortable()
                 ->rules('required', 'date', 'after:commencement_date')->hideFromIndex(),
-            Currency::make('Rent amount')->rules('required')->textAlign('left'),
             Date::make('Next due date')->sortable()
                 ->rules('required', 'date', 'after:commencement_date')->hideFromIndex(),
         ];
@@ -157,15 +158,17 @@ class Leasing extends Resource
     protected function rentPaymentFields()
     {
         return [
-            Currency::make('Late fees')->hideFromIndex()->textAlign('left'),
-            Currency::make('Security deposit')->hideFromIndex()->textAlign('left'),
+            Currency::make('Rent amount')->rules('required')->textAlign('left')
+                ->default(0),
+            Currency::make('Late fees')->hideFromIndex()->textAlign('left')
+                ->default(0),
+            Currency::make('Security deposit')->hideFromIndex()->textAlign('left')
+                ->default(0),
             Date::make('Deposit date')->sortable()
-                ->rules('required', 'date', 'after_or_equal:today')->hideFromIndex(),
-            Currency::make('Water charges')->hideFromIndex()->textAlign('left'),
-            Currency::make('Utility admin charges')->hideFromIndex()->textAlign('left'),
-            Currency::make('Trash charges')->hideFromIndex()->textAlign('left'),
-            Currency::make('Extra Monthly Charges')->hideFromIndex()->textAlign('left'),
-            Currency::make('Trash door charges')->hideFromIndex()->textAlign('left'),
+                ->rules('required', 'date', 'after_or_equal:today')->hideFromIndex()
+                ->default(0),
+            Currency::make('Water charges')->hideFromIndex()->textAlign('left')->default(0),
+            Currency::make('Trash charges')->hideFromIndex()->textAlign('left')->default(0),
         ];
     }
 }

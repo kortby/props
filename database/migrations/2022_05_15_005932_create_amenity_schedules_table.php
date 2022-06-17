@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('amenity_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('user_id');
             $table->foreignId('amenity_id');
             $table->dateTime('start');
             $table->dateTime('end');

@@ -73,10 +73,9 @@ class Property extends Resource
             Number::make('Total Floors')->rules('required', 'max:70'),
             Number::make('Number of Units')->rules('required', 'max:20'),
             Number::make('Number of Elevators')->rules('max:10')->hideFromIndex(),
-            Text::make('Phone')->rules('max:11'),
             Textarea::make('Description')->rules('max:255'),
 
-            new Panel('Address Information', $this->addressFields()),
+            new Panel('Contact Information', $this->contactFields()),
 
             Images::make('Images', 'property_collection') // second parameter is the media collection name
                 //->conversionOnPreview('medium-size') // conversion used to display the "original" image
@@ -142,9 +141,10 @@ class Property extends Resource
      *
      * @return array
      */
-    protected function addressFields()
+    protected function contactFields()
     {
         return [
+            Text::make('Phone')->rules('max:11'),
             Text::make('Address', 'address_line_1'),
             Text::make('Address Line 2')->hideFromIndex(),
             Text::make('City'),
