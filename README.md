@@ -19,6 +19,7 @@
             -   sales
             -   tenant ( pay bill, sign lease)
             -   contact ( plumers cleaner electris.....)
+        -   property agent
 
     ### our advantage to be better than others:
 
@@ -32,6 +33,10 @@
 
 
     ## To do
+        - move large file contractors
+        - fix create user
+        - fix listing Display and permission
+    ## Done
         - Fix Amenities permission view. ---fixed just change seeder
         - Fixing leasing creation --fixed just look at fees water
         - Display furnitures on unit view -- later

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\StatusNew;
 use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
@@ -49,7 +50,7 @@ class Maintenance extends Resource
             return parent::indexQuery($request, $query);
         }
 
-        return $query->whereHas('unit', function($query){
+        return $query->whereHas('unit', function ($query) {
             $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
         });
     }
@@ -119,7 +120,9 @@ class Maintenance extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new StatusNew,
+        ];
     }
 
     /**

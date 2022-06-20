@@ -17,6 +17,7 @@ use \App\Models\PropertyType as PropertyTypeModel;
 use \App\Models\UnitType as UnitTypeModel;
 use \App\Models\Category as CategoryModel;
 use App\Models\Amenity as AmenityModel;
+use App\Models\Leasing as LeasingModel;
 use App\Models\Prospect as ProspectModel;
 use App\Models\Renter as RenterModel;
 use App\Nova\Amenity;
@@ -40,6 +41,7 @@ use App\Observers\PropertyTypeObserver;
 use App\Observers\UnitTypeObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\AmenityObserver;
+use App\Observers\LeasingObserver;
 use App\Observers\ProspectObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -77,6 +79,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(CategoryModel::class, CategoryObserver::class);
         Observable::make(AmenityModel::class, AmenityObserver::class);
         Observable::make(ProspectModel::class, ProspectObserver::class);
+        Observable::make(LeasingModel::class, LeasingObserver::class);
 
         Nova::footer(function ($request) {
             $footer = '<div class="mt-12 border-t border-gray-200 pt-8">

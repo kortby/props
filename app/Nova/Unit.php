@@ -95,7 +95,7 @@ class Unit extends Resource
                 // validation rules for the collection of images
                 ->singleImageRules('dimensions:min_width=100')->hideFromIndex(),
 
-            BelongsToMany::make('Renter', 'renters', User::class)
+            BelongsToMany::make('Renter', 'renters', User::class)->searchable()
                 ->allowDuplicateRelations()
                 ->fields(function ($request, $relatedModel) {
                     return [

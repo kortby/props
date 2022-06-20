@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ContactWith;
 use App\Services\GetParentAndChildByAuthenticated;
 use App\Nova\Filters\ProspectState;
 use Illuminate\Http\Request;
@@ -88,6 +89,7 @@ class Prospect extends Resource
     {
         return [
             new ProspectState,
+            new ContactWith,
         ];
     }
 

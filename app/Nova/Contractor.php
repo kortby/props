@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Filters\ProspectState;
+use App\Nova\Filters\WorkingWith;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
@@ -77,6 +78,7 @@ class Contractor extends Resource
     {
         return [
             new ProspectState,
+            new WorkingWith,
         ];
     }
 
