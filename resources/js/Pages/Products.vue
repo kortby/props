@@ -87,11 +87,13 @@
                                             />
                                         </svg>
                                         <p class="relative">
-                                            Tincidunt integer commodo, cursus
-                                            etiam aliquam neque, et. Consectetur
-                                            pretium in volutpat, diam. Montes,
-                                            magna cursus nulla feugiat dignissim
-                                            id lobortis amet.
+                                            Excellent option for you property
+                                            management needs of course if you
+                                            just have one property and are
+                                            looking for some quick and easy
+                                            forms to make your tenant agreement
+                                            official, PropsManager have you
+                                            covered.
                                         </p>
                                     </div>
 
@@ -99,7 +101,7 @@
                                         <p
                                             class="text-base font-semibold text-indigo-200"
                                         >
-                                            Sarah Williams, CEO at Workcation
+                                            Sarah Williams, Property Manager
                                         </p>
                                     </footer>
                                 </blockquote>
@@ -190,10 +192,10 @@ import Layout from "./Shared/Partials/Layout";
 import Animation from "./Shared/Partials/Animation";
 
 const stats = [
-    { label: "Founded", value: "2021" },
+    { label: "Founded", value: "2022" },
     { label: "Employees", value: "5" },
     { label: "Beta Users", value: "521" },
-    { label: "Raised", value: "$25M" },
+    { label: "Raised", value: "$2M" },
 ];
 
 export default {

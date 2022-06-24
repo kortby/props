@@ -184,9 +184,7 @@
                             <p
                                 class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
                             >
-                                Depends on how many units do you have and how much are your benefits.
-                                You can also open a premium services and request more features.
-                                Transering data is also available.
+                                Built-in features are best for residential property managers, Property managers with mixed portfolios, and managers of community and homeowners associations. and more..
                             </p>
                             <div
                                 class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start"

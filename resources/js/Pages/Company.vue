@@ -22,12 +22,11 @@
                         class="relative z-10 text-base max-w-prose mx-auto lg:max-w-5xl lg:mx-0 lg:pr-72"
                     >
                         <p class="text-lg text-gray-500">
-                            Sagittis scelerisque nulla cursus in enim
-                            consectetur quam. Dictum urna sed consectetur neque
-                            tristique pellentesque. Blandit amet, sed aenean
-                            erat arcu morbi. Cursus faucibus nunc nisl netus
-                            morbi vel porttitor vitae ut. Amet vitae fames
-                            senectus vitae.
+                            Property Management Software simplifies the demands
+                            of tenants and managers alike by transferring many
+                            traditional property-related actions to a digital
+                            space. Landlords can collect rent list properties,
+                            even manage leases and fufill maintenance requests.
                         </p>
                     </div>
                     <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-start">
@@ -36,44 +35,48 @@
                                 class="prose prose-indigo text-gray-500 mx-auto lg:max-w-none"
                             >
                                 <p>
-                                    Sollicitudin tristique eros erat odio sed
-                                    vitae, consequat turpis elementum. Lorem
-                                    nibh vel, eget pretium arcu vitae. Eros eu
-                                    viverra donec ut volutpat donec laoreet quam
-                                    urna.
+                                    We claim of 90% reduction in paperwork are
+                                    not unheard of, and the ability to provide
+                                    managers with a single source poinnt for
+                                    their data ( and ways to safely duplicate
+                                    and store it). give property management
+                                    software incredible advantages over the
+                                    traditional way of managing properties.
                                 </p>
                                 <ul role="list">
                                     <li>
-                                        Quis elit egestas venenatis mattis
-                                        dignissim.
+                                        Ask a satisfied tenant and they might
+                                        say PropsManager is well named.
                                     </li>
                                     <li>
-                                        Cras cras lobortis vitae vivamus
-                                        ultricies facilisis tempus.
+                                        We have a wide range of options for
+                                        landlords and charge them like it too.
                                     </li>
                                     <li>
-                                        Orci in sit morbi dignissim metus diam
-                                        arcu pretium.
+                                        All in one solution, we feature page
+                                        showcases a dizzying array of options
+                                        for businesses and renters alike with a
+                                        AI back assistant that response
+                                        instantly to inquires 24/7 service.
                                     </li>
                                 </ul>
                                 <p>
-                                    Rhoncus nisl, libero egestas diam fermentum
-                                    dui. At quis tincidunt vel ultricies.
-                                    Vulputate aliquet velit faucibus semper.
-                                    Pellentesque in venenatis vestibulum
-                                    consectetur nibh id. In id ut tempus
-                                    egestas. Enim sit aliquam nec, a. Morbi enim
-                                    fermentum lacus in. Viverra.
+                                    It's more robust "advanced" plan. Also,
+                                    additional features like insurance, tanant
+                                    screening and rental reports are an
+                                    additinal charge on top of that monthly fee.
                                 </p>
                                 <h3>We’re here to help</h3>
                                 <p>
-                                    Tincidunt integer commodo, cursus etiam
-                                    aliquam neque, et. Consectetur pretium in
-                                    volutpat, diam. Montes, magna cursus nulla
-                                    feugiat dignissim id lobortis amet. Laoreet
-                                    sem est phasellus eu proin massa, lectus.
-                                    Diam rutrum posuere donec ultricies non
-                                    morbi. Mi a platea auctor mi.
+                                    Whather you are managing 2 or 20 properties
+                                    the free package provide a single
+                                    administrator with the power to do many of
+                                    the basic tasks of the property management
+                                    from maintenance requests and online billing
+                                    to recieving rental applications for
+                                    independent managers just looking for help
+                                    with the basics PropsManager appears to
+                                    offer them for free.
                                 </p>
                             </div>
                             <div
@@ -158,12 +161,11 @@
                                             />
                                         </svg>
                                         <p class="relative">
-                                            Tincidunt integer commodo, cursus
-                                            etiam aliquam neque, et. Consectetur
-                                            pretium in volutpat, diam. Montes,
-                                            magna cursus nulla feugiat dignissim
-                                            id lobortis amet. Laoreet sem est
-                                            phasellus eu proin massa, lectus.
+                                            Customer support sets us a part is
+                                            something you could probably find on
+                                            the home pages of most companies but
+                                            in the case of rent tech direct it's
+                                            true.
                                         </p>
                                     </div>
                                 </div>
@@ -188,9 +190,7 @@
                                             Judith Black
                                         </p>
                                         {{ " " }}
-                                        <p class="sm:inline">
-                                            CEO at Workcation
-                                        </p>
+                                        <p class="sm:inline">Property owner</p>
                                     </span>
                                 </cite>
                             </blockquote>

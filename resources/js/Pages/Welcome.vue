@@ -21,13 +21,11 @@
                                         Stay on top of customer support
                                     </h2>
                                     <p class="mt-4 text-lg text-gray-500">
-                                        Semper curabitur ullamcorper posuere
-                                        nunc sed. Ornare iaculis bibendum
-                                        malesuada faucibus lacinia porttitor.
-                                        Pulvinar laoreet sagittis viverra duis.
-                                        In venenatis sem arcu pretium pharetra
-                                        at. Lectus viverra dui tellus ornare
-                                        pharetra.
+                                        An easy-to-use property managemant app
+                                        that allows landlors to easily advertise
+                                        vacant units, request rental
+                                        applications and credit reports, sign
+                                        leases, and collect rent.
                                     </p>
                                     <div class="mt-6">
                                         <a
@@ -104,17 +102,18 @@
                                         Better understand your customers
                                     </h2>
                                     <p class="mt-4 text-lg text-gray-500">
-                                        Semper curabitur ullamcorper posuere
-                                        nunc sed. Ornare iaculis bibendum
-                                        malesuada faucibus lacinia porttitor.
-                                        Pulvinar laoreet sagittis viverra duis.
-                                        In venenatis sem arcu pretium pharetra
-                                        at. Lectus viverra dui tellus ornare
-                                        pharetra.
+                                        Ability to easily advertise vacant
+                                        units, request rental applications and
+                                        credit reports, sign leases, and collect
+                                        rent. We are here to make live easier
+                                        for landlord and tenant who can not only
+                                        pay rent electronically but also submit
+                                        maintenance requests at a push of a
+                                        button.
                                     </p>
                                     <div class="mt-6">
                                         <a
-                                            href="#"
+                                            href="/prices"
                                             class="inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
                                         >
                                             Get started
