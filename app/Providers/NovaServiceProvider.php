@@ -196,9 +196,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(\App\Nova\Contractor::class),
             ])->icon('phone')->collapsible(),
 
-            MenuSection::make('Users', [
-                MenuItem::resource(\App\Nova\User::class),
-            ])->icon('users')->collapsible()
+            $this->getUserMenuByRole(),
+
         ];
 
         ////Super Admin and app manager
@@ -227,11 +226,34 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             array_push($menuSections, $userMenuSection);
         }*/
 
-
-
-
-
-
         return $menuSections;
+    }
+
+    private function getUserMenuByRole() {
+
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            $users = MenuItem::make('Users')->path('/resources/users');
+
+            $permissions = MenuItem::make('Permisssions')
+                ->path('/resources/permissions');
+
+            $roles = MenuItem::make('Roles')
+                ->path('/resources/roles');
+
+            $userMenuSection = MenuSection::make('Users', [
+                $users,
+                $permissions,
+                $roles
+            ])->icon('users')
+                ->collapsible();
+
+            return $userMenuSection;
+        }
+
+        return MenuSection::make('Users', [
+            MenuItem::resource(\App\Nova\User::class),
+        ])->icon('users')->collapsible();
+
     }
 }

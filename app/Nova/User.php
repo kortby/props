@@ -7,6 +7,7 @@ use App\Services\GetParentAndChildByAuthenticated;
 
 use Illuminate\Validation\Rules;
 
+use KABBOUCHI\NovaImpersonate\Impersonate;
 use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -112,6 +113,7 @@ class User extends Resource
             (new \Coderello\LoginAs\Actions\LoginAs)->redirectTo(function ($user) {
                 return route('nova.pages.dashboard');
             }),
+            //new \Coderello\LoginAs\Actions\LoginAs,
         ];
     }
 

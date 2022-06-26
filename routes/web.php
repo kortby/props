@@ -3,9 +3,13 @@
 use App\Http\Controllers\AmenityScheduleController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UnitController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Nova\Contracts\ImpersonatesUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +65,10 @@ Route::middleware([
     Route::get('/amenities', [AmenityScheduleController::class, 'create'])->name('amenities');
     Route::post('/amenities', [AmenityScheduleController::class, 'store'])->name('postAmenities');
     // Route::resource('amenities', AmenityScheduleController::class);
+});
+
+Route::get('/impersonation', function (Request $request, ImpersonatesUsers $impersonator) {
+    if ($impersonator->impersonating($request)) {
+        $impersonator->stopImpersonating($request, Auth::guard(), User::class);
+    }
 });
