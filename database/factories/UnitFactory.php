@@ -42,9 +42,9 @@ class UnitFactory extends Factory
             $imageUrl1 = 'https://www.cityviewapts.com/uploads/floorplans/images/1336x1336G/80956/Studio_S05_480Sqft.jpg?1564582365';
             $imageUrl2 = 'https://image1.apartmentfinder.com/i2/DoSkR2Q6HnD7k7exBblnHcPtkR_0qNnddaO0dCfUgMY/110/image.jpg';
             $imageUrl3 = 'https://www.becomingminimalist.com/wp-content/uploads/2020/06/love-apartment-1200x630-cropped.jpg';
-            $unit->addMediaFromUrl($imageUrl1)->toMediaCollection('units_collection');
-            $unit->addMediaFromUrl($imageUrl2)->toMediaCollection('units_collection');
-            $unit->addMediaFromUrl($imageUrl3)->toMediaCollection('units_collection');
+            $unit->addMediaFromUrl($imageUrl1)->preservingOriginal()->toMediaCollection('units_collection');
+            $unit->addMediaFromUrl($imageUrl2)->preservingOriginal()->toMediaCollection('units_collection');
+            $unit->addMediaFromUrl($imageUrl3)->preservingOriginal()->toMediaCollection('units_collection');
         });
     }
 }
