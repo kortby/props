@@ -32,6 +32,7 @@ return new class extends Migration
             $table->float('trash_charges')->default(0);
             $table->string('status')->default('new');
             $table->foreignId('unit_user_id');
+            $table->foreignId('user_id');
             $table->integer('service_fee_id')->nullable();
             $table->timestamps();
 
