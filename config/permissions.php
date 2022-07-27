@@ -1,6 +1,24 @@
 <?php
 
 return [
+    'leasing' => [
+        'view-any-leasing',
+        'view-leasing',
+        'create-leasing',
+        'update-leasing',
+        'delete-leasing',
+        'restore-leasing',
+        'force-delete-leasing',
+    ],
+    'service-fee' => [
+        'view-any-service-fee',
+        'view-service-fee',
+        'create-service-fee',
+        'update-service-fee',
+        'delete-service-fee',
+        'restore-service-fee',
+        'force-delete-service-fee',
+    ],
     'amenity' => [
         'view-any-amenity',
         'view-amenity',
