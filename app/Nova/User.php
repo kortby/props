@@ -24,6 +24,7 @@ use Vyuldashev\NovaPermission\RoleBooleanGroup;
 
 class User extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *

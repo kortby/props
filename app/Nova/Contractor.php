@@ -13,6 +13,7 @@ use Laravel\Nova\Panel;
 
 class Contractor extends Resource
 {
+    public static $globallySearchable = false;
     /**
      * The model the resource corresponds to.
      *

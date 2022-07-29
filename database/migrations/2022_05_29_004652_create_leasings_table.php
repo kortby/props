@@ -33,7 +33,6 @@ return new class extends Migration
             $table->string('status')->default('new');
             $table->foreignId('unit_user_id');
             $table->foreignId('user_id');
-            $table->integer('service_fee_id')->nullable();
             $table->timestamps();
 
             $table->softDeletes();

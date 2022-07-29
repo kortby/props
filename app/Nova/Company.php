@@ -12,6 +12,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Company extends Resource
 {
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *

@@ -28,7 +28,7 @@ class UnitUser extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'id',
     ];
 
     /**

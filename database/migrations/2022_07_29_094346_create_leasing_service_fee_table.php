@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_fees', function (Blueprint $table) {
+        Schema::create('leasing_service_fee', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->text('note')->nullable();
-            $table->float('price');
-            $table->foreignId('user_id');
+            $table->foreignId('leasing_id');
+            $table->foreignId('service_fee_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_fees');
+        Schema::dropIfExists('leasing_service_fee');
     }
 };

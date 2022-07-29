@@ -9,7 +9,7 @@ class ServiceFeeObserver
 {
     public function creating(ServiceFee $serviceFee)
     {
-       // $serviceFee->user_id = auth()->id();
+        $serviceFee->user_id = auth()->id();
     }
 
     /**

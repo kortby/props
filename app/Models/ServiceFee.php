@@ -9,8 +9,10 @@ class ServiceFee extends Model
 {
     use HasFactory;
 
-    public function leasing()
+    protected $withCount = ['leasings'];
+
+    public function leasings()
     {
-        return $this->belongsTo(Leasing::class);
+        return $this->belongsToMany(Leasing::class);
     }
 }

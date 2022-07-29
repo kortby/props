@@ -14,6 +14,7 @@ use Laravel\Nova\Panel;
 
 class Prospect extends Resource
 {
+    public static $globallySearchable = false;
     /**
      * The model the resource corresponds to.
      *

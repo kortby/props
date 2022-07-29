@@ -37,6 +37,10 @@ class Leasing extends Model implements HasMedia
         return $this->belongsTo(UnitUser::class);
     }
 
+    public function serviceFees() {
+        return $this->belongsToMany(ServiceFee::class);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('leasing_collection');

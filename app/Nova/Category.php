@@ -12,6 +12,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Category extends Resource
 {
+    public static $globallySearchable = false;
     /**
      * The model the resource corresponds to.
      *

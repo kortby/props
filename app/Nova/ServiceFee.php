@@ -2,9 +2,11 @@
 
 namespace App\Nova;
 
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -34,6 +36,16 @@ class ServiceFee extends Resource
         'name',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -46,6 +58,7 @@ class ServiceFee extends Resource
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Name')->rules('required', 'max:50'),
             Textarea::make('Note')->alwaysShow(),
+            Number::make(__('Leasings'), 'leasings_count')->sortable(),
             Currency::make('price')->textAlign('left'),
         ];
     }

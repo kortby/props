@@ -31,7 +31,7 @@ class LeasingPolicy
      */
     public function view(User $user, Leasing $leasing)
     {
-        return $user->can('view-leasing') && $this->getEligibleUserIds($amenity);
+        return $user->can('view-leasing') && $this->getEligibleUserIds($leasing);
     }
 
     /**
@@ -54,7 +54,7 @@ class LeasingPolicy
      */
     public function update(User $user, Leasing $leasing)
     {
-        return $user->can('update-leasing') && $this->getEligibleUserIds($amenity);
+        return $user->can('update-leasing') && $this->getEligibleUserIds($leasing);
     }
 
     /**
@@ -66,7 +66,7 @@ class LeasingPolicy
      */
     public function delete(User $user, Leasing $leasing)
     {
-        return $user->can('delete-leasing') && $this->getEligibleUserIds($amenity);
+        return $user->can('delete-leasing') && $this->getEligibleUserIds($leasing);
     }
 
     /**
@@ -78,7 +78,7 @@ class LeasingPolicy
      */
     public function restore(User $user, Leasing $leasing)
     {
-        return $user->can('restore-leasing') && $this->getEligibleUserIds($amenity);
+        return $user->can('restore-leasing') && $this->getEligibleUserIds($leasing);
     }
 
     /**
@@ -90,7 +90,7 @@ class LeasingPolicy
      */
     public function forceDelete(User $user, Leasing $leasing)
     {
-        return $user->can('force-delete-leasing') && $this->getEligibleUserIds($amenity);
+        return $user->can('force-delete-leasing') && $this->getEligibleUserIds($leasing);
     }
 
     private function getEligibleUserIds(Leasing $leasing): bool
