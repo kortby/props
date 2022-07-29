@@ -19,7 +19,7 @@ class PropertyTypeSeeder extends Seeder
         foreach ($types as $type) {
             PropertyType::create([
                 'name' => $type,
-                'user_id' => rand(5,7),
+                'user_id' => 3,
             ]);
         }
     }

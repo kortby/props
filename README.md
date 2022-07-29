@@ -85,3 +85,7 @@
         - Adding more filters to prospects and contractors -- later
         - Fix contractors and prospects permission.
         - building an easy rental payment plus late fees and expenses
+
+    ## new bugs
+      - fix maintenance on renter
+      - fix create amenities schedule
