@@ -199,6 +199,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(\App\Nova\Contractor::class),
             ])->icon('phone')->collapsible(),
 
+            MenuSection::make('Application', [
+                MenuItem::resource(\App\Nova\Application::class),
+            ])->icon('document-add')->collapsible(),
+
             $this->getUserMenuByRole(),
 
         ];
@@ -232,7 +236,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return $menuSections;
     }
 
-    private function getUserMenuByRole() {
+    private function getUserMenuByRole()
+    {
 
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
 
@@ -257,6 +262,5 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return MenuSection::make('Users', [
             MenuItem::resource(\App\Nova\User::class),
         ])->icon('users')->collapsible();
-
     }
 }
