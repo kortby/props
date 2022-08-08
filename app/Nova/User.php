@@ -21,6 +21,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Spatie\Permission\Models\Role;
 use Vyuldashev\NovaPermission\RoleSelect;
 use Vyuldashev\NovaPermission\RoleBooleanGroup;
+use Dniccum\PhoneNumber\PhoneNumber;
 
 class User extends Resource
 {
@@ -131,10 +132,9 @@ class User extends Resource
                 })->displayUsing(function () {
                     return $this->roles->first()->name ?? '---';
                 })->searchable()
-                ->hideWhenUpdating()
-            ,
+                ->hideWhenUpdating(),
 
-            BelongsTo::make('Prop', 'prop' , 'App\Nova\Property')
+            BelongsTo::make('Prop', 'prop', 'App\Nova\Property')
             /*->hide()->dependsOn(
             ['roles'],
             function (BelongsTo $field, NovaRequest $request, FormData $formData) {
@@ -142,8 +142,7 @@ class User extends Resource
                     $field->show();
                 }
             }
-        )*/
-            ,
+        )*/,
 
 
             Text::make('Name')
@@ -156,7 +155,7 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Number::make('Phone Number', 'phone')->textAlign('left'),
+            PhoneNumber::make('Phone Number', 'phone')->textAlign('left'),
 
             Password::make('Password')
                 ->onlyOnForms()
@@ -168,7 +167,7 @@ class User extends Resource
         ];
 
         if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
-            array_push($detail, BelongsTo::make('Parent', 'parent' , self::class)->onlyOnIndex());
+            array_push($detail, BelongsTo::make('Parent', 'parent', self::class)->onlyOnIndex());
         }
 
         return $detail;
@@ -182,15 +181,15 @@ class User extends Resource
         $query = Role::query();
 
         if (auth()->user()->hasAnyRole('company-owner')) {
-            $query->whereIn('id' , [4,5,6]);
+            $query->whereIn('id', [4, 5, 6]);
         }
 
         if (auth()->user()->hasAnyRole('property-manager')) {
-            $query->whereIn('id' , [5,6]);
+            $query->whereIn('id', [5, 6]);
         }
 
         if (auth()->user()->hasAnyRole('property-agent')) {
-            $query->whereIn('id' , [6]);
+            $query->whereIn('id', [6]);
         }
 
 

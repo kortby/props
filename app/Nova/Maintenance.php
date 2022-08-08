@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Notifications\NovaNotification;
 use Laravel\Nova\Panel;
+use Dniccum\PhoneNumber\PhoneNumber;
 
 class Maintenance extends Resource
 {
@@ -95,7 +96,7 @@ class Maintenance extends Resource
                 'high' => 'warning',
                 'critical' => 'danger',
             ])->sortable(),
-            Text::make('phone'),
+            PhoneNumber::make('phone'),
             Currency::make('Cost', 'cost')->rules('required')->textAlign('left'),
             new Panel('Maintenance time', $this->maintenanceTimeFields()),
         ];

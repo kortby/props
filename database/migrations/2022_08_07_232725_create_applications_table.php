@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->date('date_of_birth');
             $table->string('email');
-            $table->integer('ssn');
-            $table->integer('phone');
+            $table->bigInteger('ssn')->nullable();
+            $table->string('phone');
             $table->string('address_line_1');
             $table->string('address_line_2')->nullable();
             $table->string('city');
@@ -31,10 +31,10 @@ return new class extends Migration
             $table->date('move_in_date');
             $table->string('job_type');
             $table->string('employer_name');
-            $table->integer('annual_income');
-            $table->integer('additional_income')->nullable();
+            $table->bigInteger('annual_income');
+            $table->bigInteger('additional_income')->nullable();
             $table->string('employer_email')->nullable();
-            $table->integer('employer_phone')->nullable();
+            $table->string('employer_phone')->nullable();
             $table->string('employer_address')->nullable();
             $table->boolean('pets');
             // $table->foreignId('user_id');

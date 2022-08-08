@@ -16,6 +16,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Dniccum\PhoneNumber\PhoneNumber;
 
 class Property extends Resource
 {
@@ -144,7 +145,7 @@ class Property extends Resource
     protected function contactFields()
     {
         return [
-            Text::make('Phone')->rules('max:11'),
+            PhoneNumber::make('Phone')->rules('max:11'),
             Text::make('Address', 'address_line_1'),
             Text::make('Address Line 2')->hideFromIndex(),
             Text::make('City'),

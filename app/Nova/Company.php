@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Dniccum\PhoneNumber\PhoneNumber;
 
 class Company extends Resource
 {
@@ -59,6 +60,7 @@ class Company extends Resource
             ID::make()->sortable(),
             Text::make('Company name', 'name')->rules('required', 'max:120'),
             Textarea::make('Address', 'address')->rules('required'),
+            PhoneNumber::make('Phone number'),
             HasMany::make('Properties'),
         ];
     }
