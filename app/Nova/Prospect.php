@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Dniccum\PhoneNumber\PhoneNumber;
 
 class Prospect extends Resource
 {
@@ -60,7 +61,7 @@ class Prospect extends Resource
             ID::make()->sortable()->hideFromIndex(),
             Text::make('First name', 'contact_firstname')->hideFromIndex(),
             Text::make('Last name', 'contact_lastname')->hideFromIndex(),
-            Text::make('Phone'),
+            PhoneNumber::make('Phone'),
             Text::make('Job title', 'title')->hideFromIndex(),
             Text::make('email')->hideFromIndex(),
             Boolean::make('Is client'),
@@ -129,7 +130,7 @@ class Prospect extends Resource
             Text::make('State')->sortable(),
             Text::make('County')->hideFromIndex(),
             Text::make('Zip')->hideFromIndex(),
-            Text::make('Direct phone')->hideFromIndex(),
+            PhoneNumber::make('Direct phone')->hideFromIndex(),
             Text::make('Website')->hideFromIndex(),
         ];
     }
