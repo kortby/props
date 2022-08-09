@@ -69,11 +69,12 @@ class Application extends Resource
             Text::make('Last name')->rules('required', 'max:70'),
             Date::make('Date of birth')->rules('required')->hideFromIndex(),
             Text::make('Email')->rules('required', 'max:70'),
-            Number::make('SSN')->max(999999999)->hideFromIndex(),
+            Phonenumber::make('Phone')->rules('required'),
+            Number::make('SSN')->hideFromIndex(),
             Boolean::make('Pets'),
 
-            new Panel('Current address informaion', $this->contactFields()),
-            new Panel('Job informaion', $this->jobFields()),
+            new Panel('Current address information', $this->contactFields()),
+            new Panel('Job information', $this->jobFields()),
         ];
     }
 
@@ -129,8 +130,6 @@ class Application extends Resource
     protected function contactFields()
     {
         return [
-            //PhoneNumber::make('Phone')->rules('required'),
-            Text::make('Phone')->rules('required'),
             Text::make('Address', 'address_line_1')->rules('required')->hideFromIndex(),
             Text::make('Address Line 2')->hideFromIndex()->hideFromIndex(),
             Text::make('City')->rules('required')->hideFromIndex(),
@@ -151,8 +150,7 @@ class Application extends Resource
         return [
             Text::make('Job Type')->rules('required'),
             Text::make('Employer name')->rules('required')->hideFromIndex(),
-            //PhoneNumber::make('Employer phone'),
-            Text::make('Employer phone')->hideFromIndex(),
+            Phonenumber::make('Employer phone')->hideFromIndex(),
             Text::make('Employer email')->hideFromIndex(),
             Text::make('Employer address')->hideFromIndex(),
             Currency::make('Annual income')->textAlign('left')->rules('required'),

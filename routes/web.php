@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AmenityScheduleController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UnitController;
 use App\Models\User;
@@ -62,9 +63,11 @@ Route::middleware([
     Route::get('/maintenance', [MaintenanceController::class, 'create'])->name('maintenance');
     Route::post('/maintenance', [MaintenanceController::class, 'store'])->name('postMaintenance');
 
+    Route::get('/application', [ApplicationController::class, 'create'])->name('application');
+    Route::post('/application', [ApplicationController::class, 'store'])->name('postApplication');
+
     Route::get('/amenities', [AmenityScheduleController::class, 'create'])->name('amenities');
     Route::post('/amenities', [AmenityScheduleController::class, 'store'])->name('postAmenities');
-    // Route::resource('amenities', AmenityScheduleController::class);
 });
 
 Route::get('/impersonation', function (Request $request, ImpersonatesUsers $impersonator) {
