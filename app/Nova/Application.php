@@ -63,23 +63,23 @@ class Application extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
-            BelongsTo::make('Renter' , 'user' ,User::class )->onlyOnIndex(),
+            ID::make()->sortable()->hideFromIndex(),
+            BelongsTo::make('Renter', 'user', User::class)->onlyOnIndex(),
             Select::make('Renter', 'user_id')->options(function () {
                 return \App\Models\User::query()
-                    ->whereHas('roles', function($q){
-                        $q->where('name','renter');
+                    ->whereHas('roles', function ($q) {
+                        $q->where('name', 'renter');
                     })
                     ->select(['id', 'name'])
                     ->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle())
                     ->pluck('name', 'id');
-            })->onlyOnForms(),
+            })->onlyOnForms()->searchable(),
             Text::make('First name')->rules('required', 'max:70'),
             Text::make('Middle name'),
             Text::make('Last name')->rules('required', 'max:70'),
-            Date::make('Date of birth')->rules('required'),
+            Date::make('Date of birth')->rules('required')->hideFromIndex(),
             Text::make('Email')->rules('required', 'max:70'),
-            Number::make('SSN')->max(999999999),
+            Number::make('SSN')->max(999999999)->hideFromIndex(),
             Boolean::make('Pets'),
 
             new Panel('Current address informaion', $this->contactFields()),
@@ -141,12 +141,12 @@ class Application extends Resource
         return [
             //PhoneNumber::make('Phone')->rules('required'),
             Text::make('Phone')->rules('required'),
-            Text::make('Address', 'address_line_1')->rules('required'),
-            Text::make('Address Line 2')->hideFromIndex(),
-            Text::make('City')->rules('required'),
+            Text::make('Address', 'address_line_1')->rules('required')->hideFromIndex(),
+            Text::make('Address Line 2')->hideFromIndex()->hideFromIndex(),
+            Text::make('City')->rules('required')->hideFromIndex(),
             Text::make('State')->rules('required'),
-            Text::make('Postal Code')->hideFromIndex()->rules('required'),
-            Country::make('Country')->hideFromIndex(),
+            Text::make('Postal Code')->hideFromIndex()->rules('required')->hideFromIndex(),
+            Country::make('Country')->hideFromIndex()->hideFromIndex(),
             Date::make('Move in date')->rules('required'),
         ];
     }
@@ -160,13 +160,13 @@ class Application extends Resource
     {
         return [
             Text::make('Job Type')->rules('required'),
-            Text::make('Employer name')->rules('required'),
+            Text::make('Employer name')->rules('required')->hideFromIndex(),
             //PhoneNumber::make('Employer phone'),
-            Text::make('Employer phone'),
-            Text::make('Employer email'),
-            Text::make('Employer address'),
+            Text::make('Employer phone')->hideFromIndex(),
+            Text::make('Employer email')->hideFromIndex(),
+            Text::make('Employer address')->hideFromIndex(),
             Currency::make('Annual income')->textAlign('left')->rules('required'),
-            Currency::make('Additional income')->textAlign('left'),
+            Currency::make('Additional income')->textAlign('left')->hideFromIndex(),
         ];
     }
 }
