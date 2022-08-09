@@ -2,12 +2,16 @@
 
 namespace App\Nova;
 
+
+use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
@@ -50,6 +54,16 @@ class Application extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('Renter' , 'user' ,User::class )->onlyOnIndex(),
+            Select::make('Renter', 'user_id')->options(function () {
+                return \App\Models\User::query()
+                    ->whereHas('roles', function($q){
+                        $q->where('name','renter');
+                    })
+                    ->select(['id', 'name'])
+                    ->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle())
+                    ->pluck('name', 'id');
+            })->onlyOnForms(),
             Text::make('First name')->rules('required', 'max:70'),
             Text::make('Middle name'),
             Text::make('Last name')->rules('required', 'max:70'),
@@ -115,7 +129,8 @@ class Application extends Resource
     protected function contactFields()
     {
         return [
-            PhoneNumber::make('Phone')->rules('required'),
+            //PhoneNumber::make('Phone')->rules('required'),
+            Text::make('Phone')->rules('required'),
             Text::make('Address', 'address_line_1')->rules('required'),
             Text::make('Address Line 2')->hideFromIndex(),
             Text::make('City')->rules('required'),
@@ -136,7 +151,8 @@ class Application extends Resource
         return [
             Text::make('Job Type')->rules('required'),
             Text::make('Employer name')->rules('required'),
-            PhoneNumber::make('Employer phone'),
+            //PhoneNumber::make('Employer phone'),
+            Text::make('Employer phone'),
             Text::make('Employer email'),
             Text::make('Employer address'),
             Currency::make('Annual income')->textAlign('left')->rules('required'),

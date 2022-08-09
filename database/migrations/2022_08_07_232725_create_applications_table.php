@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('employer_phone')->nullable();
             $table->string('employer_address')->nullable();
             $table->boolean('pets');
-            // $table->foreignId('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
 
             $table->softDeletes();
