@@ -118,7 +118,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             if ($user->hasRole('renter')) {
                 return false;
             }
-            return in_array($user->email, []);
+            return $user->hasRole([1,2,3,4,5]);
         });
     }
 
