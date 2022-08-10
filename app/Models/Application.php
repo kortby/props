@@ -9,6 +9,8 @@ class Application extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'created', 'updated_at', 'deleted_at'];
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -21,14 +23,14 @@ class Application extends Model
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class)->whereHas('roles', function($q){
-            $q->where('name','renter');
+        return $this->belongsTo(User::class)->whereHas('roles', function ($q) {
+            $q->where('name', 'renter');
         });
     }
 
     public function renter(): \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
     {
-        return $this->user()->whereHas('roles', function($q){
+        return $this->user()->whereHas('roles', function ($q) {
             $q->whereName('renter');
         });
     }

@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('employer_email')->nullable();
             $table->string('employer_phone')->nullable();
             $table->string('employer_address')->nullable();
-            $table->boolean('pets');
+            $table->boolean('pets')->default(false);
             $table->foreignId('user_id');
             $table->timestamps();
 

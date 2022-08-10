@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApplicationStoreRequest;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Laravel\Nova\Notifications\NovaNotification;
 
 class ApplicationController extends Controller
 {
@@ -34,9 +38,20 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApplicationStoreRequest $request)
     {
-        //
+        try {
+            Application::create([
+                'user_id' => auth()->user()->parent_id,
+            ]);
+            $request->user()->notify(
+                NovaNotification::make()->message('Your new application has been submitted.')->icon('cog')->type('success'),
+            );
+            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return redirect()->route('dashboard');
     }
 
     /**
