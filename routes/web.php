@@ -3,6 +3,7 @@
 use App\Http\Controllers\AmenityScheduleController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\PrescreeningController;
 use App\Http\Controllers\UnitController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -65,6 +66,9 @@ Route::middleware([
 
     Route::get('/application', [ApplicationController::class, 'create'])->name('application');
     Route::post('/application', [ApplicationController::class, 'store'])->name('postApplication');
+
+    Route::get('/prescreening', [PrescreeningController::class, 'create'])->name('prescreening');
+    Route::post('/prescreening', [PrescreeningController::class, 'store'])->name('postPrescreening');
 
     Route::get('/amenities', [AmenityScheduleController::class, 'create'])->name('amenities');
     Route::post('/amenities', [AmenityScheduleController::class, 'store'])->name('postAmenities');

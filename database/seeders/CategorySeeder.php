@@ -25,7 +25,7 @@ class CategorySeeder extends Seeder
             $array = [];
 
             $array['name'] = $category;
-            $array['user_id'] = 4;
+            $array['user_id'] = 3;
 
             Category::factory()->create($array);
         }
@@ -35,7 +35,7 @@ class CategorySeeder extends Seeder
             $array = [];
 
             $array['name'] = $category;
-            $array['user_id'] = 3;
+            $array['user_id'] = 4;
 
             Category::factory()->create($array);
         }

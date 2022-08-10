@@ -2,22 +2,18 @@
 
 namespace App\Nova;
 
-use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class AmenitySchedule extends Resource
+class Prescreening extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\AmenitySchedule::class;
+    public static $model = \App\Models\Prescreening::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -45,20 +41,6 @@ class AmenitySchedule extends Resource
     {
         return [
             ID::make()->sortable(),
-
-            BelongsTo::make('Renter', 'user', User::class)->onlyOnIndex(),
-            Select::make('Renter', 'user_id')->options(function () {
-                return \App\Models\User::query()
-                    ->whereHas('roles', function ($q) {
-                        $q->where('name', 'renter');
-                    })
-                    ->select(['id', 'name'])
-                    ->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle())
-                    ->pluck('name', 'id');
-            })->onlyOnForms()->searchable(),
-            BelongsTo::make('Amenity'),
-            DateTime::make('start')->rules('required', 'after:today')->sortable(),
-            DateTime::make('end')->rules('required', 'after:today')->sortable(),
         ];
     }
 

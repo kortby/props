@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ApplicationStoreRequest;
-use App\Models\Application;
+use App\Models\Prescreening;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Nova\Notifications\NovaNotification;
 
-class ApplicationController extends Controller
+class PrescreeningController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,9 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Application');
+        return Inertia::render('Prescreening', [
+            'questions' => Question::all(),
+        ]);
     }
 
     /**
@@ -38,15 +40,15 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApplicationStoreRequest $request)
+    public function store(Request $request)
     {
         try {
             $request->merge([
                 'user_id' => auth()->user()->id,
             ]);
-            Application::create($request->all());
+            Prescreening::create($request->all());
             $request->user()->notify(
-                NovaNotification::make()->message('Your new application has been submitted.')->icon('cog')->type('success'),
+                NovaNotification::make()->message('Pre-secreening has been submitted.')->icon('cog')->type('success'),
             );
             return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
@@ -58,10 +60,10 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Application  $application
+     * @param  \App\Models\Prescreening  $prescreening
      * @return \Illuminate\Http\Response
      */
-    public function show(Application $application)
+    public function show(Prescreening $prescreening)
     {
         //
     }
@@ -69,10 +71,10 @@ class ApplicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Application  $application
+     * @param  \App\Models\Prescreening  $prescreening
      * @return \Illuminate\Http\Response
      */
-    public function edit(Application $application)
+    public function edit(Prescreening $prescreening)
     {
         //
     }
@@ -81,10 +83,10 @@ class ApplicationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Application  $application
+     * @param  \App\Models\Prescreening  $prescreening
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Application $application)
+    public function update(Request $request, Prescreening $prescreening)
     {
         //
     }
@@ -92,10 +94,10 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Application  $application
+     * @param  \App\Models\Prescreening  $prescreening
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Application $application)
+    public function destroy(Prescreening $prescreening)
     {
         //
     }

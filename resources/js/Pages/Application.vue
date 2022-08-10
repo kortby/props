@@ -471,11 +471,15 @@
                                                         autocomplete="country-name"
                                                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                                     >
-                                                        <option>
+                                                        <option value="US">
                                                             United States
                                                         </option>
-                                                        <option>Canada</option>
-                                                        <option>Mexico</option>
+                                                        <option value="CA">
+                                                            Canada
+                                                        </option>
+                                                        <option value="ME">
+                                                            Mexico
+                                                        </option>
                                                     </select>
                                                 </div>
                                                 <span
@@ -838,28 +842,28 @@ export default {
     },
     data() {
         const form = reactive({
-            first_name: "",
-            middle_name: "",
-            last_name: "",
-            date_of_birth: "",
-            email: "",
-            ssn: "",
-            phone: "",
-            address_line_1: "",
-            address_line_2: "",
-            city: "",
-            state: "",
-            country: "",
-            postal_code: "",
-            move_in_date: "",
-            job_type: "",
-            employer_name: "",
-            annual_income: "",
-            additional_income: "",
-            employer_email: "",
-            employer_phone: "",
-            employer_address: "",
-            pets: "",
+            first_name: null,
+            middle_name: null,
+            last_name: null,
+            date_of_birth: null,
+            email: null,
+            ssn: null,
+            phone: null,
+            address_line_1: null,
+            address_line_2: null,
+            city: null,
+            state: null,
+            country: null,
+            postal_code: null,
+            move_in_date: null,
+            job_type: null,
+            employer_name: null,
+            annual_income: null,
+            additional_income: null,
+            employer_email: null,
+            employer_phone: null,
+            employer_address: null,
+            pets: true,
         });
         const submit = () => {
             Inertia.post("/application", form);

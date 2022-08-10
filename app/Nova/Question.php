@@ -2,29 +2,26 @@
 
 namespace App\Nova;
 
-use App\Services\GetParentAndChildByAuthenticated;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class AmenitySchedule extends Resource
+class Question extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\AmenitySchedule::class;
+    public static $model = \App\Models\Question::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'question';
 
     /**
      * The columns that should be searched.
@@ -32,7 +29,7 @@ class AmenitySchedule extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'question',
     ];
 
     /**
@@ -45,20 +42,7 @@ class AmenitySchedule extends Resource
     {
         return [
             ID::make()->sortable(),
-
-            BelongsTo::make('Renter', 'user', User::class)->onlyOnIndex(),
-            Select::make('Renter', 'user_id')->options(function () {
-                return \App\Models\User::query()
-                    ->whereHas('roles', function ($q) {
-                        $q->where('name', 'renter');
-                    })
-                    ->select(['id', 'name'])
-                    ->whereIn('parent_id', (new GetParentAndChildByAuthenticated())->handle())
-                    ->pluck('name', 'id');
-            })->onlyOnForms()->searchable(),
-            BelongsTo::make('Amenity'),
-            DateTime::make('start')->rules('required', 'after:today')->sortable(),
-            DateTime::make('end')->rules('required', 'after:today')->sortable(),
+            Text::make('question')->rules('required'),
         ];
     }
 

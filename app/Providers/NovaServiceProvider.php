@@ -118,7 +118,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             if ($user->hasRole('renter')) {
                 return false;
             }
-            return $user->hasRole([1,2,3,4,5]);
+            return $user->hasRole([1, 2, 3, 4, 5]);
         });
     }
 
@@ -201,6 +201,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             MenuSection::make('Application', [
                 MenuItem::resource(\App\Nova\Application::class),
+                MenuItem::resource(\App\Nova\Question::class),
             ])->icon('document-add')->collapsible(),
 
             $this->getUserMenuByRole(),

@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             AmenitySeeder::class,
             ServiceFeeSeeder::class,
             ProspectSeeder::class,
-            ContractorSeeder::class
+            ContractorSeeder::class,
+            QuestionSeeder::class,
         ]);
     }
 }

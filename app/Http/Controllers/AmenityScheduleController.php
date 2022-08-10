@@ -46,21 +46,19 @@ class AmenityScheduleController extends Controller
      */
     public function store(ScheduleAmenityRequest $request)
     {
+        $request->merge([
+            'user_id' => auth()->user()->id,
+        ]);
+        AmenitySchedule::create($request->all());
+        $request->user()->notify(
+            NovaNotification::make()->message('Your schedule of ' . $request->amenity_id . ' been submitted.')->icon('cog')->type('success'),
+        );
+        return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         try {
-            AmenitySchedule::create([
-                'user_id' => auth()->user()->parent_id,
-                'amenity_id' => $request->amenity_id,
-                'start' => $request->start,
-                'end' => $request->end,
-            ]);
-            $request->user()->notify(
-                NovaNotification::make()->message('New Amenity has been requested.')->icon('cog')->type('success'),
-            );
-            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return redirect()->route('amenities');
+        return redirect()->route('dashboard');
     }
 
     /**

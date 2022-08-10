@@ -36,15 +36,15 @@ class UnitFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (Unit $unit) {
-            $imageUrl1 = '/factory/units/Studio_S05_480Sqft.jpg';
-            $imageUrl2 = '/factory/units/image.jpg';
-            $imageUrl3 = '/factory/units/love-apartment-1200x630-cropped.jpg';
-            $unit->addMediaFromDisk($imageUrl1)->preservingOriginal()->toMediaCollection('units_collection');
-            $unit->addMediaFromDisk($imageUrl2)->preservingOriginal()->toMediaCollection('units_collection');
-            $unit->addMediaFromDisk($imageUrl3)->preservingOriginal()->toMediaCollection('units_collection');
-        });
-    }
+    // public function configure()
+    // {
+    //     return $this->afterCreating(function (Unit $unit) {
+    //         $imageUrl1 = '/factory/units/Studio_S05_480Sqft.jpg';
+    //         $imageUrl2 = '/factory/units/image.jpg';
+    //         $imageUrl3 = '/factory/units/love-apartment-1200x630-cropped.jpg';
+    //         $unit->addMediaFromDisk($imageUrl1)->preservingOriginal()->toMediaCollection('units_collection');
+    //         $unit->addMediaFromDisk($imageUrl2)->preservingOriginal()->toMediaCollection('units_collection');
+    //         $unit->addMediaFromDisk($imageUrl3)->preservingOriginal()->toMediaCollection('units_collection');
+    //     });
+    // }
 }
