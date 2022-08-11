@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f4a51ec7ebf56e30edbebdf4c52c9f3",
+    "content-hash": "ad0980ee32f8354165fa88e393565ea6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -8497,6 +8497,108 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "wdelfuego/nova-calendar",
+            "version": "v1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wdelfuego/nova-calendar.git",
+                "reference": "6b9f92c03d6750c4e6b7c11247fa6202f7b8a565"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wdelfuego/nova-calendar/zipball/6b9f92c03d6750c4e6b7c11247fa6202f7b8a565",
+                "reference": "6b9f92c03d6750c4e6b7c11247fa6202f7b8a565",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0",
+                "laravel/nova": "^4.2.4",
+                "php": "^8.1",
+                "wdelfuego/nova-datetime": "^1.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wdelfuego\\NovaCalendar\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wdelfuego\\NovaCalendar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0-or-later",
+                "proprietary"
+            ],
+            "description": "A minimalistic event calendar Tool for Laravel's Nova 4.",
+            "keywords": [
+                "calendar",
+                "date",
+                "event-calendar",
+                "events",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/wdelfuego/nova-calendar/issues",
+                "source": "https://github.com/wdelfuego/nova-calendar/tree/v1.5.3"
+            },
+            "time": "2022-07-19T11:01:34+00:00"
+        },
+        {
+            "name": "wdelfuego/nova-datetime",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wdelfuego/nova-datetime.git",
+                "reference": "67006e24ae7bcd728ed707d943668387511c0abc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wdelfuego/nova-datetime/zipball/67006e24ae7bcd728ed707d943668387511c0abc",
+                "reference": "67006e24ae7bcd728ed707d943668387511c0abc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.2.4",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wdelfuego\\Nova\\DateTime\\ServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wdelfuego\\Nova\\DateTime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Willem Vervuurt",
+                    "email": "willem@studiodelfuego.com"
+                }
+            ],
+            "description": "Makes working with DateTime fields in Laravel's Nova 4 easier",
+            "support": {
+                "issues": "https://github.com/wdelfuego/nova-datetime/issues",
+                "source": "https://github.com/wdelfuego/nova-datetime/tree/v1.1.2"
+            },
+            "time": "2022-07-18T20:57:27+00:00"
         },
         {
             "name": "webmozart/assert",

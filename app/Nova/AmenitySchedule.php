@@ -24,7 +24,7 @@ class AmenitySchedule extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'Amenity.name';
 
     /**
      * The columns that should be searched.

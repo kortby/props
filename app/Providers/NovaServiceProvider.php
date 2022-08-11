@@ -55,6 +55,10 @@ use Laravel\Nova\Observable;
 use \Vyuldashev\NovaPermission\NovaPermissionTool;
 use Illuminate\Support\Facades\Blade;
 
+use Wdelfuego\NovaCalendar\NovaCalendar;
+use Wdelfuego\NovaCalendar\Interface\CalendarDataProviderInterface;
+use App\Providers\CalendarDataProvider;
+
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
     /**
@@ -142,7 +146,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            NovaPermissionTool::make()
+            NovaPermissionTool::make(),
+            new NovaCalendar,
         ];
     }
 
@@ -153,7 +158,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CalendarDataProviderInterface::class, function ($app) {
+            return new CalendarDataProvider();
+        });
     }
 
     /**
@@ -202,6 +209,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             MenuSection::make('Application', [
                 MenuItem::resource(\App\Nova\Application::class),
                 MenuItem::resource(\App\Nova\Question::class),
+                MenuItem::make('Calendar')->path('/wdelfuego/nova-calendar'),
             ])->icon('document-add')->collapsible(),
 
             $this->getUserMenuByRole(),
