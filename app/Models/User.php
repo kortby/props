@@ -33,6 +33,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'answers',
     ];
 
     /**
@@ -54,8 +55,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'start'=>'date',
-        'end'=>'date',
+        'start' => 'date',
+        'end' => 'date',
+        'answers' => 'array',
     ];
 
     /**
@@ -86,8 +88,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Unit::class)
 
-                    ->withPivot('status','start','end')
-                    ->withTimestamps();
+            ->withPivot('status', 'start', 'end')
+            ->withTimestamps();
     }
 
 

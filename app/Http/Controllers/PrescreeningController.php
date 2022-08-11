@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescreening;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -30,7 +32,10 @@ class PrescreeningController extends Controller
     public function create()
     {
         return Inertia::render('Prescreening', [
-            'questions' => Question::all(),
+            'questions' => Question::all()->map(function ($question) {
+                $question->answer = null;
+                return $question;
+            }),
         ]);
     }
 
@@ -42,19 +47,20 @@ class PrescreeningController extends Controller
      */
     public function store(Request $request)
     {
+        // $user = Auth::user();
+        // $user->answers = $request->all();
+        // $user->save();
+
+        User::where('id', Auth::user()->id)->update($request->all());
+        $request->user()->notify(
+            NovaNotification::make()->message('Pre-secreening has been submitted.')->icon('cog')->type('success'),
+        );
+        return  Redirect::route('prescreening')->with('success', 'Thank you! We will contact you shortly.');
         try {
-            $request->merge([
-                'user_id' => auth()->user()->id,
-            ]);
-            Prescreening::create($request->all());
-            $request->user()->notify(
-                NovaNotification::make()->message('Pre-secreening has been submitted.')->icon('cog')->type('success'),
-            );
-            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return redirect()->route('dashboard');
+        return redirect()->route('prescreening')->with('danger', 'Something went wrong, please try again.');;
     }
 
     /**

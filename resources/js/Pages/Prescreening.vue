@@ -18,87 +18,97 @@
             </div>
 
             <!-- new form  -->
-            <div v-for="item in questions" :key="item.id">
-                <div
-                    v-if="formStep == item.id"
-                    class="mt-8 bg-white pb-16 sm:mt-12 sm:pb-20 lg:pb-28"
-                >
-                    <div class="relative">
-                        <div class="absolute inset-0 h-1/2 bg-gray-100" />
-                        <div
-                            class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-48"
-                        >
+            <form @submit.prevent="submit">
+                <div v-for="(item, index) in questions" :key="index">
+                    <div
+                        v-if="formStep == item.id"
+                        class="mt-8 bg-white pb-16 sm:mt-12 sm:pb-20 lg:pb-28"
+                    >
+                        <div class="relative">
+                            <div class="absolute inset-0 h-1/2 bg-gray-100" />
                             <div
-                                class="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex"
+                                class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-48"
                             >
-                                <div class="flex-1 bg-white px-6 py-8 lg:p-12">
-                                    <div class="pt-8">
-                                        <div>
-                                            <h3
-                                                class="text-lg leading-6 font-medium text-gray-900"
-                                                v-text="item.question"
-                                            ></h3>
-                                        </div>
-                                        <div
-                                            class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
-                                        >
-                                            <div class="sm:col-span-12">
-                                                <label
-                                                    for="first-name"
-                                                    class="block text-sm font-medium text-gray-700"
-                                                >
-                                                    Answer
-                                                </label>
-                                                <div class="mt-1">
-                                                    <textarea
-                                                        v-model="question"
-                                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                                        :class="{
-                                                            'border-red-500':
-                                                                errors.question,
-                                                        }"
-                                                    >
-                                                    </textarea>
-                                                </div>
-                                                <span
-                                                    v-if="errors.question"
-                                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
-                                                    v-text="errors.question"
-                                                >
-                                                </span>
-                                            </div>
-                                        </div>
+                                <div
+                                    class="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex"
+                                >
+                                    <div
+                                        class="flex-1 bg-white px-6 py-8 lg:p-12"
+                                    >
                                         <div class="pt-8">
-                                            <div class="flex justify-end">
-                                                <button
-                                                    @click="prevStep"
-                                                    v-if="formStep > 1"
-                                                    type="button"
-                                                    class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                >
-                                                    Previous
-                                                </button>
-                                                <button
+                                            <div>
+                                                <h3
+                                                    class="text-lg leading-6 font-medium text-gray-900"
+                                                    v-text="item.question"
+                                                ></h3>
+                                            </div>
+                                            <div
+                                                class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6"
+                                            >
+                                                <div class="sm:col-span-12">
+                                                    <label
+                                                        for="first-name"
+                                                        class="block text-sm font-medium text-gray-700"
+                                                    >
+                                                        Answer
+                                                    </label>
+                                                    <div class="mt-1">
+                                                        <textarea
+                                                            v-model="
+                                                                form.answers[
+                                                                    index
+                                                                ].answer
+                                                            "
+                                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                                        >
+                                                        </textarea>
+                                                    </div>
+                                                    <!-- <span
                                                     v-if="
-                                                        formStep <
-                                                        questions.length
+                                                        errors.answers[index]
+                                                            .answer
                                                     "
-                                                    @click="nextStep"
-                                                    type="button"
-                                                    class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
-                                                >
-                                                    Next
-                                                </button>
-                                                <button
-                                                    v-if="
-                                                        formStep ==
-                                                        questions.length
+                                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                                    v-text="
+                                                        errors.answers[index]
+                                                            .answer
                                                     "
-                                                    type="submit"
-                                                    class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 >
-                                                    Save
-                                                </button>
+                                                </span> -->
+                                                </div>
+                                            </div>
+                                            <div class="pt-8">
+                                                <div class="flex justify-end">
+                                                    <button
+                                                        @click="prevStep"
+                                                        v-if="formStep > 1"
+                                                        type="button"
+                                                        class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    >
+                                                        Previous
+                                                    </button>
+                                                    <button
+                                                        v-if="
+                                                            formStep <
+                                                            questions.length
+                                                        "
+                                                        @click="nextStep"
+                                                        type="button"
+                                                        class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3"
+                                                    >
+                                                        Next
+                                                    </button>
+                                                    <button
+                                                        v-if="
+                                                            formStep ==
+                                                            questions.length
+                                                        "
+                                                        type="submit"
+                                                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    >
+                                                        Save
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <!-- end form  -->
         </div>
     </AppLayout>
@@ -137,7 +147,7 @@ export default {
     },
     data() {
         const form = reactive({
-            question: null,
+            answers: this.questions,
         });
 
         const submit = () => {

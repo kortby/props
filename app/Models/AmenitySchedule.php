@@ -15,6 +15,7 @@ class AmenitySchedule extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'amenity_id',
         'start',
         'end',

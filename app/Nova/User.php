@@ -22,6 +22,8 @@ use Spatie\Permission\Models\Role;
 use Vyuldashev\NovaPermission\RoleSelect;
 use Vyuldashev\NovaPermission\RoleBooleanGroup;
 use Dniccum\PhoneNumber\PhoneNumber;
+use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\KeyValue;
 
 class User extends Resource
 {
@@ -161,6 +163,10 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
+
+            // KeyValue::make('answers')->rules('json'),
+            Text::make('answers', 'answers[0]->answer'),
+            // Code::make('answers')->json(),
 
 
 

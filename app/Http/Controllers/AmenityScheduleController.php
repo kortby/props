@@ -49,6 +49,7 @@ class AmenityScheduleController extends Controller
         $request->merge([
             'user_id' => auth()->user()->id,
         ]);
+        // dd($request->all());
         AmenitySchedule::create($request->all());
         $request->user()->notify(
             NovaNotification::make()->message('Your schedule of ' . $request->amenity_id . ' been submitted.')->icon('cog')->type('success'),
