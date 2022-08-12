@@ -89,3 +89,8 @@
     ## new bugs
       - fix maintenance on renter
       - fix create amenities schedule
+
+
+
+
+- we need a system that notify a showing to the right company
