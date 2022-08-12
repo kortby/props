@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ScheduleAmenityRequest;
-use App\Models\Amenity;
-use App\Models\AmenitySchedule;
+use App\Models\ScheduleViewing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Nova\Notifications\NovaNotification;
-use Illuminate\Support\Facades\Log;
 
-class AmenityScheduleController extends Controller
+class ScheduleViewingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,12 +28,7 @@ class AmenityScheduleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Amenities', [
-            'amenities' => Amenity::select('id', 'name', 'price', 'description')
-                ->where('user_id', auth()->user()->parent_id)
-                ->where('price', '>', 0)
-                ->get(),
-        ]);
+        return Inertia::render('ScheduleViewing');
     }
 
     /**
@@ -44,15 +37,12 @@ class AmenityScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ScheduleAmenityRequest $request)
+    public function store(Request $request)
     {
         try {
-            $request->merge([
-                'user_id' => auth()->user()->id,
-            ]);
-            AmenitySchedule::create($request->all());
+            ScheduleViewing::create($request->all());
             $request->user()->notify(
-                NovaNotification::make()->message('Your schedule of been submitted.')->icon('cog')->type('success'),
+                NovaNotification::make()->message('Your schedule of viewing been submitted.')->icon('cog')->type('success'),
             );
             return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
@@ -64,10 +54,10 @@ class AmenityScheduleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AmenitySchedule  $amenitySchedule
+     * @param  \App\Models\ScheduleViewing  $scheduleViewing
      * @return \Illuminate\Http\Response
      */
-    public function show(AmenitySchedule $amenitySchedule)
+    public function show(ScheduleViewing $scheduleViewing)
     {
         //
     }
@@ -75,10 +65,10 @@ class AmenityScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AmenitySchedule  $amenitySchedule
+     * @param  \App\Models\ScheduleViewing  $scheduleViewing
      * @return \Illuminate\Http\Response
      */
-    public function edit(AmenitySchedule $amenitySchedule)
+    public function edit(ScheduleViewing $scheduleViewing)
     {
         //
     }
@@ -87,10 +77,10 @@ class AmenityScheduleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AmenitySchedule  $amenitySchedule
+     * @param  \App\Models\ScheduleViewing  $scheduleViewing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AmenitySchedule $amenitySchedule)
+    public function update(Request $request, ScheduleViewing $scheduleViewing)
     {
         //
     }
@@ -98,10 +88,10 @@ class AmenityScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AmenitySchedule  $amenitySchedule
+     * @param  \App\Models\ScheduleViewing  $scheduleViewing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AmenitySchedule $amenitySchedule)
+    public function destroy(ScheduleViewing $scheduleViewing)
     {
         //
     }

@@ -31,6 +31,7 @@ use App\Nova\UnitType;
 use App\Nova\Dashboards\Main;
 use App\Nova\FurnishingItem;
 use App\Nova\Leasing;
+use App\Nova\ScheduleViewing;
 use App\Nova\ServiceFee;
 use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
@@ -202,6 +203,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ])->icon('clipboard-list')->collapsible(),
 
             MenuSection::make('Contact', [
+                MenuItem::resource(ScheduleViewing::class),
                 MenuItem::resource(\App\Nova\Prospect::class),
                 MenuItem::resource(\App\Nova\Contractor::class),
             ])->icon('phone')->collapsible(),

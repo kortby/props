@@ -5,6 +5,7 @@ namespace App\Providers;
 use Wdelfuego\NovaCalendar\DataProvider\MonthCalendar;
 use Wdelfuego\NovaCalendar\Event;
 use App\Nova\AmenitySchedule;
+use App\Nova\ScheduleViewing;
 use App\Nova\SomeEvent;
 
 class CalendarDataProvider extends MonthCalendar
@@ -36,6 +37,7 @@ class CalendarDataProvider extends MonthCalendar
 
             // Events without an ending timestamp will always be shown as single-day events:
             AmenitySchedule::class => ['start', 'end'],
+            ScheduleViewing::class => ['start', 'end'],
             // SomeEvent::class => ['starts_at', 'ends_at'],
             // Events with an ending timestamp can be multi-day events:
             // SomeResource::class => ['starts_at', 'ends_at'],
