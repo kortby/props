@@ -4,6 +4,7 @@ use App\Http\Controllers\AmenityScheduleController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PrescreeningController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ScheduleViewingController;
 use App\Http\Controllers\UnitController;
 use App\Models\User;
@@ -48,6 +49,10 @@ Route::get('/company', function () {
 });
 
 Route::get('/units/{unit}', [UnitController::class, 'show']);
+Route::get('/properties/{property}', [PropertyController::class, 'show']);
+
+Route::get('/schedule-viewing/{property}', [ScheduleViewingController::class, 'create'])->name('scheduleViewings');
+Route::post('/schedule-viewing', [ScheduleViewingController::class, 'store'])->name('postScheduleViewings');
 
 Route::middleware([
     'auth:sanctum',
@@ -70,9 +75,6 @@ Route::middleware([
 
     Route::get('/prescreening', [PrescreeningController::class, 'create'])->name('prescreening');
     Route::post('/prescreening', [PrescreeningController::class, 'store'])->name('postPrescreening');
-
-    Route::get('/schedule-viewing', [ScheduleViewingController::class, 'create'])->name('scheduleViewings');
-    Route::post('/schedule-viewing', [ScheduleViewingController::class, 'store'])->name('postScheduleViewings');
 
     Route::get('/amenities', [AmenityScheduleController::class, 'create'])->name('amenities');
     Route::post('/amenities', [AmenityScheduleController::class, 'store'])->name('postAmenities');

@@ -38,6 +38,16 @@ class ScheduleViewing extends Resource
         'phone',
     ];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        if (auth()->user()->hasAnyRole(config('roles-permissions'))) {
+
+            return parent::indexQuery($request, $query);
+        }
+
+        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *

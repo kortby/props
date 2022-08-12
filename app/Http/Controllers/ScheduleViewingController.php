@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use App\Models\ScheduleViewing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,9 +27,11 @@ class ScheduleViewingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Property $property)
     {
-        return Inertia::render('ScheduleViewing');
+        return Inertia::render('ScheduleViewing', [
+            'property' => $property
+        ]);
     }
 
     /**

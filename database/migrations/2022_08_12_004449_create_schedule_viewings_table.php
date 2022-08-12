@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->dateTime('start');
             $table->dateTime('end')->nullable();
+            $table->foreignId('property_id');
             $table->timestamps();
         });
     }

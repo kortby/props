@@ -15,6 +15,7 @@ class ScheduleViewing extends Model
      * @var array
      */
     protected $fillable = [
+        'property_id',
         'name',
         'phone',
         'email',
@@ -31,4 +32,9 @@ class ScheduleViewing extends Model
         'start',
         'end',
     ];
+
+    public function properties()
+    {
+        return $this->belongsTo(Property::class);
+    }
 }

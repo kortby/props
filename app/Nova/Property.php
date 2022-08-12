@@ -145,7 +145,7 @@ class Property extends Resource
     protected function contactFields()
     {
         return [
-            PhoneNumber::make('Phone')->rules('max:11'),
+            PhoneNumber::make('Phone'),
             Text::make('Address', 'address_line_1'),
             Text::make('Address Line 2')->hideFromIndex(),
             Text::make('City'),

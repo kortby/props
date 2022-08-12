@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PropertyController extends Controller
 {
@@ -46,7 +47,22 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        return Inertia::render('Property', [
+            'id' => $property->id,
+            'name' => $property->name,
+            'description' => $property->description,
+            'address_1' => $property->address_line_1,
+            'address_2' => $property->address_line_2,
+            'city' => $property->city,
+            'state' => $property->state,
+            'postal_code' => $property->postal_code,
+            'phone' => $property->phone,
+            'pictures' => [
+                $property->getMedia('property_collection')[0]->getUrl() ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $property->getMedia('property_collection')[1]->getUrl() ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $property->getMedia('property_collection')[2]->getUrl() ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+            ],
+        ]);
     }
 
     /**
