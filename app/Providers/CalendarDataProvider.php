@@ -37,7 +37,7 @@ class CalendarDataProvider extends MonthCalendar
 
             // Events without an ending timestamp will always be shown as single-day events:
             AmenitySchedule::class => ['start', 'end'],
-            ScheduleViewing::class => ['start', 'end'],
+            ScheduleViewing::class => ['start'],
             // SomeEvent::class => ['starts_at', 'ends_at'],
             // Events with an ending timestamp can be multi-day events:
             // SomeResource::class => ['starts_at', 'ends_at'],
@@ -50,10 +50,10 @@ class CalendarDataProvider extends MonthCalendar
     protected function nonNovaEvents(): array
     {
         return [
-            (new Event("Today until tomorrow", now(), now()->addDays(1)))
-                ->displayTime()
-                ->addBadges('👍')
-                ->withNotes('these are the event notes')
+            // (new Event("Today until tomorrow", now(), now()->addDays(1)))
+            //     ->displayTime()
+            //     ->addBadges('👍')
+            //     ->withNotes('these are the event notes')
         ];
     }
 }

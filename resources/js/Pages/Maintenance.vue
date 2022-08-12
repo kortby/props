@@ -162,7 +162,10 @@
                                 >Preferred maintenece date</label
                             >
                             <div class="mt-1">
-                                <input
+                                <Datepicker
+                                    v-model="form.preferred_maintenece_time"
+                                ></Datepicker>
+                                <!-- <input
                                     id="preferred_maintenece_time"
                                     v-model="form.preferred_maintenece_time"
                                     name="preferred_maintenece_time"
@@ -173,7 +176,7 @@
                                         'border-red-500':
                                             errors.preferred_maintenece_time,
                                     }"
-                                />
+                                /> -->
                             </div>
                             <span
                                 v-if="errors.preferred_maintenece_time"
@@ -311,6 +314,8 @@ import { Switch } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 
 export default {
     props: {
@@ -322,6 +327,7 @@ export default {
     components: {
         Switch,
         AppLayout,
+        Datepicker,
     },
     data() {
         const form = reactive({

@@ -2051,6 +2051,9 @@ select {
 .pl-4 {
   padding-left: 1rem;
 }
+.pl-2 {
+  padding-left: 0.5rem;
+}
 .text-left {
   text-align: left;
 }
@@ -2646,6 +2649,15 @@ p {
 }
 .disabled\:opacity-25:disabled {
   opacity: 0.25;
+}
+.disabled\:opacity-75:disabled {
+  opacity: 0.75;
+}
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+.disabled\:opacity-40:disabled {
+  opacity: 0.4;
 }
 .disabled\:shadow-none:disabled {
   --tw-shadow: 0 0 #0000;

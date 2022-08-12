@@ -47,10 +47,6 @@ class PrescreeningController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::user();
-        // $user->answers = $request->all();
-        // $user->save();
-
         try {
             User::where('id', Auth::user()->id)->update($request->all());
             $request->user()->notify(
@@ -60,7 +56,7 @@ class PrescreeningController extends Controller
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return redirect()->route('prescreening')->with('danger', 'Something went wrong, please try again.');;
+        return redirect()->route('prescreening')->with('danger', 'Something went wrong, please try again.');
     }
 
     /**

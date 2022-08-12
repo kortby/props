@@ -48,11 +48,11 @@ class ScheduleViewing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
-            PhoneNumber::make('Phone'),
-            Text::make('Email'),
+            Text::make('Name')->rules('required')->sortable(),
+            PhoneNumber::make('Phone')->rules('required')->sortable(),
+            Text::make('Email')->rules('required')->sortable(),
             DateTime::make('Start')->rules('required', 'after:now')->sortable(),
-            DateTime::make('End')->rules('required', 'after:now')->sortable(),
+            DateTime::make('End'),
         ];
     }
 
