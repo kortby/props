@@ -51,12 +51,12 @@ class PrescreeningController extends Controller
         // $user->answers = $request->all();
         // $user->save();
 
-        User::where('id', Auth::user()->id)->update($request->all());
-        $request->user()->notify(
-            NovaNotification::make()->message('Pre-secreening has been submitted.')->icon('cog')->type('success'),
-        );
-        return  Redirect::route('prescreening')->with('success', 'Thank you! We will contact you shortly.');
         try {
+            User::where('id', Auth::user()->id)->update($request->all());
+            $request->user()->notify(
+                NovaNotification::make()->message('Pre-secreening has been submitted.')->icon('cog')->type('success'),
+            );
+            return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);
         }

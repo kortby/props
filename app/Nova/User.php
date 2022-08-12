@@ -165,8 +165,8 @@ class User extends Resource
                 ->updateRules('nullable', Rules\Password::defaults()),
 
             // KeyValue::make('answers')->rules('json'),
-            Text::make('answers', 'answers[0]->answer'),
-            // Code::make('answers')->json(),
+            // Text::make('answers', 'answers[0]->answer'),
+            Code::make('answers')->json(),
 
 
 

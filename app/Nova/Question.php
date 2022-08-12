@@ -42,7 +42,8 @@ class Question extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('question')->rules('required'),
+            Text::make('Question')->rules('required'),
+            Text::make('Note')->hideFromIndex(),
         ];
     }
 
