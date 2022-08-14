@@ -1,21 +1,76 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
     <div class="relative bg-gray-50 overflow-hidden">
-        <!-- Background image and overlap -->
         <div
+            class="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full"
             aria-hidden="true"
-            class="hidden absolute inset-0 sm:flex sm:flex-col"
         >
-            <div class="flex-1 relative w-full bg-gray-800">
-                <div class="absolute inset-0 overflow-hidden">
-                    <img
-                        :src="property.pictures[0].imageSrc"
-                        alt=""
-                        class="w-full h-full object-center object-cover"
+            <div class="relative h-full max-w-7xl mx-auto">
+                <svg
+                    class="absolute right-full transform translate-y-1/4 translate-x-1/4 lg:translate-x-1/2"
+                    width="404"
+                    height="784"
+                    fill="none"
+                    viewBox="0 0 404 784"
+                >
+                    <defs>
+                        <pattern
+                            id="f210dbf6-a58d-4871-961e-36d5016a0f49"
+                            x="0"
+                            y="0"
+                            width="20"
+                            height="20"
+                            patternUnits="userSpaceOnUse"
+                        >
+                            <rect
+                                x="0"
+                                y="0"
+                                width="4"
+                                height="4"
+                                class="text-gray-200"
+                                fill="currentColor"
+                            />
+                        </pattern>
+                    </defs>
+                    <rect
+                        width="404"
+                        height="784"
+                        fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"
                     />
-                </div>
-                <div class="absolute inset-0 bg-gray-900 opacity-70" />
+                </svg>
+                <svg
+                    class="absolute left-full transform -translate-y-3/4 -translate-x-1/4 md:-translate-y-1/2 lg:-translate-x-1/2"
+                    width="404"
+                    height="784"
+                    fill="none"
+                    viewBox="0 0 404 784"
+                >
+                    <defs>
+                        <pattern
+                            id="5d0dd344-b041-4d26-bec4-8d33ea57ec9b"
+                            x="0"
+                            y="0"
+                            width="20"
+                            height="20"
+                            patternUnits="userSpaceOnUse"
+                        >
+                            <rect
+                                x="0"
+                                y="0"
+                                width="4"
+                                height="4"
+                                class="text-gray-200"
+                                fill="currentColor"
+                            />
+                        </pattern>
+                    </defs>
+                    <rect
+                        width="404"
+                        height="784"
+                        fill="url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)"
+                    />
+                </svg>
             </div>
-            <div class="w-full bg-white" />
         </div>
 
         <div class="relative pt-6 pb-16 sm:pb-24">
@@ -33,10 +88,11 @@
                             >
                                 <a href="#">
                                     <span class="sr-only">Workflow</span>
-                                    <h3
-                                        class="text-2xl font-bold text-white"
-                                        v-text="property.name"
-                                    ></h3>
+                                    <img
+                                        class="h-8 w-auto sm:h-10"
+                                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                                        alt=""
+                                    />
                                 </a>
                                 <div class="-mr-2 flex items-center md:hidden">
                                     <PopoverButton
@@ -58,7 +114,7 @@
                                 v-for="item in navigation"
                                 :key="item.name"
                                 :href="item.href"
-                                class="font-medium text-white hover:text-gray-900"
+                                class="font-medium text-gray-500 hover:text-gray-900"
                                 >{{ item.name }}</a
                             >
                         </div>
@@ -70,13 +126,7 @@
                                     href="#"
                                     class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
                                 >
-                                    Schedule viewing
-                                </a>
-                                <a
-                                    href="#"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 ml-3"
-                                >
-                                    Apply now
+                                    Log in
                                 </a>
                             </span>
                         </div>
@@ -102,7 +152,11 @@
                                 class="px-5 pt-4 flex items-center justify-between"
                             >
                                 <div>
-                                    <h3 v-text="property.name"></h3>
+                                    <img
+                                        class="h-8 w-auto"
+                                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                                        alt=""
+                                    />
                                 </div>
                                 <div class="-mr-2">
                                     <PopoverButton
@@ -127,32 +181,60 @@
                             </div>
                             <a
                                 href="#"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                                class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
                             >
-                                Schedule viewing
-                            </a>
-                            <a
-                                href="#"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 ml-3"
-                            >
-                                Apply now
+                                Log in
                             </a>
                         </div>
                     </PopoverPanel>
                 </transition>
             </Popover>
 
-            <main class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 h-96"></main>
+            <main class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
+                <div class="text-center">
+                    <h1
+                        class="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl sm:tracking-tight md:text-6xl md:tracking-tight"
+                    >
+                        <span class="block xl:inline">Data to enrich your</span>
+                        {{ " " }}
+                        <span class="block text-indigo-600 xl:inline"
+                            >online business</span
+                        >
+                    </h1>
+                    <p
+                        class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+                    >
+                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui
+                        irure qui lorem cupidatat commodo. Elit sunt amet fugiat
+                        veniam occaecat fugiat aliqua.
+                    </p>
+                    <div
+                        class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8"
+                    >
+                        <div class="rounded-md shadow">
+                            <a
+                                href="#"
+                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                            >
+                                Get started
+                            </a>
+                        </div>
+                        <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                            <a
+                                href="#"
+                                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+                            >
+                                Live demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { StarIcon } from "@heroicons/vue/solid";
-import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue";
-import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/vue/outline";
-
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 
@@ -162,56 +244,4 @@ const navigation = [
     { name: "Marketplace", href: "#" },
     { name: "Company", href: "#" },
 ];
-
-let props = defineProps({
-    id: Number,
-    name: String,
-    description: String,
-    address_1: String,
-    address_2: String,
-    city: String,
-    state: String,
-    postal_code: Number,
-    phone: Number,
-    pictures: Array,
-});
-
-const property = {
-    name: props.name,
-    rating: Math.floor(Math.random() * 5),
-    reviewCount: Math.floor(Math.random() * 500),
-    href: "#",
-    pictures: [
-        {
-            id: 0,
-            imageSrc: props.pictures[0],
-            imageAlt: "Apartment Architecture",
-            primary: true,
-        },
-        {
-            id: 1,
-            imageSrc: props.pictures[1],
-            imageAlt: "Kitchen.",
-            primary: false,
-        },
-        {
-            id: 2,
-            imageSrc: props.pictures[2],
-            imageAlt: "View from the top.",
-            primary: false,
-        },
-    ],
-    description: props.description,
-    address:
-        props.address_1 +
-        " " +
-        props.address_2 +
-        " , " +
-        props.city +
-        " , " +
-        props.state +
-        " " +
-        props.postal_code,
-    phone: props.phone,
-};
 </script>

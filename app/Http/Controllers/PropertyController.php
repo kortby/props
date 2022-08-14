@@ -58,9 +58,9 @@ class PropertyController extends Controller
             'postal_code' => $property->postal_code,
             'phone' => $property->phone,
             'pictures' => [
-                $property->getMedia('property_collection')[0]->getUrl() ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                $property->getMedia('property_collection')[1]->getUrl() ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                $property->getMedia('property_collection')[2]->getUrl() ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $property->getMedia('property_collection')[0] ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $property->getMedia('property_collection')[1] ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                $property->getMedia('property_collection')[2] ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
             ],
         ]);
     }
