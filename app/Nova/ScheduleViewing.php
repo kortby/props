@@ -45,7 +45,9 @@ class ScheduleViewing extends Resource
             return parent::indexQuery($request, $query);
         }
 
-        return $query->whereIn('user_id', (new GetParentAndChildByAuthenticated())->handle());
+
+
+        return $query->whereIn('property_id', \App\Models\Property::where('user_id', (new GetParentAndChildByAuthenticated())->handle())->pluck('id'));
     }
 
     /**
