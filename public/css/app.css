@@ -1710,6 +1710,13 @@ select {
 .gap-y-20 {
   row-gap: 5rem;
 }
+.gap-y-10 {
+  row-gap: 2.5rem;
+}
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+}
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(2rem * var(--tw-space-x-reverse));
@@ -2768,6 +2775,9 @@ p {
 .group:hover .group-hover\:fill-white {
   fill: #fff;
 }
+.group:hover .group-hover\:opacity-75 {
+  opacity: 0.75;
+}
 @media (prefers-color-scheme: dark) {
 
   .dark\:bg-gray-900 {
@@ -3623,6 +3633,10 @@ p {
     height: 100%;
   }
 
+  .lg\:h-80 {
+    height: 20rem;
+  }
+
   .lg\:w-screen {
     width: 100vw;
   }
@@ -3700,6 +3714,10 @@ p {
 
   .lg\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:grid-rows-3 {
@@ -3906,6 +3924,11 @@ p {
 
   .xl\:gap-8 {
     gap: 2rem;
+  }
+
+  .xl\:gap-x-8 {
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
   }
 
   .xl\:p-10 {

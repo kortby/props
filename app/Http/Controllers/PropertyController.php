@@ -58,10 +58,12 @@ class PropertyController extends Controller
             'postal_code' => $property->postal_code,
             'phone' => $property->phone,
             'pictures' => [
-                $property->getMedia('property_collection')[0] ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                $property->getMedia('property_collection')[1] ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                $property->getMedia('property_collection')[2] ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[3]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
             ],
+            'units' => $property->units()->where('is_active', true)->take(4)->get(),
         ]);
     }
 

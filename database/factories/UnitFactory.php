@@ -27,7 +27,7 @@ class UnitFactory extends Factory
             'number_of_bathroom' => rand(1, 3),
             'number_of_balcony' => rand(0, 3),
             'date_available_from' => now(),
-            'is_active' => true,
+            'is_active' => rand(0, 1) == 1,
             'description' => $this->faker->sentence,
             'unit_number' => rand(0, 1000),
             'unit_floor_number' => rand(0, 10),

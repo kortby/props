@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
 class Amenity extends Resource
 {
@@ -59,7 +60,16 @@ class Amenity extends Resource
             BelongsTo::make('property')->sortable(),
             Text::make('name')->rules('required'),
             Textarea::make('Description')->hideFromIndex()->rules('required', 'max:250')->rules('required'),
-            Currency::make('Price', 'price')->rules('required')->textAlign('left')->default(0),
+            Currency::make('Price', 'price')->textAlign('left')->default(0),
+            Images::make('Images', 'unit_type_collection') // second parameter is the media collection name
+                //->conversionOnPreview('medium-size') // conversion used to display the "original" image
+                ->conversionOnDetailView('thumb') // conversion used on the model's view
+                ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+                ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+                ->fullSize() // full size column
+                ->rules('required') // validation rules for the collection of images
+                // validation rules for the collection of images
+                ->singleImageRules('dimensions:min_width=100'),
         ];
     }
 
