@@ -89,14 +89,7 @@
                             type="submit"
                             class="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             :href="`tel:+1${unit.property_phone}`"
-                            v-html="
-                                '(' +
-                                unit.property_phone.slice(0, 3) +
-                                ')' +
-                                unit.property_phone.slice(3, 6) +
-                                '-' +
-                                unit.property_phone.slice(6, 10)
-                            "
+                            v-html="unit.property_phone"
                         ></a>
 
                         <!-- unit details -->

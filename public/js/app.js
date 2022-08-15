@@ -31903,7 +31903,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "submit",
     "class": "mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
     href: "tel:+1".concat($setup.unit.property_phone),
-    innerHTML: '(' + $setup.unit.property_phone.slice(0, 3) + ')' + $setup.unit.property_phone.slice(3, 6) + '-' + $setup.unit.property_phone.slice(6, 10)
+    innerHTML: $setup.unit.property_phone
   }, null, 8
   /* PROPS */
   , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" unit details "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
