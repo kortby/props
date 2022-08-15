@@ -145,13 +145,13 @@ class Property extends Resource
     protected function contactFields()
     {
         return [
-            PhoneNumber::make('Phone'),
-            Text::make('Address', 'address_line_1'),
+            PhoneNumber::make('Phone')->rules('required'),
+            Text::make('Address', 'address_line_1')->rules('required'),
             Text::make('Address Line 2')->hideFromIndex(),
-            Text::make('City'),
-            Text::make('State'),
-            Text::make('Postal Code')->hideFromIndex(),
-            Country::make('Country')->hideFromIndex(),
+            Text::make('City')->rules('required'),
+            Text::make('State')->rules('required'),
+            Text::make('Postal Code')->hideFromIndex()->rules('required'),
+            Country::make('Country')->hideFromIndex()->rules('required'),
         ];
     }
 }
