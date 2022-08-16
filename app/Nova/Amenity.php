@@ -61,7 +61,7 @@ class Amenity extends Resource
             Text::make('name')->rules('required'),
             Textarea::make('Description')->hideFromIndex()->rules('required', 'max:250')->rules('required'),
             Currency::make('Price', 'price')->textAlign('left')->default(0),
-            Images::make('Images', 'unit_type_collection') // second parameter is the media collection name
+            Images::make('Images', 'amenity_collection') // second parameter is the media collection name
                 //->conversionOnPreview('medium-size') // conversion used to display the "original" image
                 ->conversionOnDetailView('thumb') // conversion used on the model's view
                 ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page

@@ -68,7 +68,7 @@
                             <span class="inline-flex rounded-md shadow">
                                 <a
                                     :href="`/schedule-viewing/${props.id}`"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white hover:text-gray-300 ml-3"
+                                    class="font-medium text-white hover:text-gray-300 p-4"
                                 >
                                     Schedule viewing
                                 </a>
@@ -164,10 +164,50 @@
             </main>
         </div>
     </div>
+
+    <!-- Services -->
+    <div class="relative bg-gray-50 pb-10 px-4 sm:px-6 lg:px-8">
+        <div class="absolute inset-0">
+            <div class="bg-white h-1/3 sm:h-2/3" />
+        </div>
+        <div class="relative max-w-7xl mx-auto">
+            <div
+                class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
+            >
+                <div
+                    v-for="post in posts"
+                    :key="post.title"
+                    class="flex flex-col rounded-lg shadow-lg overflow-hidden"
+                >
+                    <div class="flex-shrink-0">
+                        <img
+                            class="h-48 w-full object-cover"
+                            :src="post.imageUrl"
+                            alt=""
+                        />
+                    </div>
+                    <div
+                        class="flex-1 bg-white p-6 flex flex-col justify-between"
+                    >
+                        <div class="flex-1">
+                            <a :href="post.href" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">
+                                    {{ post.title }}
+                                </p>
+                                <p class="mt-3 text-base text-gray-500">
+                                    {{ post.description }}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Testimonials -->
     <section
         aria-labelledby="testimonial-heading"
-        class="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8"
+        class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 lg:pt-24 lg:px-8"
     >
         <div class="max-w-2xl mx-auto lg:max-w-none">
             <h2
@@ -178,7 +218,7 @@
             </h2>
 
             <div
-                class="mt-16 space-y-16 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8"
+                class="mt-16 space-y-16 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8"
             >
                 <blockquote
                     v-for="testimonial in testimonials"
@@ -213,6 +253,7 @@
         </div>
     </section>
 
+    <!-- available units -->
     <div class="bg-white">
         <div
             class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
@@ -260,64 +301,6 @@
                         <p class="text-sm font-medium text-gray-900">
                             ${{ unit.price }}
                         </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="relative bg-gray-50 px-4 sm:px-6 lg:px-8">
-        <div class="absolute inset-0">
-            <div class="bg-white h-1/3 sm:h-2/3" />
-        </div>
-        <div class="relative max-w-7xl mx-auto">
-            <div class="text-center">
-                <h2
-                    class="text-3xl tracking-tight font-bold text-gray-900 sm:text-4xl sm:tracking-tight"
-                >
-                    From the blog
-                </h2>
-                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Ipsa libero labore natus atque, ducimus sed.
-                </p>
-            </div>
-            <div
-                class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
-            >
-                <div
-                    v-for="post in posts"
-                    :key="post.title"
-                    class="flex flex-col rounded-lg shadow-lg overflow-hidden"
-                >
-                    <div class="flex-shrink-0">
-                        <img
-                            class="h-48 w-full object-cover"
-                            :src="post.imageUrl"
-                            alt=""
-                        />
-                    </div>
-                    <div
-                        class="flex-1 bg-white p-6 flex flex-col justify-between"
-                    >
-                        <div class="flex-1">
-                            <p class="text-sm font-medium text-indigo-600">
-                                <a
-                                    :href="post.category.href"
-                                    class="hover:underline"
-                                >
-                                    {{ post.category.name }}
-                                </a>
-                            </p>
-                            <a :href="post.href" class="block mt-2">
-                                <p class="text-xl font-semibold text-gray-900">
-                                    {{ post.title }}
-                                </p>
-                                <p class="mt-3 text-base text-gray-500">
-                                    {{ post.description }}
-                                </p>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -487,11 +470,6 @@ const testimonials = [
         quote: "I had to return a purchase that didn’t fit. The whole process was so simple that I ended up ordering two new items!",
         attribution: "Kelly McPherson, Chicago",
     },
-    {
-        id: 3,
-        quote: "Now that I’m on holiday for the summer, I’ll probably order a few more shirts. It’s just so convenient, and I know the quality will always be there.",
-        attribution: "Chris Paul, Phoenix",
-    },
 ];
 
 let props = defineProps({
@@ -506,6 +484,7 @@ let props = defineProps({
     phone: Number,
     pictures: Array,
     units: Object,
+    amenities: String,
 });
 
 const property = {
@@ -563,58 +542,26 @@ const products = [
 
 const posts = [
     {
-        title: "Nice amenities",
+        title: "Amenities",
         href: "#",
-        category: { name: "Article", href: "#" },
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.",
-        date: "Mar 16, 2020",
-        datetime: "2020-03-16",
-        imageUrl:
-            "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-        readingTime: "6 min",
-        author: {
-            name: "Roel Aufderehar",
-            href: "#",
-            imageUrl:
-                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
+        imageUrl: props.amenities[0],
     },
     {
-        title: "Fitness center",
+        title: "Gallery",
         href: "#",
-        category: { name: "Video", href: "#" },
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.",
-        date: "Mar 10, 2020",
-        datetime: "2020-03-10",
-        imageUrl:
-            "https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-        readingTime: "4 min",
-        author: {
-            name: "Brenna Goyette",
-            href: "#",
-            imageUrl:
-                "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
+        imageUrl: props.amenities[1],
     },
     {
         title: "Floor plans",
         href: "#",
-        category: { name: "Case Study", href: "#" },
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-        date: "Feb 12, 2020",
-        datetime: "2020-02-12",
         imageUrl:
             "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-        readingTime: "11 min",
-        author: {
-            name: "Daniela Metz",
-            href: "#",
-            imageUrl:
-                "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
     },
 ];
 

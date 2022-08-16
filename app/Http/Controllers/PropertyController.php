@@ -64,6 +64,14 @@ class PropertyController extends Controller
                 count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[3]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
             ],
             'units' => $property->units()->where('is_active', true)->take(4)->get(),
+            'amenities' => [
+                count($property->amenities()->first()->getMedia('amenity_collection')) ?
+                    $property->amenities()->first()->getMedia('amenity_collection')[0]->getUrl() :
+                    'https://therevivalists.com/admin/fm/source/empty.png',
+                count($property->amenities()->get()[1]->getMedia('amenity_collection')) ?
+                    $property->amenities()->get()[1]->getMedia('amenity_collection')[0]->getUrl() :
+                    'https://therevivalists.com/admin/fm/source/empty.png',
+            ]
         ]);
     }
 
