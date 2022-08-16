@@ -2,5 +2,8 @@
 
 function getDefaultPictureIfNull($collection, $item)
 {
-    return count($collection) ? $collection[$item]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png';
+    if (count($collection) > $item) {
+        return $collection[$item]->getUrl();
+    }
+    return 'https://therevivalists.com/admin/fm/source/empty.png';
 }

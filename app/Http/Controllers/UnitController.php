@@ -65,9 +65,9 @@ class UnitController extends Controller
             'property_postal_code' => $unit->property->postal_code,
             'property_phone' => $unit->property->phone,
             'pictures' => [
-                count($unit->getMedia('units_collection')) ? $unit->getMedia('units_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                count($unit->getMedia('units_collection')) ? $unit->getMedia('units_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                count($unit->getMedia('units_collection')) ? $unit->getMedia('units_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                getDefaultPictureIfNull($unit->getMedia('units_collection'), 0),
+                getDefaultPictureIfNull($unit->getMedia('units_collection'), 1),
+                getDefaultPictureIfNull($unit->getMedia('units_collection'), 2),
             ],
         ]);
     }

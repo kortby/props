@@ -72,25 +72,3 @@
     `php artisan migrate:fresh --seed `
 
 
-    ## To do
-        - move large file contractors
-        - fix create user not showing for Company owner
-        - fix listing Display and permission
-    ## Done
-        - Fix Amenities permission view. ---fixed just change seeder
-        - Fixing leasing creation --fixed just look at fees water
-        - Display furnitures on unit view -- later
-        - Fix amenities renter on small screen
-        - how to get auth-user unit-number on requesting maintenance --- fixed
-        - Adding more filters to prospects and contractors -- later
-        - Fix contractors and prospects permission.
-        - building an easy rental payment plus late fees and expenses
-
-    ## new bugs
-      - fix maintenance on renter
-      - fix create amenities schedule
-
-
-
-
-- we need a system that notify a showing to the right company

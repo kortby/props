@@ -1,446 +1,418 @@
 <template>
-    <div class="relative bg-gray-50 overflow-hidden">
-        <!-- Background image and overlap -->
-        <div
-            aria-hidden="true"
-            class="hidden absolute inset-0 sm:flex sm:flex-col"
-        >
-            <div class="flex-1 relative w-full bg-gray-800">
-                <div class="absolute inset-0 overflow-hidden">
-                    <img
-                        :src="property.pictures[0].imageSrc"
-                        alt=""
-                        class="w-full h-full object-center object-cover"
-                    />
+    <PropLayout :title="`${props.name}`" :propertyname="props.name">
+        <div class="relative bg-gray-50 overflow-hidden">
+            <!-- Background image and overlap -->
+            <div
+                aria-hidden="true"
+                class="hidden absolute inset-0 sm:flex sm:flex-col"
+            >
+                <div class="flex-1 relative w-full bg-gray-800">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <img
+                            :src="property.pictures[0].imageSrc"
+                            alt=""
+                            class="w-full h-full object-center object-cover"
+                        />
+                    </div>
+                    <div class="absolute inset-0 bg-gray-900 opacity-70" />
                 </div>
-                <div class="absolute inset-0 bg-gray-900 opacity-70" />
+                <div class="w-full bg-white" />
             </div>
-            <div class="w-full bg-white" />
-        </div>
 
-        <div class="relative pt-6 pb-16 sm:pb-24">
-            <Popover>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6">
-                    <nav
-                        class="relative flex items-center justify-between sm:h-10 md:justify-center"
-                        aria-label="Global"
-                    >
-                        <div
-                            class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0"
+            <div class="relative pt-6 pb-16 sm:pb-24">
+                <Popover>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                        <nav
+                            class="relative flex items-center justify-between sm:h-10 md:justify-center"
+                            aria-label="Global"
                         >
                             <div
-                                class="flex items-center justify-between w-full md:w-auto"
+                                class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0"
                             >
-                                <a href="#">
-                                    <span class="sr-only">Workflow</span>
-                                    <h3
-                                        class="text-2xl font-bold text-white"
-                                        v-text="property.name"
-                                    ></h3>
-                                </a>
-                                <div class="-mr-2 flex items-center md:hidden">
-                                    <PopoverButton
-                                        class="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                                <div
+                                    class="flex items-center justify-between w-full md:w-auto"
+                                >
+                                    <a href="#">
+                                        <span class="sr-only">Workflow</span>
+                                        <h3
+                                            class="text-2xl font-bold text-white"
+                                            v-text="property.name"
+                                        ></h3>
+                                    </a>
+                                    <div
+                                        class="-mr-2 flex items-center md:hidden"
                                     >
-                                        <span class="sr-only"
-                                            >Open main menu</span
+                                        <PopoverButton
+                                            class="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                                         >
-                                        <MenuIcon
-                                            class="h-6 w-6"
-                                            aria-hidden="true"
-                                        />
-                                    </PopoverButton>
+                                            <span class="sr-only"
+                                                >Open main menu</span
+                                            >
+                                            <MenuIcon
+                                                class="h-6 w-6"
+                                                aria-hidden="true"
+                                            />
+                                        </PopoverButton>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="hidden md:flex md:space-x-10">
-                            <a
-                                v-for="item in navigation"
-                                :key="item.name"
-                                :href="item.href"
-                                class="font-medium text-white hover:text-gray-300"
-                                >{{ item.name }}</a
-                            >
-                        </div>
-                        <div
-                            class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0"
-                        >
-                            <span class="inline-flex rounded-md shadow">
-                                <a
-                                    :href="`/schedule-viewing/${props.id}`"
-                                    class="font-medium text-white hover:text-gray-300 p-4"
-                                >
-                                    Schedule viewing
-                                </a>
-                                <a
-                                    :href="`/application`"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700"
-                                >
-                                    Apply now
-                                </a>
-                            </span>
-                        </div>
-                    </nav>
-                </div>
-
-                <transition
-                    enter-active-class="duration-150 ease-out"
-                    enter-from-class="opacity-0 scale-95"
-                    enter-to-class="opacity-100 scale-100"
-                    leave-active-class="duration-100 ease-in"
-                    leave-from-class="opacity-100 scale-100"
-                    leave-to-class="opacity-0 scale-95"
-                >
-                    <PopoverPanel
-                        focus
-                        class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-                    >
-                        <div
-                            class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden"
-                        >
-                            <div
-                                class="px-5 pt-4 flex items-center justify-between"
-                            >
-                                <div>
-                                    <h3 v-text="property.name"></h3>
-                                </div>
-                                <div class="-mr-2">
-                                    <PopoverButton
-                                        class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                                    >
-                                        <span class="sr-only">Close menu</span>
-                                        <XIcon
-                                            class="h-6 w-6"
-                                            aria-hidden="true"
-                                        />
-                                    </PopoverButton>
-                                </div>
-                            </div>
-                            <div class="px-2 pt-2 pb-3">
+                            <div class="hidden md:flex md:space-x-10">
                                 <a
                                     v-for="item in navigation"
                                     :key="item.name"
                                     :href="item.href"
-                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                    class="font-medium text-white hover:text-gray-300"
                                     >{{ item.name }}</a
                                 >
                             </div>
-                            <a
-                                href="#"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                            <div
+                                class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0"
                             >
-                                Schedule viewing
-                            </a>
-                            <a
-                                href="#"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 ml-3"
-                            >
-                                Apply now
-                            </a>
-                        </div>
-                    </PopoverPanel>
-                </transition>
-            </Popover>
-
-            <main
-                class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 h-96 flex items-end"
-            >
-                <div class="align-bottom">
-                    <h4
-                        class="text-lg font-bold text-white"
-                        v-text="property.phone"
-                    ></h4>
-                    <h5
-                        class="text-md text-white"
-                        v-text="`${props.address_1} ${props.address_2}`"
-                    ></h5>
-                    <span
-                        class="text-md text-white"
-                        v-text="
-                            `${props.city}, ${props.state} ${props.code_postal}`
-                        "
-                    ></span>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Services -->
-    <div class="relative bg-gray-50 pb-10 px-4 sm:px-6 lg:px-8">
-        <div class="absolute inset-0">
-            <div class="bg-white h-1/3 sm:h-2/3" />
-        </div>
-        <div class="relative max-w-7xl mx-auto">
-            <div
-                class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
-            >
-                <div
-                    v-for="post in posts"
-                    :key="post.title"
-                    class="flex flex-col rounded-lg shadow-lg overflow-hidden"
-                >
-                    <div class="flex-shrink-0">
-                        <img
-                            class="h-48 w-full object-cover"
-                            :src="post.imageUrl"
-                            alt=""
-                        />
+                                <span class="inline-flex rounded-md shadow">
+                                    <a
+                                        :href="`/schedule-viewing/${props.id}`"
+                                        class="font-medium text-white hover:text-gray-300 p-4"
+                                    >
+                                        Schedule viewing
+                                    </a>
+                                    <a
+                                        :href="`/application`"
+                                        class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700"
+                                    >
+                                        Apply now
+                                    </a>
+                                </span>
+                            </div>
+                        </nav>
                     </div>
-                    <div
-                        class="flex-1 bg-white p-6 flex flex-col justify-between"
-                    >
-                        <div class="flex-1">
-                            <a :href="post.href" class="block mt-2">
-                                <p class="text-xl font-semibold text-gray-900">
-                                    {{ post.title }}
-                                </p>
-                                <p class="mt-3 text-base text-gray-500">
-                                    {{ post.description }}
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonials -->
-    <section
-        aria-labelledby="testimonial-heading"
-        class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 lg:pt-24 lg:px-8"
-    >
-        <div class="max-w-2xl mx-auto lg:max-w-none">
-            <h2
-                id="testimonial-heading"
-                class="text-2xl font-bold tracking-tight text-gray-900"
-            >
-                What are people saying?
-            </h2>
 
-            <div
-                class="mt-16 space-y-16 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8"
-            >
-                <blockquote
-                    v-for="testimonial in testimonials"
-                    :key="testimonial.id"
-                    class="sm:flex lg:block"
-                >
-                    <svg
-                        width="24"
-                        height="18"
-                        viewBox="0 0 24 18"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        class="flex-shrink-0 text-gray-300"
+                    <transition
+                        enter-active-class="duration-150 ease-out"
+                        enter-from-class="opacity-0 scale-95"
+                        enter-to-class="opacity-100 scale-100"
+                        leave-active-class="duration-100 ease-in"
+                        leave-from-class="opacity-100 scale-100"
+                        leave-to-class="opacity-0 scale-95"
                     >
-                        <path
-                            d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z"
-                            fill="currentColor"
-                        />
-                    </svg>
-                    <div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
-                        <p class="text-lg text-gray-600">
-                            {{ testimonial.quote }}
-                        </p>
-                        <cite
-                            class="mt-4 block font-semibold not-italic text-gray-900"
+                        <PopoverPanel
+                            focus
+                            class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                         >
-                            {{ testimonial.attribution }}
-                        </cite>
+                            <div
+                                class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden"
+                            >
+                                <div
+                                    class="px-5 pt-4 flex items-center justify-between"
+                                >
+                                    <div>
+                                        <h3 v-text="property.name"></h3>
+                                    </div>
+                                    <div class="-mr-2">
+                                        <PopoverButton
+                                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                                        >
+                                            <span class="sr-only"
+                                                >Close menu</span
+                                            >
+                                            <XIcon
+                                                class="h-6 w-6"
+                                                aria-hidden="true"
+                                            />
+                                        </PopoverButton>
+                                    </div>
+                                </div>
+                                <div class="px-2 pt-2 pb-3">
+                                    <a
+                                        v-for="item in navigation"
+                                        :key="item.name"
+                                        :href="item.href"
+                                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                        >{{ item.name }}</a
+                                    >
+                                </div>
+                                <a
+                                    href="#"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                                >
+                                    Schedule viewing
+                                </a>
+                                <a
+                                    href="#"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 ml-3"
+                                >
+                                    Apply now
+                                </a>
+                            </div>
+                        </PopoverPanel>
+                    </transition>
+                </Popover>
+
+                <main
+                    class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 h-96 flex items-end"
+                >
+                    <div class="align-bottom">
+                        <h4
+                            class="text-lg font-bold text-white"
+                            v-text="property.phone"
+                        ></h4>
+                        <h5
+                            class="text-md text-white"
+                            v-text="`${props.address_1} ${props.address_2}`"
+                        ></h5>
+                        <span
+                            class="text-md text-white"
+                            v-text="
+                                `${props.city}, ${props.state} ${props.code_postal}`
+                            "
+                        ></span>
                     </div>
-                </blockquote>
+                </main>
             </div>
         </div>
-    </section>
 
-    <!-- available units -->
-    <div class="bg-white">
-        <div
-            class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
-        >
-            <h2
-                class="text-3xl font-bold text-center tracking-tight text-gray-900"
-            >
-                Available units
-            </h2>
-            <p class="mt-3 text-center mx-auto text-xl text-gray-500 sm:mt-4">
-                For more available units please contact us at
-                <span class="text-indigo-600" v-text="property.phone"></span>.
-            </p>
-            <div
-                class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-            >
+        <!-- Services -->
+        <div class="relative bg-gray-50 pb-10 px-4 sm:px-6 lg:px-8">
+            <div class="absolute inset-0">
+                <div class="bg-white h-1/3 sm:h-2/3" />
+            </div>
+            <div class="relative max-w-7xl mx-auto">
                 <div
-                    v-for="(unit, index) in props.units"
-                    :key="index"
-                    class="group relative"
+                    class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
                 >
                     <div
-                        class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none"
+                        v-for="post in posts"
+                        :key="post.title"
+                        class="flex flex-col rounded-lg shadow-lg overflow-hidden"
                     >
-                        <img
-                            :src="props.pictures[index]"
-                            class="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                        />
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a :href="`/units/${unit.id}`">
-                                    <span
-                                        aria-hidden="true"
-                                        class="absolute inset-0"
-                                    />
-                                    {{ unit.unit_heading }}
+                        <div class="flex-shrink-0">
+                            <img
+                                class="h-48 w-full object-cover"
+                                :src="post.imageUrl"
+                                alt=""
+                            />
+                        </div>
+                        <div
+                            class="flex-1 bg-white p-6 flex flex-col justify-between"
+                        >
+                            <div class="flex-1">
+                                <a :href="post.href" class="block mt-2">
+                                    <p
+                                        class="text-xl font-semibold text-gray-900"
+                                    >
+                                        {{ post.title }}
+                                    </p>
+                                    <p class="mt-3 text-base text-gray-500">
+                                        {{ post.description }}
+                                    </p>
                                 </a>
-                            </h3>
-                            <p class="mt-1 text-sm text-gray-500">
-                                {{ unit.size }} SQFT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonials -->
+        <section
+            aria-labelledby="testimonial-heading"
+            class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 lg:pt-24 lg:px-8"
+        >
+            <div class="max-w-2xl mx-auto lg:max-w-none">
+                <h2
+                    id="testimonial-heading"
+                    class="text-2xl font-bold tracking-tight text-gray-900"
+                >
+                    What are people saying?
+                </h2>
+
+                <div
+                    class="mt-16 space-y-16 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8"
+                >
+                    <blockquote
+                        v-for="testimonial in testimonials"
+                        :key="testimonial.id"
+                        class="sm:flex lg:block"
+                    >
+                        <svg
+                            width="24"
+                            height="18"
+                            viewBox="0 0 24 18"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            class="flex-shrink-0 text-gray-300"
+                        >
+                            <path
+                                d="M0 18h8.7v-5.555c-.024-3.906 1.113-6.841 2.892-9.68L6.452 0C3.188 2.644-.026 7.86 0 12.469V18zm12.408 0h8.7v-5.555C21.083 8.539 22.22 5.604 24 2.765L18.859 0c-3.263 2.644-6.476 7.86-6.451 12.469V18z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                        <div class="mt-8 sm:mt-0 sm:ml-6 lg:mt-10 lg:ml-0">
+                            <p class="text-lg text-gray-600">
+                                {{ testimonial.quote }}
+                            </p>
+                            <cite
+                                class="mt-4 block font-semibold not-italic text-gray-900"
+                            >
+                                {{ testimonial.attribution }}
+                            </cite>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- available units -->
+        <div class="bg-white">
+            <div
+                class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
+            >
+                <h2
+                    class="text-3xl font-bold text-center tracking-tight text-gray-900"
+                >
+                    Available units
+                </h2>
+                <p
+                    class="mt-3 text-center mx-auto text-xl text-gray-500 sm:mt-4"
+                >
+                    For more available units please contact us at
+                    <span class="text-indigo-600" v-text="property.phone"></span
+                    >.
+                </p>
+                <div
+                    class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+                >
+                    <div
+                        v-for="(unit, index) in props.units"
+                        :key="index"
+                        class="group relative"
+                    >
+                        <div
+                            class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none"
+                        >
+                            <img
+                                :src="props.floor_plans_pictures[index]"
+                                class="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                            />
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h3 class="text-sm text-gray-700">
+                                    <a :href="`/units/${unit.id}`">
+                                        <span
+                                            aria-hidden="true"
+                                            class="absolute inset-0"
+                                        />
+                                        {{ unit.unit_heading }}
+                                    </a>
+                                </h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    {{ unit.size }} SQFT
+                                </p>
+                            </div>
+                            <p class="text-sm font-medium text-gray-900">
+                                ${{ unit.price }}
                             </p>
                         </div>
-                        <p class="text-sm font-medium text-gray-900">
-                            ${{ unit.price }}
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <section class="py-12 bg-gray-50 overflow-hidden md:py-20 lg:py-24">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <svg
-                class="absolute top-full right-full transform translate-x-1/3 -translate-y-1/4 lg:translate-x-1/2 xl:-translate-y-1/2"
-                width="404"
-                height="404"
-                fill="none"
-                viewBox="0 0 404 404"
-                role="img"
-                aria-labelledby="svg-workcation"
-            >
-                <title id="svg-workcation">Workcation</title>
-                <defs>
-                    <pattern
-                        id="ad119f34-7694-4c31-947f-5c9d249b21f3"
-                        x="0"
-                        y="0"
-                        width="20"
-                        height="20"
-                        patternUnits="userSpaceOnUse"
-                    >
-                        <rect
-                            x="0"
-                            y="0"
-                            width="4"
-                            height="4"
-                            class="text-gray-200"
-                            fill="currentColor"
-                        />
-                    </pattern>
-                </defs>
-                <rect
+        <section class="py-12 bg-gray-50 overflow-hidden md:py-20 lg:py-24">
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <svg
+                    class="absolute top-full right-full transform translate-x-1/3 -translate-y-1/4 lg:translate-x-1/2 xl:-translate-y-1/2"
                     width="404"
                     height="404"
-                    fill="url(#ad119f34-7694-4c31-947f-5c9d249b21f3)"
-                />
-            </svg>
-
-            <div class="relative">
-                <img
-                    class="mx-auto h-8"
-                    src="https://tailwindui.com/img/logos/workcation-logo-indigo-600-mark-gray-800-and-indigo-600-text.svg"
-                    alt="Workcation"
-                />
-                <blockquote class="mt-10">
-                    <div
-                        class="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900"
-                    >
-                        <p>
-                            &ldquo;Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Nemo expedita voluptas culpa
-                            sapiente alias molestiae. Numquam corrupti in
-                            laborum sed rerum et corporis.&rdquo;
-                        </p>
-                    </div>
-                    <footer class="mt-8">
-                        <div class="md:flex md:items-center md:justify-center">
-                            <div class="md:flex-shrink-0">
-                                <img
-                                    class="mx-auto h-10 w-10 rounded-full"
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt=""
-                                />
-                            </div>
-                            <div
-                                class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center"
-                            >
-                                <div
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    Judith Black
-                                </div>
-
-                                <svg
-                                    class="hidden md:block mx-1 h-5 w-5 text-indigo-600"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M11 0h3L9 20H6l5-20z" />
-                                </svg>
-
-                                <div
-                                    class="text-base font-medium text-gray-500"
-                                >
-                                    CEO, Workcation
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-    <footer class="bg-white">
-        <div
-            class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8"
-        >
-            <nav
-                class="-mx-5 -my-2 flex flex-wrap justify-center"
-                aria-label="Footer"
-            >
-                <div
-                    v-for="item in navigationFooter.main"
-                    :key="item.name"
-                    class="px-5 py-2"
+                    fill="none"
+                    viewBox="0 0 404 404"
+                    role="img"
+                    aria-labelledby="svg-workcation"
                 >
-                    <a
-                        :href="item.href"
-                        class="text-base text-gray-500 hover:text-gray-900"
-                    >
-                        {{ item.name }}
-                    </a>
-                </div>
-            </nav>
-            <div class="mt-8 flex justify-center space-x-6">
-                <a
-                    v-for="item in navigationFooter.social"
-                    :key="item.name"
-                    :href="item.href"
-                    class="text-gray-400 hover:text-gray-500"
-                >
-                    <span class="sr-only">{{ item.name }}</span>
-                    <component
-                        :is="item.icon"
-                        class="h-6 w-6"
-                        aria-hidden="true"
+                    <title id="svg-workcation">Workcation</title>
+                    <defs>
+                        <pattern
+                            id="ad119f34-7694-4c31-947f-5c9d249b21f3"
+                            x="0"
+                            y="0"
+                            width="20"
+                            height="20"
+                            patternUnits="userSpaceOnUse"
+                        >
+                            <rect
+                                x="0"
+                                y="0"
+                                width="4"
+                                height="4"
+                                class="text-gray-200"
+                                fill="currentColor"
+                            />
+                        </pattern>
+                    </defs>
+                    <rect
+                        width="404"
+                        height="404"
+                        fill="url(#ad119f34-7694-4c31-947f-5c9d249b21f3)"
                     />
-                </a>
+                </svg>
+
+                <div class="relative">
+                    <img
+                        class="mx-auto h-8"
+                        src="https://tailwindui.com/img/logos/workcation-logo-indigo-600-mark-gray-800-and-indigo-600-text.svg"
+                        alt="Workcation"
+                    />
+                    <blockquote class="mt-10">
+                        <div
+                            class="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900"
+                        >
+                            <p>
+                                &ldquo;Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Nemo expedita voluptas culpa
+                                sapiente alias molestiae. Numquam corrupti in
+                                laborum sed rerum et corporis.&rdquo;
+                            </p>
+                        </div>
+                        <footer class="mt-8">
+                            <div
+                                class="md:flex md:items-center md:justify-center"
+                            >
+                                <div class="md:flex-shrink-0">
+                                    <img
+                                        class="mx-auto h-10 w-10 rounded-full"
+                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        alt=""
+                                    />
+                                </div>
+                                <div
+                                    class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center"
+                                >
+                                    <div
+                                        class="text-base font-medium text-gray-900"
+                                    >
+                                        Judith Black
+                                    </div>
+
+                                    <svg
+                                        class="hidden md:block mx-1 h-5 w-5 text-indigo-600"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path d="M11 0h3L9 20H6l5-20z" />
+                                    </svg>
+
+                                    <div
+                                        class="text-base font-medium text-gray-500"
+                                    >
+                                        CEO, Workcation
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </blockquote>
+                </div>
             </div>
-            <p class="mt-8 text-center text-base text-gray-400">
-                &copy; 2020 Workflow, Inc. All rights reserved.
-            </p>
-        </div>
-    </footer>
+        </section>
+    </PropLayout>
 </template>
 
 <script setup>
@@ -451,6 +423,8 @@ import { CurrencyDollarIcon, GlobeIcon } from "@heroicons/vue/outline";
 
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { MenuIcon, XIcon } from "@heroicons/vue/outline";
+
+import PropLayout from "@/Pages/Shared/Partials/PropLayout.vue";
 
 const navigation = [
     { name: "Product", href: "#" },
@@ -485,6 +459,7 @@ let props = defineProps({
     pictures: Array,
     units: Object,
     amenities: String,
+    floor_plans_pictures: Array,
 });
 
 const property = {

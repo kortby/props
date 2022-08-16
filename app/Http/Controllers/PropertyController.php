@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\UnitType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -45,8 +46,9 @@ class PropertyController extends Controller
      * @param  \App\Models\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Property $property)
+    public function show(Property $property, UnitType $unitType)
     {
+        // dd($property->units()->where('is_active', true)->take(4)->get())
         return Inertia::render('Property', [
             'id' => $property->id,
             'name' => $property->name,
@@ -67,7 +69,13 @@ class PropertyController extends Controller
             'amenities' => [
                 getDefaultPictureIfNull($property->amenities()->first()->getMedia('amenity_collection'), 0),
                 getDefaultPictureIfNull($property->amenities()->get()[1]->getMedia('amenity_collection'), 0),
-            ]
+            ],
+            'floor_plans_pictures' => [
+                getDefaultPictureIfNull($unitType->get()[0]->getMedia('unit_type_collection'), 0),
+                getDefaultPictureIfNull($unitType->get()[1]->getMedia('unit_type_collection'), 0),
+                getDefaultPictureIfNull($unitType->get()[2]->getMedia('unit_type_collection'), 0),
+                getDefaultPictureIfNull($unitType->get()[3]->getMedia('unit_type_collection'), 0),
+            ],
         ]);
     }
 
