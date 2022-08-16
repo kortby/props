@@ -58,19 +58,15 @@ class PropertyController extends Controller
             'postal_code' => $property->postal_code,
             'phone' => $property->phone,
             'pictures' => [
-                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[0]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[1]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[2]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
-                count($property->getMedia('property_collection')) ? $property->getMedia('property_collection')[3]->getUrl() : 'https://therevivalists.com/admin/fm/source/empty.png',
+                getDefaultPictureIfNull($property->getMedia('property_collection'), 0),
+                getDefaultPictureIfNull($property->getMedia('property_collection'), 1),
+                getDefaultPictureIfNull($property->getMedia('property_collection'), 2),
+                getDefaultPictureIfNull($property->getMedia('property_collection'), 3),
             ],
             'units' => $property->units()->where('is_active', true)->take(4)->get(),
             'amenities' => [
-                count($property->amenities()->first()->getMedia('amenity_collection')) ?
-                    $property->amenities()->first()->getMedia('amenity_collection')[0]->getUrl() :
-                    'https://therevivalists.com/admin/fm/source/empty.png',
-                count($property->amenities()->get()[1]->getMedia('amenity_collection')) ?
-                    $property->amenities()->get()[1]->getMedia('amenity_collection')[0]->getUrl() :
-                    'https://therevivalists.com/admin/fm/source/empty.png',
+                getDefaultPictureIfNull($property->amenities()->first()->getMedia('amenity_collection'), 0),
+                getDefaultPictureIfNull($property->amenities()->get()[1]->getMedia('amenity_collection'), 0),
             ]
         ]);
     }
