@@ -186,7 +186,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(ServiceFee::class),
             ])->icon('paper-clip')->collapsible(),
 
-            MenuSection::make('Calendar')->path('/wdelfuego/nova-calendar')->icon('calendar'),
+            MenuSection::make('Calendar', [
+                MenuItem::make('Calendar')->path('/wdelfuego/nova-calendar'),
+                MenuItem::resource(AmenitySchedule::class),
+                MenuItem::resource(ScheduleViewing::class),
+            ])->icon('calendar')->collapsible(),
 
             MenuSection::make('Application', [
                 MenuItem::resource(\App\Nova\Application::class),
@@ -195,11 +199,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             MenuSection::make('Amenity', [
                 MenuItem::resource(Amenity::class),
-                MenuItem::resource(AmenitySchedule::class),
             ])->icon('clipboard-list')->collapsible(),
 
             MenuSection::make('Contact', [
-                MenuItem::resource(ScheduleViewing::class),
                 MenuItem::resource(\App\Nova\Prospect::class),
                 MenuItem::resource(\App\Nova\Contractor::class),
             ])->icon('phone')->collapsible(),

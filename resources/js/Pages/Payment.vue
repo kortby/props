@@ -35,12 +35,6 @@
                                 >
                                     Current Due (Includes past due)
                                 </h3>
-                                <p class="mt-6 text-base text-gray-500">
-                                    Lorem ipsum dolor sit amet consect etur
-                                    adipisicing elit. Itaque amet indis
-                                    perferendis blanditiis repellendus etur
-                                    quidem assumenda.
-                                </p>
                                 <div class="mt-8">
                                     <div class="flex items-center">
                                         <h4
@@ -82,7 +76,7 @@
                                 <p
                                     class="text-lg leading-6 font-medium text-gray-900"
                                 >
-                                    Pay once, own it forever
+                                    Make a One-Time Payment
                                 </p>
                                 <div
                                     class="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900"
@@ -94,14 +88,6 @@
                                         USD
                                     </span>
                                 </div>
-                                <p class="mt-4 text-sm">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-gray-500 underline"
-                                    >
-                                        Schedule a New Payment
-                                    </a>
-                                </p>
                                 <div class="mt-6">
                                     <div class="rounded-md shadow">
                                         <a
@@ -111,18 +97,6 @@
                                             Make a Payment
                                         </a>
                                     </div>
-                                </div>
-                                <div class="mt-4 text-sm">
-                                    <a
-                                        href="#"
-                                        class="font-medium text-gray-900"
-                                    >
-                                        Get a free sample
-                                        {{ " " }}
-                                        <span class="font-normal text-gray-500">
-                                            (20MB)
-                                        </span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -138,10 +112,10 @@ import { CheckCircleIcon } from "@heroicons/vue/solid";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 const includedFeatures = [
-    "Private forum access",
-    "Member resources",
-    "Entry to annual conference",
-    "Official member t-shirt",
+    "Parking spot",
+    "Pest control",
+    "Trash - door to door",
+    "Additional charges may vary month to month(if applicable)",
 ];
 
 export default {

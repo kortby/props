@@ -791,6 +791,14 @@
                                                 </span>
                                             </div>
                                             <div class="updoad sm:col-span-2">
+                                                <label
+                                                    class="block mb-2 text-sm font-mediu"
+                                                    for="multiple_files"
+                                                    >Upload multiple files
+                                                    (Picture of your ID,
+                                                    paystubs for last 3
+                                                    months)</label
+                                                >
                                                 <input
                                                     type="file"
                                                     multiple
@@ -798,7 +806,18 @@
                                                         form.documents =
                                                             $event.target.files
                                                     "
+                                                    class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
                                                 />
+                                                <span
+                                                    v-if="
+                                                        form.documents
+                                                            .length === 0
+                                                    "
+                                                    class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                                >
+                                                    Please upload the required
+                                                    documents
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="pt-8">
