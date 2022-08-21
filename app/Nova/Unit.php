@@ -118,6 +118,8 @@ class Unit extends Resource
                         }),
                     ];
                 }),
+
+            new Panel('Features', $this->featureFields()),
         ];
     }
 
@@ -198,7 +200,28 @@ class Unit extends Resource
                 'How many square feet?'
             ),
             Number::make('Balcony', 'number_of_balcony')->hideFromIndex(),
-            HasOne::make('Unit Feature'),
+            BelongsToMany::make('Furnishing Items'),
+        ];
+    }
+
+    /**
+     * Get the maintenance time fields for the resource.
+     *
+     * @return array
+     */
+    protected function featureFields()
+    {
+        return [
+            Boolean::make('Is air conditioning')->hideFromIndex(),
+            Number::make('Parking spot number', 'parking_spot')->textAlign('left'),
+            Boolean::make('Has carpet')->hideFromIndex(),
+            Boolean::make('Has hardwood flooring'),
+            Boolean::make('Is ceiling fan cooling'),
+            Boolean::make('Has in unit fireplace')->hideFromIndex(),
+            Boolean::make('Has in unit garden')->hideFromIndex(),
+            Boolean::make('Has in unit laundry'),
+            Boolean::make('Has walkin closet')->hideFromIndex(),
+            Boolean::make('Are pets allowed'),
         ];
     }
 }

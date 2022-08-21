@@ -11,7 +11,14 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <style>
+            .spatie-support-bubble__button {
+                width: 60px;
+                margin: 20px;
+                background: #4f46e5;
+                border-radius: 50%;
+            }
+        </style>
 
         <!-- Scripts -->
         @routes

@@ -55,15 +55,6 @@ return [
         'restore-company',
         'force-delete-company',
     ],
-    'furnishing-category' => [
-        'view-any-furnishing-category',
-        'view-furnishing-category',
-        'create-furnishing-category',
-        'update-furnishing-category',
-        'delete-furnishing-category',
-        'restore-furnishing-category',
-        'force-delete-furnishing-category',
-    ],
     'furnishing-item' => [
         'view-any-furnishing-item',
         'view-furnishing-item',
@@ -99,15 +90,6 @@ return [
         'delete-property-type',
         'restore-property-type',
         'force-delete-property-type',
-    ],
-    'unit-feature' => [
-        'view-any-unit-feature',
-        'view-unit-feature',
-        'create-unit-feature',
-        'update-unit-feature',
-        'delete-unit-feature',
-        'restore-unit-feature',
-        'force-delete-unit-feature',
     ],
     'unit' => [
         'view-any-unit',

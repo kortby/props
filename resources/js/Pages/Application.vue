@@ -790,6 +790,16 @@
                                                 >
                                                 </span>
                                             </div>
+                                            <div class="updoad sm:col-span-2">
+                                                <input
+                                                    type="file"
+                                                    multiple
+                                                    @input="
+                                                        form.documents =
+                                                            $event.target.files
+                                                    "
+                                                />
+                                            </div>
                                         </div>
                                         <div class="pt-8">
                                             <div class="flex justify-end">
@@ -864,6 +874,7 @@ export default {
             employer_phone: null,
             employer_address: null,
             pets: true,
+            documents: [],
         });
         const submit = () => {
             Inertia.post("/application", form);
@@ -880,6 +891,9 @@ export default {
         },
         nextStep() {
             formStep.value++;
+        },
+        selectFile() {
+            this.form.documents = $event.target.files;
         },
     },
 };

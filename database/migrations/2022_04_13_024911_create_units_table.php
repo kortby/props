@@ -27,7 +27,17 @@ return new class extends Migration
             $table->integer('size');
             $table->float('price');
 
-            $table->foreignId('unit_feature_id');
+            $table->boolean('is_air_conditioning');
+            $table->integer('parking_spot');
+            $table->boolean('has_carpet');
+            $table->boolean('has_hardwood_flooring');
+            $table->boolean('is_ceiling_fan_cooling');
+            $table->boolean('has_in_unit_fireplace');
+            $table->boolean('has_in_unit_garden');
+            $table->boolean('has_in_unit_laundry');
+            $table->boolean('has_walkin_closet');
+            $table->boolean('are_pets_allowed');
+
             $table->foreignId('property_id');
             $table->foreignId('unit_type_id');
             $table->foreignId('user_id');

@@ -9,13 +9,8 @@ class FurnishingItem extends Model
 {
     use HasFactory;
 
-    public function unitFeatures()
+    public function units()
     {
-        return $this->belongsToMany(UnitFeature::class, 'unit_furnishing', 'unit_feature_unit_id', 'furnishing_item_id');
-    }
-
-    public function furnishingCategory()
-    {
-        return $this->belongsTo(FurnishingCategory::class, 'furnishing_category_id');
+        return $this->belongsToMany(Unit::class);
     }
 }

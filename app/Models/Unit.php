@@ -17,6 +17,16 @@ class Unit extends Model implements HasMedia
 
     protected $fillable = [
         'is_active',
+        'is_air_conditioning',
+        'parking_spot',
+        'has_carpet',
+        'has_hardwood_flooring',
+        'is_ceiling_fan_cooling',
+        'has_in_unit_fireplace',
+        'has_in_unit_garden',
+        'has_in_unit_laundry',
+        'has_walkin_closet',
+        'are_pets_allowed',
     ];
 
     /*protected  $casts = [
@@ -31,8 +41,8 @@ class Unit extends Model implements HasMedia
      */
     protected $dates = [
         'date_available_from',
-        'start'=>'date',
-        'end'=>'date',
+        'start' => 'date',
+        'end' => 'date',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -43,8 +53,8 @@ class Unit extends Model implements HasMedia
     public function renters(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class)
-                    ->withPivot('status','start','end')
-                    ->withTimestamps();
+            ->withPivot('status', 'start', 'end')
+            ->withTimestamps();
     }
 
     public function property(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -57,13 +67,6 @@ class Unit extends Model implements HasMedia
         return $this->belongsTo(UnitType::class);
     }
 
-    public function unitFeature(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(UnitFeature::class);
-    }
-
-
-
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -74,5 +77,10 @@ class Unit extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('units_collection');
+    }
+
+    public function furnishingItems()
+    {
+        return $this->belongsToMany(FurnishingItem::class);
     }
 }

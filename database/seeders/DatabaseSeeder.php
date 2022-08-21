@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             CategorySeeder::class,
             MaintenanceSeeder::class,
-            FurnishingCategorySeeder::class,
             FurnishingItemSeeder::class,
             AmenitySeeder::class,
             ServiceFeeSeeder::class,

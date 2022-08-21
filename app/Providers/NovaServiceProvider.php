@@ -5,14 +5,11 @@ namespace App\Providers;
 use App\Models\User;
 use App\Nova\Category;
 use App\Nova\Company;
-use App\Nova\FurnishingCategory;
 
 use App\Nova\Maintenance;
 use App\Models\Property as PropertyModel;
 use App\Models\Unit as UnitModel;
 use App\Models\Company as CompanyModel;
-use App\Models\UnitFeature as UnitFeatureModel;
-use App\Models\FurnishingCategory as FurnishingCategoryModel;
 use \App\Models\PropertyType as PropertyTypeModel;
 use \App\Models\UnitType as UnitTypeModel;
 use \App\Models\Category as CategoryModel;
@@ -23,7 +20,6 @@ use App\Models\Prospect as ProspectModel;
 use App\Models\Renter as RenterModel;
 use App\Nova\Amenity;
 use App\Nova\AmenitySchedule;
-use App\Nova\UnitFeature;
 use App\Nova\PropertyType;
 use App\Nova\Property;
 use App\Nova\Unit;
@@ -37,8 +33,6 @@ use App\Observers\PropertyObserver;
 use App\Observers\UnitObserver;
 use App\Observers\UserObserver;
 use App\Observers\CompanyObserver;
-use App\Observers\UnitFeatureObserver;
-use App\Observers\FurnishingCategoryObserver;
 use App\Observers\PropertyTypeObserver;
 use App\Observers\UnitTypeObserver;
 use App\Observers\CategoryObserver;
@@ -78,9 +72,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Observable::make(User::class, UserObserver::class);
         Observable::make(PropertyModel::class, PropertyObserver::class);
         Observable::make(UnitModel::class, UnitObserver::class);
-        Observable::make(UnitFeatureModel::class, UnitFeatureObserver::class);
         Observable::make(CompanyModel::class, CompanyObserver::class);
-        Observable::make(FurnishingCategoryModel::class, FurnishingCategoryObserver::class);
         Observable::make(PropertyTypeModel::class, PropertyTypeObserver::class);
         Observable::make(UnitTypeModel::class, UnitTypeObserver::class);
         Observable::make(CategoryModel::class, CategoryObserver::class);
@@ -181,9 +173,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             MenuSection::make('Units', [
                 MenuItem::resource(Unit::class),
                 MenuItem::resource(UnitType::class),
-                MenuItem::resource(UnitFeature::class),
-
-                MenuItem::resource(FurnishingCategory::class),
                 MenuItem::resource(FurnishingItem::class),
             ])->icon('document-duplicate')->collapsible(),
 

@@ -16,12 +16,12 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $sa=Role::create(['name' => 'Super-Admin']); //ID 1
-        $am=Role::create(['name' => 'app-manager']); //ID 2
-        $co=Role::create(['name' => 'company-owner']); //ID 3
-        $pm=Role::create(['name' => 'property-manager']); //ID 4
-        $pa=Role::create(['name' => 'property-agent']); //ID 5
-        $r=Role::create(['name' => 'renter']); //ID 6
+        $sa = Role::create(['name' => 'Super-Admin']); //ID 1
+        $am = Role::create(['name' => 'app-manager']); //ID 2
+        $co = Role::create(['name' => 'company-owner']); //ID 3
+        $pm = Role::create(['name' => 'property-manager']); //ID 4
+        $pa = Role::create(['name' => 'property-agent']); //ID 5
+        $r = Role::create(['name' => 'renter']); //ID 6
 
         foreach (config('permissions') as $key => $resource) {
             if (in_array($key, ['users', 'company', 'prospect'])) {
@@ -46,7 +46,7 @@ class RoleSeeder extends Seeder
                 }
             }
 
-            if (in_array($key, ['unit', 'unit-feature', 'unit-type'])) {
+            if (in_array($key, ['unit', 'unit-type'])) {
                 foreach ($resource as $permission) {
                     $pa->givePermissionTo($permission);
                 }

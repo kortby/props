@@ -44,7 +44,12 @@ class ApplicationController extends Controller
             $request->merge([
                 'user_id' => auth()->user()->id,
             ]);
-            Application::create($request->all());
+            $application = Application::create($request->all());
+            foreach ($request->documents as $document) {
+                $application->addMedia($document)
+                    ->toMediaCollection('application_collection');
+            }
+
             $request->user()->notify(
                 NovaNotification::make()->message('Your new application has been submitted.')->icon('cog')->type('success'),
             );

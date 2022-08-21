@@ -44,7 +44,6 @@ class FurnishingItem extends Resource
         return [
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
-            BelongsTo::make('furnishingCategory'),
         ];
     }
 

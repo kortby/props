@@ -22,7 +22,6 @@ class UnitFactory extends Factory
             'unit_heading' => $this->faker->name(),
             'property_id' => rand(1, 3),
             'unit_type_id' => rand(0, 6),
-            'unit_feature_id' => rand(1, 9),
             'number_of_bedroom' => rand(1, 5),
             'number_of_bathroom' => rand(1, 3),
             'number_of_balcony' => rand(0, 3),
@@ -33,6 +32,16 @@ class UnitFactory extends Factory
             'unit_floor_number' => rand(0, 10),
             'size' => rand(300, 1240),
             'price' => rand(700, 3240),
+            'parking_spot' => rand(3, 100),
+            'is_air_conditioning' => rand(0, 1) == 1,
+            'has_carpet' => rand(0, 1) == 1,
+            'has_hardwood_flooring' => rand(0, 1) == 1,
+            'is_ceiling_fan_cooling' => rand(0, 1) == 1,
+            'has_in_unit_fireplace' => rand(0, 1) == 1,
+            'has_in_unit_garden' => rand(0, 1) == 1,
+            'has_in_unit_laundry' => rand(0, 1) == 1,
+            'has_walkin_closet' => rand(0, 1) == 1,
+            'are_pets_allowed' => rand(0, 1) == 1,
         ];
     }
 

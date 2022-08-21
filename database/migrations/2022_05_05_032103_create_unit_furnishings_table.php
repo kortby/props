@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('unit_furnishing', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('unit_feature_unit_id');
-            $table->foreignId('furnishing_item_id');
+            $table->foreignId('unit_furnishing_item_id');
             $table->integer('number_of_items')->default(0);
             $table->timestamps();
         });

@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('furnishing_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->foreignId('user_id')->constrained();
+        Schema::create('furnishing_item_unit', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('furnishing_item_id');
+            $table->foreignId('unit_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('furnishing_categories');
+        Schema::dropIfExists('furnishing_item_unit');
     }
 };

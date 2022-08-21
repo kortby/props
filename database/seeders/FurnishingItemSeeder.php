@@ -19,7 +19,6 @@ class FurnishingItemSeeder extends Seeder
         foreach ($items as $item) {
             FurnishingItem::create([
                 'name' => $item,
-                'furnishing_category_id' => rand(0, 3),
             ]);
         }
     }
