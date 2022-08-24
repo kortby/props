@@ -13,6 +13,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Nova\Auth\Impersonatable;
 use Laravel\Sanctum\HasApiTokens;
+use KirschbaumDevelopment\NovaMail\Traits\Mailable;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
     use Impersonatable;
+    use Mailable;
 
     /**
      * The attributes that are mass assignable.
@@ -106,5 +108,15 @@ class User extends Authenticatable
     public function canBeImpersonated()
     {
         return true;
+    }
+
+    /**
+     * Get the name of the email field for the model.
+     *
+     * @return string
+     */
+    public function getEmailField(): string
+    {
+        return 'email';
     }
 }

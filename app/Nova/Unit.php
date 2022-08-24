@@ -213,15 +213,15 @@ class Unit extends Resource
     {
         return [
             Boolean::make('Is air conditioning')->hideFromIndex(),
-            Number::make('Parking spot number', 'parking_spot')->textAlign('left'),
+            Number::make('Parking', 'parking_spot')->textAlign('left'),
             Boolean::make('Has carpet')->hideFromIndex(),
-            Boolean::make('Has hardwood flooring'),
-            Boolean::make('Is ceiling fan cooling'),
+            Boolean::make('Has hardwood flooring')->hideFromIndex(),
+            Boolean::make('Is ceiling fan cooling')->hideFromIndex(),
             Boolean::make('Has in unit fireplace')->hideFromIndex(),
             Boolean::make('Has in unit garden')->hideFromIndex(),
-            Boolean::make('Has in unit laundry'),
+            Boolean::make('Has in unit laundry')->hideFromIndex(),
             Boolean::make('Has walkin closet')->hideFromIndex(),
-            Boolean::make('Are pets allowed'),
+            Boolean::make('Are pets allowed')->hideFromIndex(),
         ];
     }
 }

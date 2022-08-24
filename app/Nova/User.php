@@ -24,6 +24,8 @@ use Vyuldashev\NovaPermission\RoleBooleanGroup;
 use Dniccum\PhoneNumber\PhoneNumber;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\KeyValue;
+use KirschbaumDevelopment\NovaMail\Actions\SendMail;
+use KirschbaumDevelopment\NovaMail\Nova\NovaSentMail;
 
 class User extends Resource
 {
@@ -118,6 +120,7 @@ class User extends Resource
                 return route('nova.pages.dashboard');
             }),
             //new \Coderello\LoginAs\Actions\LoginAs,
+            new SendMail,
         ];
     }
 
@@ -168,6 +171,7 @@ class User extends Resource
             // Text::make('answers', 'answers[0]->answer'),
             Code::make('answers')->json(),
 
+            HasMany::make('Sent Mail', 'mails', NovaSentMail::class),
 
 
         ];
@@ -197,7 +201,6 @@ class User extends Resource
         if (auth()->user()->hasAnyRole('property-agent')) {
             $query->whereIn('id', [6]);
         }
-
 
         return $query->pluck('name', 'id');
     }

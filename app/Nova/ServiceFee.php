@@ -58,7 +58,7 @@ class ServiceFee extends Resource
             ID::make()->sortable()->hideFromIndex()->hideFromDetail(),
             Text::make('Name')->rules('required', 'max:50'),
             Textarea::make('Note')->alwaysShow(),
-            Number::make(__('Leasings'), 'leasings_count')->sortable(),
+            // Number::make(__('Leasings'), 'leasings_count')->sortable(),
             Currency::make('price')->textAlign('left'),
         ];
     }

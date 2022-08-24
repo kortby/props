@@ -201,6 +201,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::resource(Amenity::class),
             ])->icon('clipboard-list')->collapsible(),
 
+            MenuSection::make('Email', [
+                MenuItem::resource(\KirschbaumDevelopment\NovaMail\Nova\NovaMailEvent::class),
+                MenuItem::resource(\KirschbaumDevelopment\NovaMail\Nova\NovaMailTemplate::class),
+                MenuItem::resource(\KirschbaumDevelopment\NovaMail\Nova\NovaSentMail::class),
+            ])->icon('at-symbol')->collapsible(),
+
             MenuSection::make('Contact', [
                 MenuItem::resource(\App\Nova\Prospect::class),
                 MenuItem::resource(\App\Nova\Contractor::class),

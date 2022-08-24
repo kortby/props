@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "920730c69a0ba060f7ba85a0fa2584f3",
+    "content-hash": "cd4bd1a23c8121f648b1c10b852a3e3c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2298,6 +2298,54 @@
                 "source": "https://github.com/kiritokatklian/nova-permission/tree/v4.0.3"
             },
             "time": "2022-05-17T08:54:35+00:00"
+        },
+        {
+            "name": "kirschbaum-development/nova-mail",
+            "version": "4.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kirschbaum-development/nova-mail.git",
+                "reference": "15514d1af23cb06d02c771b9434a2b8f365ffaac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kirschbaum-development/nova-mail/zipball/15514d1af23cb06d02c771b9434a2b8f365ffaac",
+                "reference": "15514d1af23cb06d02c771b9434a2b8f365ffaac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "laravel/nova": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KirschbaumDevelopment\\NovaMail\\NovaMailServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KirschbaumDevelopment\\NovaMail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova action for sending mail.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/kirschbaum-development/nova-mail/issues",
+                "source": "https://github.com/kirschbaum-development/nova-mail/tree/4.9.0"
+            },
+            "time": "2022-06-21T14:25:12+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",

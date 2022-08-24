@@ -13,6 +13,7 @@
         "inertiajs/inertia-laravel": "^0.5.4",
         "kabbouchi/nova-impersonate": "^2.0",
         "kiritokatklian/nova-permission": "^4.0",
+        "kirschbaum-development/nova-mail": "^4.9",
         "laravel/framework": "^9.2",
         "laravel/jetstream": "^2.7",
         "laravel/nova": "~4.6.1",
