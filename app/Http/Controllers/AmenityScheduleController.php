@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Nova\Notifications\NovaNotification;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class AmenityScheduleController extends Controller
 {
@@ -51,6 +52,7 @@ class AmenityScheduleController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
             AmenitySchedule::create($request->all());
+            Mail::send(new \App\Mail\AmenityScheduled);
             $request->user()->notify(
                 NovaNotification::make()->message('Your schedule of been submitted.')->icon('cog')->type('success'),
             );

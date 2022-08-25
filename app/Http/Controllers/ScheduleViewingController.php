@@ -6,6 +6,7 @@ use App\Models\Property;
 use App\Models\ScheduleViewing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Nova\Notifications\NovaNotification;
@@ -47,6 +48,7 @@ class ScheduleViewingController extends Controller
             $request->user()->notify(
                 NovaNotification::make()->message('Your schedule of viewing been submitted.')->icon('cog')->type('success'),
             );
+            Mail::send(new \App\Mail\ScheduleViewing);
             return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);

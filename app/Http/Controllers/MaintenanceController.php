@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Nova\Notifications\NovaNotification;
@@ -56,6 +57,7 @@ class MaintenanceController extends Controller
             $request->user()->notify(
                 NovaNotification::make()->message('New maintenance has been requested.')->icon('cog')->type('success'),
             );
+            Mail::send(new \App\Mail\MaintenanceRequested);
             return  Redirect::route('dashboard')->with('success', 'Thank you! We will contact you shortly.');
         } catch (\Exception $e) {
             Log::error($e);
