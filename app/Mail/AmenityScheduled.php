@@ -13,7 +13,7 @@ class AmenityScheduled extends Mailable
 
     /**
      * Create a new message instance.
-     *
+     * https://github.com/kirschbaum-development/nova-mail
      * @return void
      */
     public function __construct()

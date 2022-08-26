@@ -309,10 +309,9 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { Switch } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";

@@ -51,7 +51,7 @@
                                         class="mt-8 space-y-5 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-5"
                                     >
                                         <li
-                                            v-for="feature in includedFeatures"
+                                            v-for="feature in unitsType"
                                             :key="feature"
                                             class="flex items-start lg:col-span-1"
                                         >
@@ -81,7 +81,15 @@
                                 <div
                                     class="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900"
                                 >
-                                    <span> $1,349 </span>
+                                    <span>
+                                        ${{
+                                            $props.units.length > 1
+                                                ? getTotal($props.units)
+                                                : formatPrice(
+                                                      $props.units[0].price
+                                                  )
+                                        }}
+                                    </span>
                                     <span
                                         class="ml-3 text-xl font-medium text-gray-500"
                                     >
@@ -91,12 +99,18 @@
                                 <div class="mt-6">
                                     <div class="rounded-md shadow">
                                         <a
-                                            href="#"
+                                            href="/unit-payment"
                                             class="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900"
                                         >
                                             Make a Payment
                                         </a>
                                     </div>
+                                </div>
+                                <div
+                                    class="mt-6"
+                                    v-if="$props.units.length > 1"
+                                >
+                                    For all units that you have
                                 </div>
                             </div>
                         </div>
@@ -111,7 +125,7 @@
 import { CheckCircleIcon } from "@heroicons/vue/solid";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-const includedFeatures = [
+const unitsType = [
     "Parking spot",
     "Pest control",
     "Trash - door to door",
@@ -119,13 +133,28 @@ const includedFeatures = [
 ];
 
 export default {
+    props: {
+        units: Array,
+    },
     components: {
         CheckCircleIcon,
         AppLayout,
     },
+    methods: {
+        getTotal(units) {
+            let total = units.reduce(function (prev, curr) {
+                return prev.price + curr.price;
+            });
+            return this.formatPrice(total);
+        },
+        formatPrice(value) {
+            let val = (value / 1).toFixed(2).replace(",", ".");
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+    },
     setup() {
         return {
-            includedFeatures,
+            unitsType,
         };
     },
 };

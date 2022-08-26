@@ -13,6 +13,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Nova\Auth\Impersonatable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Cashier\Billable;
 use KirschbaumDevelopment\NovaMail\Traits\Mailable;
 
 class User extends Authenticatable
@@ -25,6 +26,7 @@ class User extends Authenticatable
     use HasRoles;
     use Impersonatable;
     use Mailable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -92,6 +94,11 @@ class User extends Authenticatable
 
             ->withPivot('status', 'start', 'end')
             ->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 

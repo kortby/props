@@ -73,6 +73,4 @@
 
 
     ## To do
-    - unit feature under unit
-    - application : upload file system
-    - email system to communicate 
+    - renter needs to have a unit to login and have an active account 

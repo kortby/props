@@ -3,10 +3,13 @@
 use App\Http\Controllers\AmenityScheduleController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PrescreeningController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ScheduleViewingController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UnitPaymentController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +57,9 @@ Route::get('/properties/{property}', [PropertyController::class, 'show']);
 Route::get('/schedule-viewing/{property}', [ScheduleViewingController::class, 'create'])->name('scheduleViewings');
 Route::post('/schedule-viewing', [ScheduleViewingController::class, 'store'])->name('postScheduleViewings');
 
+Route::get('/perchase', [OrderController::class, 'show'])->name('unitPayment');
+Route::get('/unit-payment', [UnitPaymentController::class, 'show'])->name('unitPayment');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -63,9 +69,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/payment', function () {
-        return Inertia::render('Payment');
-    })->name('payment');
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
 
     Route::get('/maintenance', [MaintenanceController::class, 'create'])->name('maintenance');
     Route::post('/maintenance', [MaintenanceController::class, 'store'])->name('postMaintenance');

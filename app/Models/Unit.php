@@ -83,4 +83,9 @@ class Unit extends Model implements HasMedia
     {
         return $this->belongsToMany(FurnishingItem::class);
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }
